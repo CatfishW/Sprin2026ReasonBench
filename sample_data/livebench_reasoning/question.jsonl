@@ -1,0 +1,24 @@
+// make it better formatted instead of one line per question
+[
+  {
+    "question_id": "q1",
+    "category": "reasoning",
+    "ground_truth": "yes, no, yes",
+    "turns": [
+      "In this question, assume each person either always tells the truth or always lies. Person A says B lies. Person B says C tells the truth. Person C says A tells the truth. Does A tell the truth? Does B tell the truth? Does C tell the truth? Answer as yes/no, yes/no, yes/no."
+    ],
+    "task": "toy_reasoning"
+  },
+  {
+    "question_id": "q2",
+    "category": "reasoning",
+    "ground_truth": "4",
+    "turns": [
+      "What is 2+2? Return only the number."
+    ],
+    "task": "toy_math"
+  }
+]
+
+
+

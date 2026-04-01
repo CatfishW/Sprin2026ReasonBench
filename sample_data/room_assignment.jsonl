@@ -1,0 +1,18 @@
+// make it better formatted instead of one line per prompt
+[
+  {
+    "prompt": "You are given a logic test. There are 3 rooms, which are assigned to Alice, Bob and Charlie. Restriction 1: Alice: # o o. Restriction 2: Bob: o o #. What are the tenants of the rooms?",
+    "completion": "room 1: Alice\nroom 2: Charlie\nroom 3: Bob",
+    "label": "true"
+  },
+  {
+    "prompt": "You are given a logic test. There are 3 rooms, which are assigned to Alice, Bob and Charlie. Restriction 1: Alice = Bob. Restriction 2: Charlie: # o o. What are the tenants of the rooms?",
+    "completion": "room 1: Charlie\nroom 2: Alice\nroom 3: Bob",
+    "label": "true"
+  },
+  {
+    "prompt": "You are given a logic test. There are 4 rooms, which are assigned to Ava, Ben, Cara and Dan. Restriction 1: Ava: o # o o. Restriction 2: Dan: o o o #. Restriction 3: Ben <> Dan. What are the tenants of the rooms?",
+    "completion": "room 1: Ben\nroom 2: Ava\nroom 3: Cara\nroom 4: Dan",
+    "label": "true"
+  }
+]

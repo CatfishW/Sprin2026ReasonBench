@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reasonbench"
+version = "0.1.0"
+description = "A modular benchmark harness for reasoning-oriented prompt strategies across Room Assignment, LiveBench, and TruthfulQA."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "requests>=2.31",
+  "PyYAML>=6.0"
+]
+authors = [
+  { name = "OpenAI ChatGPT" }
+]
+keywords = ["llm", "benchmark", "prompting", "reasoning", "evaluation"]
+
+[project.optional-dependencies]
+hf = ["datasets>=2.19"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+reasonbench-run = "reasonbench.cli.run:main"
+reasonbench-sweep = "reasonbench.cli.sweep:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+addopts = "-q"

@@ -1,0 +1,42 @@
+[dataset]
+kind = "livebench"
+local_path = "sample_data/livebench_reasoning/question.jsonl"
+split = "test"
+limit = 2
+shuffle = false
+seed = 13
+
+[client]
+kind = "openai_compatible"
+base_url = "https://openrouter.ai/api/v1/chat/completions"
+model = "openai/gpt-4.1-mini"
+api_key_env = "OPENROUTER_API_KEY"
+default_temperature = 0.0
+default_max_tokens = 700
+max_retries = 3
+min_request_interval_s = 0.1
+loop_retries = 2
+
+[run]
+experiment_name = "livebench_reasoning_demo"
+max_workers = 2
+strict_benchmark_mode = true
+enable_cache = true
+enable_checkpoint = true
+enable_leakage_check = true
+
+[output]
+output_dir = "outputs/livebench"
+cache_path = "outputs/livebench/cache.sqlite"
+checkpoint_path = "outputs/livebench/results.jsonl"
+summary_path = "outputs/livebench/summary.csv"
+manifest_path = "outputs/livebench/manifest.json"
+
+[strategies.direct]
+enabled = true
+
+[strategies.concise_cot]
+enabled = true
+
+[strategies.self_verify]
+enabled = true

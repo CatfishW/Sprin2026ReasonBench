@@ -1,0 +1,64 @@
+[dataset]
+kind = "room_assignment"
+local_path = "sample_data/room_assignment.jsonl"
+split = "train"
+limit = 3
+shuffle = false
+seed = 19
+
+[client]
+kind = "openai_compatible"
+base_url = "https://openrouter.ai/api/v1/chat/completions"
+model = "openai/gpt-4.1-mini"
+api_key_env = "OPENROUTER_API_KEY"
+default_temperature = 0.0
+default_max_tokens = 800
+max_retries = 4
+min_request_interval_s = 0.05
+loop_retries = 2
+
+[run]
+experiment_name = "paper_suite_demo"
+max_workers = 4
+strict_benchmark_mode = true
+enable_cache = true
+enable_checkpoint = true
+enable_leakage_check = true
+
+[output]
+output_dir = "outputs/paper_suite"
+cache_path = "outputs/paper_suite/cache.sqlite"
+checkpoint_path = "outputs/paper_suite/results.jsonl"
+summary_path = "outputs/paper_suite/summary.csv"
+manifest_path = "outputs/paper_suite/manifest.json"
+
+[strategies.direct]
+enabled = true
+
+[strategies.concise_cot]
+enabled = true
+
+[strategies.least_to_most]
+enabled = true
+
+[strategies.constraint_decompose]
+enabled = true
+
+[strategies.self_verify]
+enabled = true
+
+[strategies.critique_refine]
+enabled = true
+
+[strategies.self_consistency]
+enabled = true
+num_samples = 3
+temperature = 0.7
+
+[strategies.selective_self_consistency]
+enabled = true
+num_samples = 3
+temperature = 0.7
+
+[strategies.budgeted_cascade]
+enabled = true

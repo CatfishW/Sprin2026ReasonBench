@@ -1,0 +1,45 @@
+[dataset]
+kind = "room_assignment"
+local_path = "sample_data/room_assignment.jsonl"
+split = "train"
+limit = 3
+shuffle = false
+seed = 7
+
+[client]
+kind = "openai_compatible"
+base_url = "https://openrouter.ai/api/v1/chat/completions"
+model = "openai/gpt-4.1-mini"
+api_key_env = "OPENROUTER_API_KEY"
+default_temperature = 0.0
+default_max_tokens = 800
+max_retries = 3
+min_request_interval_s = 0.1
+loop_retries = 2
+
+[run]
+experiment_name = "room_assignment_demo"
+max_workers = 2
+strict_benchmark_mode = true
+enable_cache = true
+enable_checkpoint = true
+enable_leakage_check = true
+
+[output]
+output_dir = "outputs/room_assignment"
+cache_path = "outputs/room_assignment/cache.sqlite"
+checkpoint_path = "outputs/room_assignment/results.jsonl"
+summary_path = "outputs/room_assignment/summary.csv"
+manifest_path = "outputs/room_assignment/manifest.json"
+
+[strategies.direct]
+enabled = true
+
+[strategies.concise_cot]
+enabled = true
+
+[strategies.self_verify]
+enabled = true
+
+[strategies.budgeted_cascade]
+enabled = true

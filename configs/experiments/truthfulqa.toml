@@ -1,0 +1,47 @@
+[dataset]
+kind = "truthfulqa"
+local_path = "sample_data/truthfulqa.csv"
+split = "train"
+limit = 4
+shuffle = false
+seed = 11
+
+[client]
+kind = "openai_compatible"
+base_url = "https://openrouter.ai/api/v1/chat/completions"
+model = "openai/gpt-4.1-mini"
+api_key_env = "OPENROUTER_API_KEY"
+default_temperature = 0.0
+default_max_tokens = 300
+max_retries = 3
+min_request_interval_s = 0.1
+loop_retries = 2
+
+[run]
+experiment_name = "truthfulqa_demo"
+max_workers = 2
+strict_benchmark_mode = true
+enable_cache = true
+enable_checkpoint = true
+enable_leakage_check = true
+
+[output]
+output_dir = "outputs/truthfulqa"
+cache_path = "outputs/truthfulqa/cache.sqlite"
+checkpoint_path = "outputs/truthfulqa/results.jsonl"
+summary_path = "outputs/truthfulqa/summary.csv"
+manifest_path = "outputs/truthfulqa/manifest.json"
+
+[strategies.direct]
+enabled = true
+
+[strategies.concise_cot]
+enabled = true
+
+[strategies.least_to_most]
+enabled = true
+
+[strategies.self_consistency]
+enabled = true
+num_samples = 3
+temperature = 0.7
