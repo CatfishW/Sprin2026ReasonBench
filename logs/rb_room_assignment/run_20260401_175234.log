@@ -1,0 +1,11 @@
+============================================================
+session_name: rb_room_assignment
+attempt: 1
+started_at: 2026-04-01T17:52:34-04:00
+config_path: configs/experiments/full_room_assignment_all_strategies.toml
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/full_room_assignment_all_strategies.toml
+============================================================
+[ReasonBench] experiment=room_assignment_full_all_strategies examples=37984 strategies=10 expected_total=379840 existing_checkpoint_records=11
+[ReasonBench] pending_records=379829 max_workers=4
+[ReasonBench] progress total=12/379840 (0.00%) new=1/379829 elapsed_s=94.1

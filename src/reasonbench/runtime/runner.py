@@ -67,6 +67,14 @@ class ExperimentRunner:
         if warnings and self.config.run.strict_benchmark_mode:
             raise RuntimeError(f'Potential demo leakage detected: {warnings[:3]}')
 
+        total_expected_records = len(self.examples) * len(self.strategies)
+        existing_records = len(self.checkpoint.load_all()) if self.checkpoint else 0
+        print(
+            f"[ReasonBench] experiment={self.config.run.experiment_name} "
+            f"examples={len(self.examples)} strategies={len(self.strategies)} "
+            f"expected_total={total_expected_records} existing_checkpoint_records={existing_records}"
+        )
+
         pending: list[tuple[Example, Any]] = []
         for example in self.examples:
             for strategy in self.strategies:
@@ -74,14 +82,36 @@ class ExperimentRunner:
                     continue
                 pending.append((example, strategy))
 
+        print(f"[ReasonBench] pending_records={len(pending)} max_workers={self.config.run.max_workers}")
+
         new_records: list[ExperimentRecord] = []
         with ThreadPoolExecutor(max_workers=self.config.run.max_workers) as executor:
             futures = {executor.submit(self._run_one, ex, strat): (ex, strat) for ex, strat in pending}
+            progress_every = max(25, len(pending) // 200) if pending else 1
+            completed_new = 0
             for future in as_completed(futures):
-                record = future.result()
+                ex, strat = futures[future]
+                try:
+                    record = future.result()
+                except Exception as exc:
+                    print(
+                        f"[ReasonBench] error example_id={ex.example_id} "
+                        f"strategy={strat.name} error={exc!r}"
+                    )
+                    raise
                 new_records.append(record)
                 if self.checkpoint:
                     self.checkpoint.append(record)
+                completed_new += 1
+
+                if completed_new == 1 or completed_new % progress_every == 0 or completed_new == len(pending):
+                    total_done = existing_records + completed_new
+                    pct = (100.0 * total_done / total_expected_records) if total_expected_records else 100.0
+                    elapsed = time.perf_counter() - started
+                    print(
+                        f"[ReasonBench] progress total={total_done}/{total_expected_records} "
+                        f"({pct:.2f}%) new={completed_new}/{len(pending)} elapsed_s={elapsed:.1f}"
+                    )
 
         records = self.checkpoint.load_all() if self.checkpoint else new_records
         summary_rows = build_summary(records)

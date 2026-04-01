@@ -1,0 +1,76 @@
+[dataset]
+kind = "room_assignment"
+local_path = "data/room_assignment/room_assignment_train_full.jsonl"
+split = "train"
+shuffle = false
+seed = 19
+
+[client]
+kind = "openai_compatible"
+base_url = "https://game.agaii.org/llm/v1/chat/completions"
+model = "/home/tang/Models/Qwen3.5-4B"
+api_key_env = "OPENAI_API_KEY"
+default_temperature = 1.0
+default_max_tokens = 4096
+max_retries = 4
+min_request_interval_s = 0.05
+loop_retries = 2
+
+[client.extra_payload]
+top_p = 0.95
+top_k = 20
+presence_penalty = 1.5
+repetition_penalty = 1.0
+
+[client.extra_payload.extra_body]
+thinking_budget = 512
+
+[run]
+experiment_name = "room_assignment_full_all_strategies"
+max_workers = 4
+strict_benchmark_mode = true
+enable_cache = true
+enable_checkpoint = true
+enable_leakage_check = true
+
+[output]
+output_dir = "outputs/full_room_assignment"
+cache_path = "outputs/full_room_assignment/cache.sqlite"
+checkpoint_path = "outputs/full_room_assignment/results.jsonl"
+summary_path = "outputs/full_room_assignment/summary.csv"
+manifest_path = "outputs/full_room_assignment/manifest.json"
+
+[strategies.direct]
+enabled = true
+
+[strategies.concise_cot]
+enabled = true
+
+[strategies.least_to_most]
+enabled = true
+
+[strategies.constraint_decompose]
+enabled = true
+
+[strategies.self_verify]
+enabled = true
+
+[strategies.critique_refine]
+enabled = true
+
+[strategies.self_consistency]
+enabled = true
+num_samples = 3
+temperature = 0.7
+
+[strategies.selective_self_consistency]
+enabled = true
+num_samples = 3
+temperature = 0.7
+
+[strategies.budgeted_cascade]
+enabled = true
+
+[strategies.few_shot_exemplar]
+enabled = true
+demo_path = "data/external_demos/general_reasoning.jsonl"

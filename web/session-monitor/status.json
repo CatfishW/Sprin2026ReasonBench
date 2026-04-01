@@ -1,0 +1,76 @@
+{
+  "generated_at": "2026-04-01T22:01:32.622403+00:00",
+  "overall": {
+    "completed_records": 122,
+    "expected_records": 402370,
+    "progress_pct": 0.03
+  },
+  "sessions": [
+    {
+      "name": "rb_room_assignment",
+      "state": "running",
+      "running": true,
+      "config_path": "configs/experiments/full_room_assignment_all_strategies.toml",
+      "checkpoint_path": "outputs/full_room_assignment/results.jsonl",
+      "log_dir": "logs/rb_room_assignment",
+      "latest_log": "logs/rb_room_assignment/run_20260401_175234.log",
+      "completed_records": 39,
+      "expected_records": 379840,
+      "progress_pct": 0.01,
+      "last_log_lines": [
+        "started_at: 2026-04-01T17:52:34-04:00",
+        "config_path: configs/experiments/full_room_assignment_all_strategies.toml",
+        "cwd: /mnt/Yanlai/ReasonBench",
+        "command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/full_room_assignment_all_strategies.toml",
+        "============================================================",
+        "[ReasonBench] experiment=room_assignment_full_all_strategies examples=37984 strategies=10 expected_total=379840 existing_checkpoint_records=11",
+        "[ReasonBench] pending_records=379829 max_workers=4",
+        "[ReasonBench] progress total=12/379840 (0.00%) new=1/379829 elapsed_s=94.1"
+      ]
+    },
+    {
+      "name": "rb_truthfulqa",
+      "state": "running",
+      "running": true,
+      "config_path": "configs/experiments/full_truthfulqa_all_strategies.toml",
+      "checkpoint_path": "outputs/full_truthfulqa/results.jsonl",
+      "log_dir": "logs/rb_truthfulqa",
+      "latest_log": "logs/rb_truthfulqa/run_20260401_175731.log",
+      "completed_records": 59,
+      "expected_records": 8170,
+      "progress_pct": 0.72,
+      "last_log_lines": [
+        "started_at: 2026-04-01T17:57:31-04:00",
+        "config_path: configs/experiments/full_truthfulqa_all_strategies.toml",
+        "cwd: /mnt/Yanlai/ReasonBench",
+        "command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/full_truthfulqa_all_strategies.toml",
+        "============================================================",
+        "[ReasonBench] experiment=truthfulqa_full_all_strategies examples=817 strategies=10 expected_total=8170 existing_checkpoint_records=40",
+        "[ReasonBench] pending_records=8130 max_workers=4",
+        "[ReasonBench] progress total=41/8170 (0.50%) new=1/8130 elapsed_s=0.2"
+      ]
+    },
+    {
+      "name": "rb_livebench",
+      "state": "running",
+      "running": true,
+      "config_path": "configs/experiments/full_livebench_all_strategies.toml",
+      "checkpoint_path": "outputs/full_livebench/results.jsonl",
+      "log_dir": "logs/rb_livebench",
+      "latest_log": "logs/rb_livebench/run_20260401_175234.log",
+      "completed_records": 24,
+      "expected_records": 14360,
+      "progress_pct": 0.17,
+      "last_log_lines": [
+        "started_at: 2026-04-01T17:52:34-04:00",
+        "config_path: configs/experiments/full_livebench_all_strategies.toml",
+        "cwd: /mnt/Yanlai/ReasonBench",
+        "command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/full_livebench_all_strategies.toml",
+        "============================================================",
+        "[ReasonBench] experiment=livebench_full_all_strategies examples=1436 strategies=10 expected_total=14360 existing_checkpoint_records=7",
+        "[ReasonBench] pending_records=14353 max_workers=3",
+        "[ReasonBench] progress total=8/14360 (0.06%) new=1/14353 elapsed_s=89.2"
+      ]
+    }
+  ]
+}

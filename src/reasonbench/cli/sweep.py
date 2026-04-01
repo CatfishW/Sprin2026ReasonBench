@@ -21,3 +21,7 @@ def main() -> None:
     runner = ExperimentRunner(config)
     runner.run()
     print(f'Sweep complete. Available strategies: {", ".join(available_strategies())}')
+
+
+if __name__ == "__main__":
+    main()

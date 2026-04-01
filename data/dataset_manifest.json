@@ -1,0 +1,13 @@
+{
+  "room_assignment_train": 37984,
+  "truthfulqa_train": 817,
+  "livebench": {
+    "reasoning": 200,
+    "math": 368,
+    "coding": 128,
+    "language": 190,
+    "data_analysis": 150,
+    "instruction_following": 400
+  },
+  "livebench_total": 1436
+}

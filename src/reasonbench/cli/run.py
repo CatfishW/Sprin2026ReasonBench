@@ -19,3 +19,7 @@ def main() -> None:
     print(f"Completed {result['manifest']['completed_records']} records.")
     print(f"Summary CSV: {config.output.summary_path}")
     print(f"Manifest:    {config.output.manifest_path}")
+
+
+if __name__ == "__main__":
+    main()
