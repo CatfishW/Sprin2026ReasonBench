@@ -23,6 +23,9 @@ top_k = 20
 presence_penalty = 1.5
 repetition_penalty = 1.0
 
+[client.extra_payload.extra_body]
+thinking_budget = 512
+
 [run]
 experiment_name = "room_assignment_demo"
 max_workers = 2
