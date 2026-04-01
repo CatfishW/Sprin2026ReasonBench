@@ -8,14 +8,20 @@ seed = 13
 
 [client]
 kind = "openai_compatible"
-base_url = "https://openrouter.ai/api/v1/chat/completions"
-model = "openai/gpt-4.1-mini"
-api_key_env = "OPENROUTER_API_KEY"
-default_temperature = 0.0
-default_max_tokens = 700
+base_url = "https://game.agaii.org/mllm/v1/chat/completions"
+model = "Qwen/Qwen3.5-27B-FP8"
+api_key_env = "OPENAI_API_KEY"
+default_temperature = 1.0
+default_max_tokens = 32768
 max_retries = 3
 min_request_interval_s = 0.1
 loop_retries = 2
+
+[client.extra_payload]
+top_p = 0.95
+top_k = 20
+presence_penalty = 1.5
+repetition_penalty = 1.0
 
 [run]
 experiment_name = "livebench_reasoning_demo"
