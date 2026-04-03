@@ -97,6 +97,8 @@ METRIC_PRIORITY = [
     "text_match_score",
 ]
 
+STUCK_STALE_ATTEMPT_THRESHOLD = 3
+
 
 def line_count(path: Path) -> int:
     if not path.exists():
@@ -190,6 +192,87 @@ def _extract_log_signals(lines: list[str]) -> tuple[str, str]:
         if last_progress and last_error:
             break
     return last_progress, last_error
+
+
+def _parse_log_attempt_info(log_path: Path) -> dict[str, Any]:
+    exit_code: int | None = None
+    checkpoint_added: int | None = None
+    stale_exit = False
+    stale_line = ""
+
+    for line in tail_lines(log_path, max_lines=200):
+        stripped = line.strip()
+        if stripped.startswith("exit_code:"):
+            try:
+                exit_code = int(stripped.split(":", 1)[1].strip())
+            except ValueError:
+                exit_code = None
+        elif stripped.startswith("checkpoint_records_added:"):
+            try:
+                checkpoint_added = int(stripped.split(":", 1)[1].strip())
+            except ValueError:
+                checkpoint_added = None
+        elif "consecutive stale attempts" in stripped:
+            stale_exit = True
+            stale_line = stripped
+
+    return {
+        "exit_code": exit_code,
+        "checkpoint_records_added": checkpoint_added,
+        "stale_exit": stale_exit,
+        "stale_line": stale_line,
+    }
+
+
+def _stale_attempt_state(log_dir: Path) -> dict[str, Any]:
+    if not log_dir.exists():
+        return {
+            "stale_retry_streak": 0,
+            "stuck": False,
+            "stuck_reason": "",
+            "last_exit_code": "",
+        }
+
+    logs = sorted(log_dir.glob("run_*.log"))
+    if not logs:
+        return {
+            "stale_retry_streak": 0,
+            "stuck": False,
+            "stuck_reason": "",
+            "last_exit_code": "",
+        }
+
+    stale_retry_streak = 0
+    stuck_reason = ""
+    last_exit_code = ""
+
+    for log_path in reversed(logs[-12:]):
+        info = _parse_log_attempt_info(log_path)
+        exit_code = info["exit_code"]
+        checkpoint_added = info["checkpoint_records_added"]
+
+        if exit_code is None:
+            continue
+
+        last_exit_code = str(exit_code)
+        if exit_code != 0 and checkpoint_added == 0:
+            stale_retry_streak += 1
+            if info["stale_exit"] and not stuck_reason:
+                stuck_reason = info["stale_line"]
+            continue
+
+        break
+
+    stuck = stale_retry_streak >= STUCK_STALE_ATTEMPT_THRESHOLD
+    if stuck and not stuck_reason:
+        stuck_reason = f"stale_retry_streak={stale_retry_streak}"
+
+    return {
+        "stale_retry_streak": stale_retry_streak,
+        "stuck": stuck,
+        "stuck_reason": stuck_reason,
+        "last_exit_code": last_exit_code,
+    }
 
 
 def _checkpoint_live_summary(checkpoint_path: Path, max_leaderboard_rows: int = 5) -> dict[str, Any]:
@@ -367,11 +450,18 @@ def build_snapshot(repo_root: Path) -> dict[str, Any]:
 
         latest_log = None
         last_lines: list[str] = []
+        stale_state = {
+            "stale_retry_streak": 0,
+            "stuck": False,
+            "stuck_reason": "",
+            "last_exit_code": "",
+        }
         if log_dir.exists():
             logs = sorted(log_dir.glob("run_*.log"))
             if logs:
                 latest_log = str(logs[-1].relative_to(repo_root))
                 last_lines = tail_lines(logs[-1], max_lines=12)
+            stale_state = _stale_attempt_state(log_dir)
 
         running = spec.session_name in active_sessions
         if completed_records >= expected_records and expected_records > 0:
@@ -412,6 +502,10 @@ def build_snapshot(repo_root: Path) -> dict[str, Any]:
                 "progress_pct": round(progress, 2),
                 "last_progress_line": last_progress_line,
                 "last_error_line": last_error_line,
+                "stale_retry_streak": stale_state["stale_retry_streak"],
+                "stuck": stale_state["stuck"],
+                "stuck_reason": stale_state["stuck_reason"],
+                "last_exit_code": stale_state["last_exit_code"],
                 "last_log_lines": last_lines,
                 "live_summary": live_summary,
             }

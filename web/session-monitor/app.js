@@ -119,6 +119,9 @@ function sessionCard(session, openState) {
   const pct = Number(session.progress_pct || 0);
   const detailsKeyBase = esc(session.name || 'session');
   const liveSummary = session.live_summary || {};
+  const isStuck = Boolean(session.stuck);
+  const staleRetryStreak = Number(session.stale_retry_streak || 0);
+  const stuckReason = session.stuck_reason || '';
 
   const detailsSummary = [
     `records scanned: ${formatInt(liveSummary.records_scanned || 0)}`,
@@ -129,7 +132,10 @@ function sessionCard(session, openState) {
     <article class="session-card card" data-session="${esc(session.name)}">
       <div class="session-head">
         <h2 class="session-name">${esc(displayName)}</h2>
-        <span class="badge ${esc(session.state)}">${esc(session.state.replaceAll('_', ' '))}</span>
+        <div class="session-badges">
+          <span class="badge ${esc(session.state)}">${esc(session.state.replaceAll('_', ' '))}</span>
+          ${isStuck ? '<span class="badge stuck">stuck</span>' : ''}
+        </div>
       </div>
       <div class="session-subhead">
         <span class="chip">${esc(session.dataset_kind || 'dataset')}</span>
@@ -171,8 +177,10 @@ function sessionCard(session, openState) {
         ${leaderboardMarkup(liveSummary)}
       </details>
 
-      <details class="detail-block" data-section="signals" ${detailOpenAttr(openState, `${detailsKeyBase}:signals`, false)}>
+      <details class="detail-block" data-section="signals" ${detailOpenAttr(openState, `${detailsKeyBase}:signals`, isStuck)}>
         <summary>Signals</summary>
+        <p class="signal-line mono"><strong>Stale retry streak:</strong> ${formatInt(staleRetryStreak)}${stuckReason ? ` (${esc(stuckReason)})` : ''}</p>
+        <p class="signal-line mono"><strong>Last exit code:</strong> ${esc(session.last_exit_code || 'N/A')}</p>
         <p class="signal-line mono"><strong>Last progress:</strong> ${esc(session.last_progress_line || 'N/A')}</p>
         <p class="signal-line mono"><strong>Last error:</strong> ${esc(session.last_error_line || 'N/A')}</p>
       </details>

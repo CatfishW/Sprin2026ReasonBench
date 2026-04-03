@@ -172,6 +172,12 @@ h1 {
   gap: 10px;
 }
 
+.session-badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .session-subhead {
   display: flex;
   flex-wrap: wrap;
@@ -205,6 +211,11 @@ h1 {
 .badge.completed { background: #e6f7ff; }
 .badge.stopped_resumable { background: #fff6e0; }
 .badge.not_started { background: #efefef; }
+.badge.stuck {
+  background: #ffe3e3;
+  border-color: #b91c1c;
+  color: #7f1d1d;
+}
 
 .metrics {
   display: grid;
