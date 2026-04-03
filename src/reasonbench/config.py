@@ -48,6 +48,8 @@ class RunConfig:
     enable_cache: bool = True
     enable_checkpoint: bool = True
     enable_leakage_check: bool = True
+    continue_on_error: bool = True
+    max_error_records: int = 1000
 
 
 @dataclass

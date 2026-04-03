@@ -42,7 +42,7 @@ if [[ "$KEEP_EXISTING" -eq 0 ]]; then
       echo "Stopping session: $session_name"
       screen -S "$session_name" -X quit || true
     fi
-  done < <(screen -list | awk '/[0-9]+\.[^[:space:]]+[[:space:]]+\((Detached|Attached)\)/ { split($1, parts, "."); print parts[2] }')
+  done < <(screen -list | sed -nE 's/^[[:space:]]*[0-9]+\.([^[:space:]]+)[[:space:]].*\((Detached|Attached)\).*/\1/p')
 fi
 
 echo "Preparing timestamped rerun manifest..."

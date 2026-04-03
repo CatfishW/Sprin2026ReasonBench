@@ -46,19 +46,45 @@ class ExperimentRunner:
 
     def _run_one(self, example: Example, strategy) -> ExperimentRecord:
         strategy_result = strategy.run(example, self.client, self.strategy_context)
-        evaluation = self.evaluator.evaluate(example, strategy_result.final_text)
+        evaluation = self.evaluator.evaluate(
+            example,
+            strategy_result.final_text,
+            reasoning_content=strategy_result.reasoning_content,
+        )
         from_cache = bool(strategy_result.metadata.get('from_cache', False))
         return ExperimentRecord(
             example_id=example.example_id,
             dataset_name=example.dataset_name,
             strategy_name=strategy_result.strategy_name,
             final_text=strategy_result.final_text,
+            reasoning_content=strategy_result.reasoning_content,
             primary_score=evaluation.primary_score,
             metrics=evaluation.metrics,
             api_calls=strategy_result.api_calls,
             wall_time_s=strategy_result.wall_time_s,
             from_cache=from_cache,
             metadata={'example_metadata': example.metadata, 'trace': strategy_result.trace},
+        )
+
+    def _build_error_record(self, example: Example, strategy_name: str, exc: Exception) -> ExperimentRecord:
+        return ExperimentRecord(
+            example_id=example.example_id,
+            dataset_name=example.dataset_name,
+            strategy_name=strategy_name,
+            final_text="",
+            primary_score=0.0,
+            metrics={
+                "is_unscorable": True,
+                "unscorable_reason": "generation_error",
+                "format_valid": False,
+                "error_type": type(exc).__name__,
+                "error_message": str(exc),
+            },
+            api_calls=0,
+            wall_time_s=0.0,
+            reasoning_content=None,
+            from_cache=False,
+            metadata={"example_metadata": example.metadata, "trace": []},
         )
 
     def run(self) -> dict[str, Any]:
@@ -85,6 +111,8 @@ class ExperimentRunner:
         print(f"[ReasonBench] pending_records={len(pending)} max_workers={self.config.run.max_workers}")
 
         new_records: list[ExperimentRecord] = []
+        error_records = 0
+        max_error_records = max(self.config.run.max_error_records, 0)
         with ThreadPoolExecutor(max_workers=self.config.run.max_workers) as executor:
             futures = {executor.submit(self._run_one, ex, strat): (ex, strat) for ex, strat in pending}
             progress_every = max(25, len(pending) // 200) if pending else 1
@@ -98,11 +126,23 @@ class ExperimentRunner:
                         f"[ReasonBench] error example_id={ex.example_id} "
                         f"strategy={strat.name} error={exc!r}"
                     )
-                    raise
+                    if not self.config.run.continue_on_error:
+                        raise
+                    error_records += 1
+                    record = self._build_error_record(ex, strat.name, exc)
+                    print(
+                        f"[ReasonBench] marked_unscorable example_id={ex.example_id} "
+                        f"strategy={strat.name} error_records={error_records}"
+                    )
                 new_records.append(record)
                 if self.checkpoint:
                     self.checkpoint.append(record)
                 completed_new += 1
+
+                if max_error_records and error_records >= max_error_records:
+                    raise RuntimeError(
+                        f"Exceeded max_error_records={max_error_records}; aborting run after repeated generation failures."
+                    )
 
                 if completed_new == 1 or completed_new % progress_every == 0 or completed_new == len(pending):
                     total_done = existing_records + completed_new
@@ -127,6 +167,7 @@ class ExperimentRunner:
             'example_count': len(self.examples),
             'completed_records': len(records),
             'new_records': len(new_records),
+            'error_records': error_records,
             'warnings': warnings,
             'elapsed_s': round(time.perf_counter() - started, 4),
         }
