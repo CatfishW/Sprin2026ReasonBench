@@ -14,8 +14,12 @@
   <main class="page">
     <section class="title-card card">
       <p class="kicker">Spring 2026</p>
-      <h1>ReasonBench Live Sessions</h1>
-      <p class="subtitle">Full datasets, all strategies, resumable screen runs</p>
+      <h1 id="runTitle">ReasonBench Live Sessions</h1>
+      <p class="subtitle">Full datasets (LiveBench, TruthfulQA, Room Assignment, AI2 ARC), all strategies, resumable screen runs</p>
+      <div class="run-meta">
+        <span id="runTag" class="meta-chip mono small">Run Tag: --</span>
+        <span id="launchedAt" class="meta-chip mono small">Launched: --</span>
+      </div>
       <div class="overall-wrap">
         <div class="overall-row">
           <span>Overall Progress</span>
@@ -23,6 +27,10 @@
         </div>
         <div class="progress-track"><div id="overallBar" class="progress-bar"></div></div>
         <p id="overallCounts" class="mono">0 / 0 records</p>
+      </div>
+      <div class="controls">
+        <button id="expandAll" class="control-btn" type="button">Expand All Details</button>
+        <button id="collapseAll" class="control-btn" type="button">Collapse All Details</button>
       </div>
       <p id="generatedAt" class="mono small">Last update: --</p>
     </section>

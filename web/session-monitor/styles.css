@@ -76,11 +76,46 @@ h1 {
   font-size: 15px;
 }
 
+.run-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.meta-chip {
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: #fff;
+}
+
 .overall-wrap {
   background: #fff8eb;
   border: 3px solid var(--ink);
   border-radius: 14px;
   padding: 10px;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.control-btn {
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  background: #fff;
+  padding: 7px 10px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.control-btn:hover {
+  transform: translateY(-1px);
 }
 
 .overall-row {
@@ -135,6 +170,21 @@ h1 {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+}
+
+.session-subhead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.chip {
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  padding: 2px 8px;
+  background: #fff;
+  font-size: 12px;
 }
 
 .session-name {
@@ -198,7 +248,94 @@ h1 {
   font-size: 12px;
 }
 
+.detail-block {
+  margin-top: 10px;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  background: #fffdf8;
+  padding: 8px;
+}
+
+.detail-block > summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.detail-block[open] {
+  background: #fff7e8;
+}
+
+.muted {
+  opacity: 0.75;
+}
+
+.metric-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.metric-pill {
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: #fff;
+  padding: 6px 8px;
+  min-width: 140px;
+}
+
+.metric-pill label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.metric-pill strong {
+  font-size: 14px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  background: #fff;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+  border: 2px solid var(--ink);
+  padding: 6px;
+  font-size: 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.strategy-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.signal-line {
+  margin: 8px 0;
+  font-size: 12px;
+}
+
 @media (max-width: 700px) {
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .session-name {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 480px) {
   .metrics {
     grid-template-columns: 1fr;
   }

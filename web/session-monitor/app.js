@@ -5,15 +5,136 @@ function esc(text) {
     .replaceAll('>', '&gt;');
 }
 
-function sessionCard(session) {
-  const logText = (session.last_log_lines || []).join('\n') || 'No logs yet.';
-  const pct = Number(session.progress_pct || 0);
+function formatInt(value) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) {
+    return '0';
+  }
+  return new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(numeric);
+}
+
+function formatFloat(value, digits = 3) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) {
+    return '--';
+  }
+  return numeric.toFixed(digits);
+}
+
+function formatTimestamp(raw) {
+  if (!raw) {
+    return '--';
+  }
+  const parsed = new Date(raw);
+  if (Number.isNaN(parsed.getTime())) {
+    return esc(raw);
+  }
+  return parsed.toLocaleString();
+}
+
+function detailOpenAttr(openState, key, fallbackOpen = false) {
+  if (openState && openState.has(key)) {
+    return 'open';
+  }
+  if (!openState && fallbackOpen) {
+    return 'open';
+  }
+  return '';
+}
+
+function metricRollupMarkup(liveSummary) {
+  const entries = Object.entries(liveSummary?.metric_rollup || {});
+  if (entries.length === 0) {
+    return '<p class="muted">No rollup metrics yet.</p>';
+  }
 
   return `
-    <article class="session-card card">
+    <div class="metric-pills">
+      ${entries
+        .map(
+          ([name, value]) => `
+            <span class="metric-pill">
+              <label>${esc(name)}</label>
+              <strong>${formatFloat(value, 4)}</strong>
+            </span>
+          `,
+        )
+        .join('')}
+    </div>
+  `;
+}
+
+function leaderboardMarkup(liveSummary) {
+  const rows = liveSummary?.leaderboard || [];
+  if (rows.length === 0) {
+    return '<p class="muted">No leaderboard rows yet.</p>';
+  }
+
+  return `
+    <div class="table-wrap">
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th>Strategy</th>
+            <th>Primary</th>
+            <th>Records</th>
+            <th>API</th>
+            <th>Wall(s)</th>
+            <th>Cache</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows
+            .map((row) => {
+              const strategyMetrics = Object.entries(row.metric_means || {})
+                .map(([name, value]) => `${esc(name)}=${formatFloat(value, 4)}`)
+                .join(' | ');
+
+              return `
+                <tr>
+                  <td>
+                    <div class="strategy-cell">
+                      <strong>${esc(row.strategy || 'unknown')}</strong>
+                      <span class="mono small muted">${esc(strategyMetrics || 'no metric means')}</span>
+                    </div>
+                  </td>
+                  <td>${formatFloat(row.mean_primary_score, 4)}</td>
+                  <td>${formatInt(row.records)}</td>
+                  <td>${formatFloat(row.mean_api_calls, 3)}</td>
+                  <td>${formatFloat(row.mean_wall_time_s, 3)}</td>
+                  <td>${formatFloat(row.cache_hit_rate, 4)}</td>
+                </tr>
+              `;
+            })
+            .join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function sessionCard(session, openState) {
+  const logText = (session.last_log_lines || []).join('\n') || 'No logs yet.';
+  const displayName = session.display_name || session.name;
+  const pct = Number(session.progress_pct || 0);
+  const detailsKeyBase = esc(session.name || 'session');
+  const liveSummary = session.live_summary || {};
+
+  const detailsSummary = [
+    `records scanned: ${formatInt(liveSummary.records_scanned || 0)}`,
+    `best strategy: ${esc(liveSummary.best_strategy || 'N/A')}`,
+  ].join(' | ');
+
+  return `
+    <article class="session-card card" data-session="${esc(session.name)}">
       <div class="session-head">
-        <h2 class="session-name">${esc(session.name)}</h2>
+        <h2 class="session-name">${esc(displayName)}</h2>
         <span class="badge ${esc(session.state)}">${esc(session.state.replaceAll('_', ' '))}</span>
+      </div>
+      <div class="session-subhead">
+        <span class="chip">${esc(session.dataset_kind || 'dataset')}</span>
+        <span class="chip">${esc(session.model || 'model')}</span>
+        <span class="chip">run: ${esc(session.run_tag || '--')}</span>
       </div>
       <div class="metrics">
         <div class="metric">
@@ -26,15 +147,65 @@ function sessionCard(session) {
         </div>
         <div class="metric">
           <label>Expected</label>
-          <strong>${esc(session.expected_records)}</strong>
+          <strong>${formatInt(session.expected_records)}</strong>
+        </div>
+        <div class="metric">
+          <label>Remaining</label>
+          <strong>${formatInt(session.remaining_records)}</strong>
+        </div>
+        <div class="metric">
+          <label>Strategies</label>
+          <strong>${formatInt(session.strategy_count)}</strong>
+        </div>
+        <div class="metric">
+          <label>Examples</label>
+          <strong>${formatInt(session.example_count)}</strong>
         </div>
       </div>
       <div class="progress-track"><div class="progress-bar" style="width:${pct}%;"></div></div>
-      <p class="path mono">checkpoint: ${esc(session.checkpoint_path)}</p>
-      <p class="path mono">log: ${esc(session.latest_log || 'N/A')}</p>
-      <pre class="log-snippet mono">${esc(logText)}</pre>
+
+      <details class="detail-block" data-section="live" ${detailOpenAttr(openState, `${detailsKeyBase}:live`, session.state === 'running')}>
+        <summary>Live Metrics</summary>
+        <p class="mono small muted">${detailsSummary}</p>
+        ${metricRollupMarkup(liveSummary)}
+        ${leaderboardMarkup(liveSummary)}
+      </details>
+
+      <details class="detail-block" data-section="signals" ${detailOpenAttr(openState, `${detailsKeyBase}:signals`, false)}>
+        <summary>Signals</summary>
+        <p class="signal-line mono"><strong>Last progress:</strong> ${esc(session.last_progress_line || 'N/A')}</p>
+        <p class="signal-line mono"><strong>Last error:</strong> ${esc(session.last_error_line || 'N/A')}</p>
+      </details>
+
+      <details class="detail-block" data-section="logs" ${detailOpenAttr(openState, `${detailsKeyBase}:logs`, false)}>
+        <summary>Paths & Logs</summary>
+        <p class="path mono">config: ${esc(session.config_path)}</p>
+        <p class="path mono">output: ${esc(session.output_dir || 'N/A')}</p>
+        <p class="path mono">checkpoint: ${esc(session.checkpoint_path)}</p>
+        <p class="path mono">latest log: ${esc(session.latest_log || 'N/A')}</p>
+        <pre class="log-snippet mono">${esc(logText)}</pre>
+      </details>
     </article>
   `;
+}
+
+function captureOpenDetailState() {
+  const state = new Set();
+  document.querySelectorAll('.session-card details[open]').forEach((details) => {
+    const card = details.closest('.session-card');
+    const sessionName = card?.dataset.session;
+    const section = details.dataset.section;
+    if (sessionName && section) {
+      state.add(`${sessionName}:${section}`);
+    }
+  });
+  return state;
+}
+
+function setAllDetails(open) {
+  document.querySelectorAll('.session-card details').forEach((details) => {
+    details.open = open;
+  });
 }
 
 async function refresh() {
@@ -50,15 +221,23 @@ async function refresh() {
     const overallPctText = document.getElementById('overallPct');
     const overallCounts = document.getElementById('overallCounts');
     const generatedAt = document.getElementById('generatedAt');
+    const runTitle = document.getElementById('runTitle');
+    const runTag = document.getElementById('runTag');
+    const launchedAt = document.getElementById('launchedAt');
     const grid = document.getElementById('sessionGrid');
+    const hasPreviousCards = grid.children.length > 0;
+    const openState = hasPreviousCards ? captureOpenDetailState() : null;
 
     overallBar.style.width = `${overallPct}%`;
     overallPctText.textContent = `${overallPct.toFixed(2)}%`;
-    overallCounts.textContent = `${data.overall?.completed_records || 0} / ${data.overall?.expected_records || 0} records`;
-    generatedAt.textContent = `Last update: ${data.generated_at || '--'}`;
+    overallCounts.textContent = `${formatInt(data.overall?.completed_records || 0)} / ${formatInt(data.overall?.expected_records || 0)} records`;
+    generatedAt.textContent = `Last update: ${formatTimestamp(data.generated_at)}`;
+    runTitle.textContent = data.run_title || 'ReasonBench Live Sessions';
+    runTag.textContent = `Run Tag: ${data.run_tag || '--'}`;
+    launchedAt.textContent = `Launched: ${formatTimestamp(data.launched_at)}`;
 
     const sessions = data.sessions || [];
-    grid.innerHTML = sessions.map(sessionCard).join('');
+    grid.innerHTML = sessions.map((session) => sessionCard(session, openState)).join('');
   } catch (error) {
     document.getElementById('sessionGrid').innerHTML = `
       <article class="session-card card">
@@ -68,6 +247,9 @@ async function refresh() {
     `;
   }
 }
+
+document.getElementById('expandAll')?.addEventListener('click', () => setAllDetails(true));
+document.getElementById('collapseAll')?.addEventListener('click', () => setAllDetails(false));
 
 refresh();
 setInterval(refresh, 10000);
