@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-04-14T21:31:17.036777+00:00",
+  "generated_at": "2026-04-14T21:32:01.998010+00:00",
   "run_tag": "spring26_room_truth_rerun_2026-04-14",
   "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
   "launched_at": "2026-04-14T20:27:35.629142+00:00",
   "run_manifest": "web/session-monitor/active_run.json",
   "overall": {
-    "completed_records": 592,
+    "completed_records": 598,
     "expected_records": 931224,
     "progress_pct": 0.06
   },
@@ -25,9 +25,9 @@
       "model": "/home/tang/Models/Qwen3.5-4B",
       "strategy_count": 12,
       "example_count": 37984,
-      "completed_records": 187,
+      "completed_records": 190,
       "expected_records": 455808,
-      "remaining_records": 455621,
+      "remaining_records": 455618,
       "progress_pct": 0.04,
       "last_progress_line": "[ReasonBench] progress total=146/455808 (0.03%) new=1/455663 elapsed_s=92.4",
       "last_error_line": "",
@@ -50,7 +50,7 @@
         "[ReasonBench] progress total=146/455808 (0.03%) new=1/455663 elapsed_s=92.4"
       ],
       "live_summary": {
-        "records_scanned": 187,
+        "records_scanned": 190,
         "best_strategy": "coconut",
         "leaderboard": [
           {
@@ -83,16 +83,16 @@
           },
           {
             "strategy": "self_verify",
-            "records": 15,
-            "mean_primary_score": 0.0732,
+            "records": 16,
+            "mean_primary_score": 0.0686,
             "mean_api_calls": 2.0,
-            "mean_wall_time_s": 116.55,
+            "mean_wall_time_s": 116.274,
             "cache_hit_rate": 0.0,
             "metric_means": {
-              "room_exact_accuracy": 0.0417,
-              "entity_room_accuracy": 0.175,
+              "room_exact_accuracy": 0.0391,
+              "entity_room_accuracy": 0.1641,
               "all_rooms_exact": 0.0,
-              "format_valid": 0.7333
+              "format_valid": 0.75
             }
           },
           {
@@ -125,16 +125,16 @@
           },
           {
             "strategy": "few_shot_exemplar",
-            "records": 15,
-            "mean_primary_score": 0.0417,
+            "records": 16,
+            "mean_primary_score": 0.0391,
             "mean_api_calls": 1.0,
-            "mean_wall_time_s": 54.006,
+            "mean_wall_time_s": 54.155,
             "cache_hit_rate": 0.0,
             "metric_means": {
-              "room_exact_accuracy": 0.0333,
-              "entity_room_accuracy": 0.05,
+              "room_exact_accuracy": 0.0312,
+              "entity_room_accuracy": 0.0469,
               "all_rooms_exact": 0.0,
-              "format_valid": 0.8
+              "format_valid": 0.8125
             }
           },
           {
@@ -209,24 +209,24 @@
           },
           {
             "strategy": "critique_refine",
-            "records": 15,
-            "mean_primary_score": 0.0,
+            "records": 16,
+            "mean_primary_score": 0.0026,
             "mean_api_calls": 3.0,
-            "mean_wall_time_s": 139.255,
+            "mean_wall_time_s": 139.291,
             "cache_hit_rate": 0.0,
             "metric_means": {
               "room_exact_accuracy": 0.0,
-              "entity_room_accuracy": 0.0,
+              "entity_room_accuracy": 0.0078,
               "all_rooms_exact": 0.0,
-              "format_valid": 0.7333
+              "format_valid": 0.75
             }
           }
         ],
         "metric_rollup": {
-          "room_exact_accuracy": 0.0657,
-          "entity_room_accuracy": 0.1123,
-          "all_rooms_exact": 0.0428,
-          "format_valid": 0.8021
+          "room_exact_accuracy": 0.0646,
+          "entity_room_accuracy": 0.1112,
+          "all_rooms_exact": 0.0421,
+          "format_valid": 0.8053
         }
       }
     },
@@ -245,10 +245,10 @@
       "model": "/home/tang/Models/Qwen3.5-4B",
       "strategy_count": 12,
       "example_count": 817,
-      "completed_records": 258,
+      "completed_records": 260,
       "expected_records": 9804,
-      "remaining_records": 9546,
-      "progress_pct": 2.63,
+      "remaining_records": 9544,
+      "progress_pct": 2.65,
       "last_progress_line": "[ReasonBench] progress total=246/9804 (2.51%) new=48/9606 elapsed_s=709.1",
       "last_error_line": "",
       "stale_retry_streak": 0,
@@ -270,7 +270,7 @@
         "[ReasonBench] progress total=246/9804 (2.51%) new=48/9606 elapsed_s=709.1"
       ],
       "live_summary": {
-        "records_scanned": 258,
+        "records_scanned": 260,
         "best_strategy": "concise_cot",
         "leaderboard": [
           {
@@ -340,10 +340,10 @@
           },
           {
             "strategy": "few_shot_exemplar",
-            "records": 21,
+            "records": 22,
             "mean_primary_score": 0.5714,
             "mean_api_calls": 1.0,
-            "mean_wall_time_s": 31.159,
+            "mean_wall_time_s": 31.32,
             "cache_hit_rate": 0.0,
             "metric_means": {
               "bleu_acc": 0.6190476190476191,
@@ -353,10 +353,10 @@
           },
           {
             "strategy": "self_consistency",
-            "records": 21,
+            "records": 22,
             "mean_primary_score": 0.5714,
             "mean_api_calls": 3.0,
-            "mean_wall_time_s": 34.361,
+            "mean_wall_time_s": 35.204,
             "cache_hit_rate": 0.0,
             "metric_means": {
               "bleu_acc": 0.5238095238095238,
@@ -441,7 +441,7 @@
         "primary_metric": "rouge1_acc",
         "proxy_metric_rollup": {
           "format_valid": 0.0,
-          "truth_delta": 0.0425,
+          "truth_delta": 0.0418,
           "is_unscorable": 1.0
         }
       }
@@ -461,9 +461,9 @@
       "model": "Qwen/Qwen3.5-27B-FP8",
       "strategy_count": 12,
       "example_count": 37984,
-      "completed_records": 35,
+      "completed_records": 36,
       "expected_records": 455808,
-      "remaining_records": 455773,
+      "remaining_records": 455772,
       "progress_pct": 0.01,
       "last_progress_line": "[ReasonBench] progress total=23/455808 (0.01%) new=1/455786 elapsed_s=236.8",
       "last_error_line": "",
@@ -486,7 +486,7 @@
         "[ReasonBench] progress total=23/455808 (0.01%) new=1/455786 elapsed_s=236.8"
       ],
       "live_summary": {
-        "records_scanned": 35,
+        "records_scanned": 36,
         "best_strategy": "few_shot_exemplar",
         "leaderboard": [
           {
@@ -653,24 +653,24 @@
           },
           {
             "strategy": "coconut",
-            "records": 2,
+            "records": 3,
             "mean_primary_score": 0.0,
             "mean_api_calls": 5.0,
-            "mean_wall_time_s": 232.605,
+            "mean_wall_time_s": 216.907,
             "cache_hit_rate": 0.0,
             "metric_means": {
               "room_exact_accuracy": 0.0,
               "entity_room_accuracy": 0.0,
               "all_rooms_exact": 0.0,
-              "format_valid": 1.0
+              "format_valid": 0.6667
             }
           }
         ],
         "metric_rollup": {
-          "room_exact_accuracy": 0.3344,
-          "entity_room_accuracy": 0.4691,
-          "all_rooms_exact": 0.2593,
-          "format_valid": 0.6286,
+          "room_exact_accuracy": 0.3225,
+          "entity_room_accuracy": 0.4524,
+          "all_rooms_exact": 0.25,
+          "format_valid": 0.6111,
           "is_unscorable": 1.0
         }
       }
@@ -734,25 +734,38 @@
           {
             "strategy": "concise_cot",
             "records": 10,
-            "mean_primary_score": 0.6667,
+            "mean_primary_score": 0.7,
             "mean_api_calls": 1.0,
             "mean_wall_time_s": 25.237,
             "cache_hit_rate": 0.0,
             "metric_means": {
-              "bleu_acc": 0.8888888888888888,
-              "rouge1_acc": 0.6666666666666666
+              "bleu_acc": 0.8,
+              "rouge1_acc": 0.7
             },
             "primary_metric": "rouge1_acc"
           },
           {
             "strategy": "direct",
             "records": 10,
-            "mean_primary_score": 0.6667,
+            "mean_primary_score": 0.7,
             "mean_api_calls": 1.0,
             "mean_wall_time_s": 30.208,
             "cache_hit_rate": 0.0,
             "metric_means": {
-              "bleu_acc": 0.6666666666666666,
+              "bleu_acc": 0.7,
+              "rouge1_acc": 0.7
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "constraint_decompose",
+            "records": 10,
+            "mean_primary_score": 0.6667,
+            "mean_api_calls": 0.9,
+            "mean_wall_time_s": 62.101,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.4444444444444444,
               "rouge1_acc": 0.6666666666666666
             },
             "primary_metric": "rouge1_acc"
@@ -810,40 +823,27 @@
             "primary_metric": "rouge1_acc"
           },
           {
-            "strategy": "constraint_decompose",
-            "records": 10,
-            "mean_primary_score": 0.625,
-            "mean_api_calls": 0.9,
-            "mean_wall_time_s": 62.101,
-            "cache_hit_rate": 0.0,
-            "metric_means": {
-              "bleu_acc": 0.375,
-              "rouge1_acc": 0.625
-            },
-            "primary_metric": "rouge1_acc"
-          },
-          {
             "strategy": "tree_of_thoughts",
             "records": 9,
-            "mean_primary_score": 0.625,
+            "mean_primary_score": 0.6667,
             "mean_api_calls": 4.0,
             "mean_wall_time_s": 104.941,
             "cache_hit_rate": 0.0,
             "metric_means": {
-              "bleu_acc": 0.75,
-              "rouge1_acc": 0.625
+              "bleu_acc": 0.7777777777777778,
+              "rouge1_acc": 0.6666666666666666
             },
             "primary_metric": "rouge1_acc"
           },
           {
-            "strategy": "least_to_most",
-            "records": 10,
+            "strategy": "coconut",
+            "records": 9,
             "mean_primary_score": 0.4444,
-            "mean_api_calls": 1.0,
-            "mean_wall_time_s": 37.266,
+            "mean_api_calls": 5.0,
+            "mean_wall_time_s": 128.873,
             "cache_hit_rate": 0.0,
             "metric_means": {
-              "bleu_acc": 0.5555555555555556,
+              "bleu_acc": 0.6666666666666666,
               "rouge1_acc": 0.4444444444444444
             },
             "primary_metric": "rouge1_acc"
@@ -862,26 +862,26 @@
             "primary_metric": "rouge1_acc"
           },
           {
-            "strategy": "coconut",
-            "records": 9,
-            "mean_primary_score": 0.375,
-            "mean_api_calls": 5.0,
-            "mean_wall_time_s": 128.873,
+            "strategy": "least_to_most",
+            "records": 10,
+            "mean_primary_score": 0.4,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 37.266,
             "cache_hit_rate": 0.0,
             "metric_means": {
-              "bleu_acc": 0.75,
-              "rouge1_acc": 0.375
+              "bleu_acc": 0.5,
+              "rouge1_acc": 0.4
             },
             "primary_metric": "rouge1_acc"
           }
         ],
         "metric_rollup": {
-          "bleu_acc": 0.6562,
-          "rouge1_acc": 0.6076
+          "bleu_acc": 0.6481,
+          "rouge1_acc": 0.6222
         },
         "evaluation_mode": "official_truthfulqa",
         "official_status": "ok",
-        "official_message": "Official scoring throttled.",
+        "official_message": "",
         "official_summary_path": "outputs/full_truthfulqa_27b__spring26_room_truth_rerun_2026-04-14/official_truthfulqa/summary.csv",
         "primary_metric": "rouge1_acc",
         "proxy_metric_rollup": {
