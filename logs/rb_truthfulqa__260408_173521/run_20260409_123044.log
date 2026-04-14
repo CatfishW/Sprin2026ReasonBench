@@ -1,0 +1,236 @@
+============================================================
+session_name: rb_truthfulqa__260408_173521
+attempt: 5
+started_at: 2026-04-09T12:30:44-04:00
+config_path: configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies.toml
+checkpoint_path: outputs/full_truthfulqa__spring26_2026-04-08__17-35-21/results.jsonl
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies.toml
+============================================================
+[ReasonBench] experiment=truthfulqa_full_all_strategies__spring26_2026-04-08__17-35-21 examples=817 strategies=10 expected_total=8170 existing_checkpoint_records=2962
+[ReasonBench] pending_records=5208 max_workers=4
+[ReasonBench] progress total=2963/8170 (36.27%) new=1/5208 elapsed_s=0.2
+[ReasonBench] progress total=2988/8170 (36.57%) new=26/5208 elapsed_s=743.0
+[ReasonBench] progress total=3014/8170 (36.89%) new=52/5208 elapsed_s=1481.3
+[ReasonBench] progress total=3040/8170 (37.21%) new=78/5208 elapsed_s=2283.4
+[ReasonBench] progress total=3066/8170 (37.53%) new=104/5208 elapsed_s=3041.4
+[ReasonBench] progress total=3092/8170 (37.85%) new=130/5208 elapsed_s=4647.4
+[ReasonBench] error example_id=309 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=309 strategy=critique_refine error_records=1
+[ReasonBench] progress total=3118/8170 (38.16%) new=156/5208 elapsed_s=7782.9
+[ReasonBench] error example_id=313 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=313 strategy=constraint_decompose error_records=2
+[ReasonBench] error example_id=313 strategy=few_shot_exemplar error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=313 strategy=few_shot_exemplar error_records=3
+[ReasonBench] progress total=3144/8170 (38.48%) new=182/5208 elapsed_s=11635.7
+[ReasonBench] error example_id=314 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=314 strategy=self_verify error_records=4
+[ReasonBench] error example_id=315 strategy=concise_cot error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=315 strategy=concise_cot error_records=5
+[ReasonBench] error example_id=315 strategy=least_to_most error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=315 strategy=least_to_most error_records=6
+[ReasonBench] error example_id=315 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=315 strategy=constraint_decompose error_records=7
+[ReasonBench] error example_id=315 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=315 strategy=critique_refine error_records=8
+[ReasonBench] error example_id=315 strategy=selective_self_consistency error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=315 strategy=selective_self_consistency error_records=9
+[ReasonBench] error example_id=315 strategy=few_shot_exemplar error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=315 strategy=few_shot_exemplar error_records=10
+[ReasonBench] error example_id=316 strategy=least_to_most error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=316 strategy=least_to_most error_records=11
+[ReasonBench] error example_id=316 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=316 strategy=constraint_decompose error_records=12
+[ReasonBench] error example_id=316 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=316 strategy=self_verify error_records=13
+[ReasonBench] progress total=3170/8170 (38.80%) new=208/5208 elapsed_s=15583.0
+[ReasonBench] error example_id=317 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=317 strategy=constraint_decompose error_records=14
+[ReasonBench] error example_id=317 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=317 strategy=self_verify error_records=15
+[ReasonBench] error example_id=317 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=317 strategy=critique_refine error_records=16
+[ReasonBench] error example_id=317 strategy=selective_self_consistency error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=317 strategy=selective_self_consistency error_records=17
+[ReasonBench] error example_id=317 strategy=few_shot_exemplar error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=317 strategy=few_shot_exemplar error_records=18
+[ReasonBench] error example_id=318 strategy=direct error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=318 strategy=direct error_records=19
+[ReasonBench] progress total=3196/8170 (39.12%) new=234/5208 elapsed_s=18606.4
+[ReasonBench] progress total=3222/8170 (39.44%) new=260/5208 elapsed_s=19297.0
+[ReasonBench] progress total=3248/8170 (39.76%) new=286/5208 elapsed_s=19999.1
+[ReasonBench] progress total=3274/8170 (40.07%) new=312/5208 elapsed_s=20600.2
+[ReasonBench] progress total=3300/8170 (40.39%) new=338/5208 elapsed_s=21131.9
+[ReasonBench] progress total=3326/8170 (40.71%) new=364/5208 elapsed_s=21658.9
+[ReasonBench] progress total=3352/8170 (41.03%) new=390/5208 elapsed_s=22138.4
+[ReasonBench] progress total=3378/8170 (41.35%) new=416/5208 elapsed_s=22662.4
+[ReasonBench] progress total=3404/8170 (41.66%) new=442/5208 elapsed_s=23171.3
+[ReasonBench] progress total=3430/8170 (41.98%) new=468/5208 elapsed_s=23744.8
+[ReasonBench] progress total=3456/8170 (42.30%) new=494/5208 elapsed_s=24330.6
+[ReasonBench] progress total=3482/8170 (42.62%) new=520/5208 elapsed_s=24949.8
+[ReasonBench] progress total=3508/8170 (42.94%) new=546/5208 elapsed_s=25530.6
+[ReasonBench] progress total=3534/8170 (43.26%) new=572/5208 elapsed_s=26084.4
+[ReasonBench] progress total=3560/8170 (43.57%) new=598/5208 elapsed_s=26739.6
+[ReasonBench] progress total=3586/8170 (43.89%) new=624/5208 elapsed_s=27379.9
+[ReasonBench] error example_id=359 strategy=self_consistency error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=359 strategy=self_consistency error_records=20
+[ReasonBench] error example_id=359 strategy=budgeted_cascade error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=359 strategy=budgeted_cascade error_records=21
+[ReasonBench] progress total=3612/8170 (44.21%) new=650/5208 elapsed_s=30468.1
+[ReasonBench] error example_id=361 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=361 strategy=critique_refine error_records=22
+[ReasonBench] error example_id=362 strategy=direct error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=362 strategy=direct error_records=23
+[ReasonBench] error example_id=362 strategy=least_to_most error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=362 strategy=least_to_most error_records=24
+[ReasonBench] error example_id=362 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=362 strategy=constraint_decompose error_records=25
+[ReasonBench] error example_id=362 strategy=budgeted_cascade error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=362 strategy=budgeted_cascade error_records=26
+[ReasonBench] error example_id=362 strategy=few_shot_exemplar error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=362 strategy=few_shot_exemplar error_records=27
+[ReasonBench] error example_id=363 strategy=concise_cot error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=363 strategy=concise_cot error_records=28
+[ReasonBench] error example_id=363 strategy=least_to_most error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=363 strategy=least_to_most error_records=29
+[ReasonBench] error example_id=363 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=363 strategy=self_verify error_records=30
+[ReasonBench] error example_id=363 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=363 strategy=critique_refine error_records=31
+[ReasonBench] progress total=3638/8170 (44.53%) new=676/5208 elapsed_s=34416.5
+[ReasonBench] error example_id=364 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=364 strategy=critique_refine error_records=32
+[ReasonBench] error example_id=365 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=365 strategy=critique_refine error_records=33
+[ReasonBench] progress total=3664/8170 (44.85%) new=702/5208 elapsed_s=37395.6
+[ReasonBench] error example_id=366 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=366 strategy=self_verify error_records=34
+[ReasonBench] error example_id=367 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=367 strategy=critique_refine error_records=35
+[ReasonBench] error example_id=368 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=368 strategy=critique_refine error_records=36
+[ReasonBench] progress total=3690/8170 (45.17%) new=728/5208 elapsed_s=40246.0
+[ReasonBench] error example_id=369 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=369 strategy=constraint_decompose error_records=37
+[ReasonBench] error example_id=369 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=369 strategy=self_verify error_records=38
+[ReasonBench] error example_id=369 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=369 strategy=critique_refine error_records=39
+[ReasonBench] error example_id=369 strategy=selective_self_consistency error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=369 strategy=selective_self_consistency error_records=40
+[ReasonBench] error example_id=370 strategy=least_to_most error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=370 strategy=least_to_most error_records=41
+[ReasonBench] error example_id=370 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=370 strategy=constraint_decompose error_records=42
+[ReasonBench] error example_id=370 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=370 strategy=self_verify error_records=43
+[ReasonBench] error example_id=370 strategy=selective_self_consistency error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=370 strategy=selective_self_consistency error_records=44
+[ReasonBench] error example_id=371 strategy=direct error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=371 strategy=direct error_records=45
+[ReasonBench] error example_id=371 strategy=concise_cot error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=371 strategy=concise_cot error_records=46
+[ReasonBench] error example_id=371 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=371 strategy=constraint_decompose error_records=47
+[ReasonBench] error example_id=371 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=371 strategy=critique_refine error_records=48
+[ReasonBench] error example_id=371 strategy=self_consistency error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=371 strategy=self_consistency error_records=49
+[ReasonBench] progress total=3716/8170 (45.48%) new=754/5208 elapsed_s=45412.1
+[ReasonBench] error example_id=371 strategy=selective_self_consistency error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=371 strategy=selective_self_consistency error_records=50
+[ReasonBench] error example_id=371 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=371 strategy=self_verify error_records=51
+[ReasonBench] error example_id=372 strategy=concise_cot error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=372 strategy=concise_cot error_records=52
+[ReasonBench] error example_id=372 strategy=least_to_most error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=372 strategy=least_to_most error_records=53
+[ReasonBench] error example_id=372 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=372 strategy=constraint_decompose error_records=54
+[ReasonBench] error example_id=372 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=372 strategy=self_verify error_records=55
+[ReasonBench] error example_id=372 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=372 strategy=critique_refine error_records=56
+[ReasonBench] error example_id=372 strategy=few_shot_exemplar error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=372 strategy=few_shot_exemplar error_records=57
+[ReasonBench] error example_id=373 strategy=least_to_most error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=373 strategy=least_to_most error_records=58
+[ReasonBench] error example_id=373 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=373 strategy=constraint_decompose error_records=59
+[ReasonBench] error example_id=373 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=373 strategy=self_verify error_records=60
+[ReasonBench] error example_id=373 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=373 strategy=critique_refine error_records=61
+[ReasonBench] progress total=3742/8170 (45.80%) new=780/5208 elapsed_s=48780.0
+[ReasonBench] error example_id=374 strategy=least_to_most error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=374 strategy=least_to_most error_records=62
+[ReasonBench] error example_id=374 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=374 strategy=constraint_decompose error_records=63
+[ReasonBench] error example_id=374 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=374 strategy=critique_refine error_records=64
+[ReasonBench] error example_id=374 strategy=self_consistency error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=374 strategy=self_consistency error_records=65
+[ReasonBench] error example_id=374 strategy=selective_self_consistency error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=374 strategy=selective_self_consistency error_records=66
+[ReasonBench] error example_id=375 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=375 strategy=self_verify error_records=67
+[ReasonBench] error example_id=375 strategy=few_shot_exemplar error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=375 strategy=few_shot_exemplar error_records=68
+[ReasonBench] error example_id=375 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=375 strategy=critique_refine error_records=69
+[ReasonBench] progress total=3768/8170 (46.12%) new=806/5208 elapsed_s=52174.6
+[ReasonBench] error example_id=377 strategy=direct error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=377 strategy=direct error_records=70
+[ReasonBench] error example_id=376 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=376 strategy=critique_refine error_records=71
+[ReasonBench] error example_id=377 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=377 strategy=critique_refine error_records=72
+[ReasonBench] error example_id=377 strategy=few_shot_exemplar error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=377 strategy=few_shot_exemplar error_records=73
+[ReasonBench] error example_id=377 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=377 strategy=self_verify error_records=74
+[ReasonBench] error example_id=378 strategy=least_to_most error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=378 strategy=least_to_most error_records=75
+[ReasonBench] error example_id=378 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=378 strategy=constraint_decompose error_records=76
+[ReasonBench] error example_id=379 strategy=direct error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=379 strategy=direct error_records=77
+[ReasonBench] progress total=3794/8170 (46.44%) new=832/5208 elapsed_s=56844.1
+[ReasonBench] error example_id=379 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=379 strategy=self_verify error_records=78
+[ReasonBench] error example_id=379 strategy=few_shot_exemplar error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=379 strategy=few_shot_exemplar error_records=79
+[ReasonBench] error example_id=380 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=380 strategy=self_verify error_records=80
+[ReasonBench] progress total=3820/8170 (46.76%) new=858/5208 elapsed_s=59435.6
+[ReasonBench] error example_id=383 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=383 strategy=constraint_decompose error_records=81
+[ReasonBench] progress total=3846/8170 (47.07%) new=884/5208 elapsed_s=62390.8
+[ReasonBench] error example_id=385 strategy=few_shot_exemplar error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=385 strategy=few_shot_exemplar error_records=82
+[ReasonBench] error example_id=386 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=386 strategy=constraint_decompose error_records=83
+[ReasonBench] error example_id=386 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=386 strategy=critique_refine error_records=84
+[ReasonBench] progress total=3872/8170 (47.39%) new=910/5208 elapsed_s=64891.8
+[ReasonBench] error example_id=387 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=387 strategy=constraint_decompose error_records=85
+[ReasonBench] error example_id=387 strategy=self_consistency error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=387 strategy=self_consistency error_records=86
+[ReasonBench] error example_id=387 strategy=selective_self_consistency error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=387 strategy=selective_self_consistency error_records=87
+[ReasonBench] error example_id=388 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=388 strategy=self_verify error_records=88
+[ReasonBench] error example_id=389 strategy=direct error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=389 strategy=direct error_records=89
+[ReasonBench] progress total=3898/8170 (47.71%) new=936/5208 elapsed_s=68339.0
+[ReasonBench] progress total=3924/8170 (48.03%) new=962/5208 elapsed_s=69325.1
+[ReasonBench] error example_id=394 strategy=self_consistency error=TypeError("'set_iterator' object cannot be interpreted as an integer")
+[ReasonBench] marked_unscorable example_id=394 strategy=self_consistency error_records=90
+[ReasonBench] progress total=3950/8170 (48.35%) new=988/5208 elapsed_s=69767.8
+finished_at: 2026-04-10T07:55:37-04:00
+exit_code: 139
+checkpoint_records_before: 2962
+checkpoint_records_after: 3955
+checkpoint_records_added: 993
+Run failed (exit 139). stale_attempts=0. Will resume from checkpoint after 20s...

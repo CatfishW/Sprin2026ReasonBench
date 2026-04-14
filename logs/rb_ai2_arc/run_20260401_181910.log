@@ -1,0 +1,41 @@
+============================================================
+session_name: rb_ai2_arc
+attempt: 1
+started_at: 2026-04-01T18:19:10-04:00
+config_path: configs/experiments/full_ai2_arc_all_strategies.toml
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/full_ai2_arc_all_strategies.toml
+============================================================
+[ReasonBench] experiment=ai2_arc_full_all_strategies examples=7787 strategies=10 expected_total=77870 existing_checkpoint_records=0
+[ReasonBench] pending_records=77870 max_workers=4
+[ReasonBench] progress total=1/77870 (0.00%) new=1/77870 elapsed_s=9.9
+[ReasonBench] progress total=389/77870 (0.50%) new=389/77870 elapsed_s=1865.1
+[ReasonBench] progress total=778/77870 (1.00%) new=778/77870 elapsed_s=3700.6
+[ReasonBench] progress total=1167/77870 (1.50%) new=1167/77870 elapsed_s=6657.4
+[ReasonBench] progress total=1556/77870 (2.00%) new=1556/77870 elapsed_s=9549.4
+[ReasonBench] progress total=1945/77870 (2.50%) new=1945/77870 elapsed_s=12238.5
+[ReasonBench] progress total=2334/77870 (3.00%) new=2334/77870 elapsed_s=14943.5
+[ReasonBench] progress total=2723/77870 (3.50%) new=2723/77870 elapsed_s=17685.2
+[ReasonBench] progress total=3112/77870 (4.00%) new=3112/77870 elapsed_s=20451.9
+[ReasonBench] progress total=3501/77870 (4.50%) new=3501/77870 elapsed_s=23249.5
+[ReasonBench] progress total=3890/77870 (5.00%) new=3890/77870 elapsed_s=25889.8
+[ReasonBench] progress total=4279/77870 (5.50%) new=4279/77870 elapsed_s=28520.6
+[ReasonBench] progress total=4668/77870 (5.99%) new=4668/77870 elapsed_s=31227.2
+[ReasonBench] progress total=5057/77870 (6.49%) new=5057/77870 elapsed_s=34010.6
+[ReasonBench] progress total=5446/77870 (6.99%) new=5446/77870 elapsed_s=36626.5
+[ReasonBench] progress total=5835/77870 (7.49%) new=5835/77870 elapsed_s=39032.1
+[ReasonBench] progress total=6224/77870 (7.99%) new=6224/77870 elapsed_s=41293.4
+[ReasonBench] progress total=6613/77870 (8.49%) new=6613/77870 elapsed_s=43291.8
+[ReasonBench] progress total=7002/77870 (8.99%) new=7002/77870 elapsed_s=45230.8
+[ReasonBench] progress total=7391/77870 (9.49%) new=7391/77870 elapsed_s=47099.4
+[ReasonBench] progress total=7780/77870 (9.99%) new=7780/77870 elapsed_s=49005.1
+[ReasonBench] progress total=8169/77870 (10.49%) new=8169/77870 elapsed_s=50985.1
+[ReasonBench] progress total=8558/77870 (10.99%) new=8558/77870 elapsed_s=52984.8
+[ReasonBench] progress total=8947/77870 (11.49%) new=8947/77870 elapsed_s=54825.5
+[ReasonBench] progress total=9336/77870 (11.99%) new=9336/77870 elapsed_s=56716.5
+[ReasonBench] progress total=9725/77870 (12.49%) new=9725/77870 elapsed_s=58675.0
+[ReasonBench] progress total=10114/77870 (12.99%) new=10114/77870 elapsed_s=60548.3
+[ReasonBench] progress total=10503/77870 (13.49%) new=10503/77870 elapsed_s=62406.2
+[ReasonBench] progress total=10892/77870 (13.99%) new=10892/77870 elapsed_s=64366.2
+[ReasonBench] progress total=11281/77870 (14.49%) new=11281/77870 elapsed_s=66277.0
+[ReasonBench] error example_id=ARC-Challenge:validation:LEAP__7_10354 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))

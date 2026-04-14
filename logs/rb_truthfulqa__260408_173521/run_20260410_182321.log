@@ -1,0 +1,31 @@
+============================================================
+session_name: rb_truthfulqa__260408_173521
+attempt: 19
+started_at: 2026-04-10T18:23:21-04:00
+config_path: configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies.toml
+checkpoint_path: outputs/full_truthfulqa__spring26_2026-04-08__17-35-21/results.jsonl
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies.toml
+============================================================
+[ReasonBench] experiment=truthfulqa_full_all_strategies__spring26_2026-04-08__17-35-21 examples=817 strategies=10 expected_total=8170 existing_checkpoint_records=6373
+[ReasonBench] pending_records=1797 max_workers=4
+[ReasonBench] progress total=6374/8170 (78.02%) new=1/1797 elapsed_s=0.1
+[ReasonBench] progress total=6398/8170 (78.31%) new=25/1797 elapsed_s=260.5
+[ReasonBench] progress total=6423/8170 (78.62%) new=50/1797 elapsed_s=578.9
+[ReasonBench] progress total=6448/8170 (78.92%) new=75/1797 elapsed_s=894.9
+[ReasonBench] progress total=6473/8170 (79.23%) new=100/1797 elapsed_s=1224.5
+[ReasonBench] progress total=6498/8170 (79.53%) new=125/1797 elapsed_s=1593.6
+[ReasonBench] progress total=6523/8170 (79.84%) new=150/1797 elapsed_s=1888.7
+[ReasonBench] progress total=6548/8170 (80.15%) new=175/1797 elapsed_s=2251.3
+[ReasonBench] progress total=6573/8170 (80.45%) new=200/1797 elapsed_s=2642.3
+[ReasonBench] progress total=6598/8170 (80.76%) new=225/1797 elapsed_s=2970.4
+[ReasonBench] progress total=6623/8170 (81.06%) new=250/1797 elapsed_s=3309.3
+[ReasonBench] progress total=6648/8170 (81.37%) new=275/1797 elapsed_s=3640.2
+[ReasonBench] progress total=6673/8170 (81.68%) new=300/1797 elapsed_s=3956.7
+[ReasonBench] progress total=6698/8170 (81.98%) new=325/1797 elapsed_s=4384.2
+finished_at: 2026-04-10T19:38:21-04:00
+exit_code: 139
+checkpoint_records_before: 6373
+checkpoint_records_after: 6704
+checkpoint_records_added: 331
+Run failed (exit 139). stale_attempts=0. Will resume from checkpoint after 20s...

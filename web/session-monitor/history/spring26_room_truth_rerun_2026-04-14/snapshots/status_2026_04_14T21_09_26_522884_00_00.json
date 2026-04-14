@@ -1,0 +1,877 @@
+{
+  "generated_at": "2026-04-14T21:09:26.522884+00:00",
+  "run_tag": "spring26_room_truth_rerun_2026-04-14",
+  "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+  "launched_at": "2026-04-14T20:27:35.629142+00:00",
+  "run_manifest": "web/session-monitor/active_run.json",
+  "overall": {
+    "completed_records": 371,
+    "expected_records": 931224,
+    "progress_pct": 0.04
+  },
+  "sessions": [
+    {
+      "name": "rb_room_assignment__260414_162735",
+      "display_name": "Room Assignment (4B)",
+      "state": "running",
+      "running": true,
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "config_path": "configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_room_assignment_all_strategies.toml",
+      "output_dir": "outputs/full_room_assignment__spring26_room_truth_rerun_2026-04-14",
+      "checkpoint_path": "outputs/full_room_assignment__spring26_room_truth_rerun_2026-04-14/results.jsonl",
+      "log_dir": "logs/rb_room_assignment__260414_162735",
+      "latest_log": "logs/rb_room_assignment__260414_162735/run_20260414_162735.log",
+      "dataset_kind": "room_assignment",
+      "model": "/home/tang/Models/Qwen3.5-4B",
+      "strategy_count": 12,
+      "example_count": 37984,
+      "completed_records": 126,
+      "expected_records": 455808,
+      "remaining_records": 455682,
+      "progress_pct": 0.03,
+      "last_progress_line": "[ReasonBench] progress total=1/455808 (0.00%) new=1/455808 elapsed_s=90.4",
+      "last_error_line": "",
+      "stale_retry_streak": 0,
+      "stuck": false,
+      "stuck_reason": "",
+      "last_exit_code": "",
+      "last_log_lines": [
+        "============================================================",
+        "session_name: rb_room_assignment__260414_162735",
+        "attempt: 1",
+        "started_at: 2026-04-14T16:27:35-04:00",
+        "config_path: configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_room_assignment_all_strategies.toml",
+        "checkpoint_path: outputs/full_room_assignment__spring26_room_truth_rerun_2026-04-14/results.jsonl",
+        "cwd: /mnt/Yanlai/ReasonBench",
+        "command: PYTHONUNBUFFERED=1 PYTHONPATH=src /mnt/Yanlai/ReasonBench/.venv/bin/python -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_room_assignment_all_strategies.toml",
+        "============================================================",
+        "[ReasonBench] experiment=room_assignment_full_all_strategies__spring26_room_truth_rerun_2026-04-14 examples=37984 strategies=12 expected_total=455808 existing_checkpoint_records=0",
+        "[ReasonBench] pending_records=455808 max_workers=4",
+        "[ReasonBench] progress total=1/455808 (0.00%) new=1/455808 elapsed_s=90.4"
+      ],
+      "live_summary": {
+        "records_scanned": 126,
+        "best_strategy": "coconut",
+        "leaderboard": [
+          {
+            "strategy": "coconut",
+            "records": 10,
+            "mean_primary_score": 0.4421,
+            "mean_api_calls": 5.0,
+            "mean_wall_time_s": 155.007,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.4308,
+              "entity_room_accuracy": 0.5,
+              "all_rooms_exact": 0.4,
+              "format_valid": 1.0
+            }
+          },
+          {
+            "strategy": "self_verify",
+            "records": 10,
+            "mean_primary_score": 0.1097,
+            "mean_api_calls": 2.0,
+            "mean_wall_time_s": 118.358,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0625,
+              "entity_room_accuracy": 0.2625,
+              "all_rooms_exact": 0.0,
+              "format_valid": 0.6
+            }
+          },
+          {
+            "strategy": "tree_of_thoughts",
+            "records": 10,
+            "mean_primary_score": 0.1,
+            "mean_api_calls": 4.0,
+            "mean_wall_time_s": 139.957,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.1,
+              "entity_room_accuracy": 0.1,
+              "all_rooms_exact": 0.1,
+              "format_valid": 0.8
+            }
+          },
+          {
+            "strategy": "few_shot_exemplar",
+            "records": 10,
+            "mean_primary_score": 0.0625,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 52.378,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.05,
+              "entity_room_accuracy": 0.075,
+              "all_rooms_exact": 0.0,
+              "format_valid": 0.7
+            }
+          },
+          {
+            "strategy": "direct",
+            "records": 11,
+            "mean_primary_score": 0.0458,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 56.133,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0341,
+              "entity_room_accuracy": 0.0909,
+              "all_rooms_exact": 0.0,
+              "format_valid": 0.8182
+            }
+          },
+          {
+            "strategy": "budgeted_cascade",
+            "records": 11,
+            "mean_primary_score": 0.0458,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 0.001,
+            "cache_hit_rate": 1.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0341,
+              "entity_room_accuracy": 0.0909,
+              "all_rooms_exact": 0.0,
+              "format_valid": 0.8182
+            }
+          },
+          {
+            "strategy": "selective_self_consistency",
+            "records": 10,
+            "mean_primary_score": 0.0347,
+            "mean_api_calls": 2.6,
+            "mean_wall_time_s": 56.316,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.025,
+              "entity_room_accuracy": 0.1,
+              "all_rooms_exact": 0.0,
+              "format_valid": 0.9
+            }
+          },
+          {
+            "strategy": "self_consistency",
+            "records": 11,
+            "mean_primary_score": 0.0316,
+            "mean_api_calls": 3.0,
+            "mean_wall_time_s": 56.043,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0227,
+              "entity_room_accuracy": 0.0909,
+              "all_rooms_exact": 0.0,
+              "format_valid": 0.9091
+            }
+          },
+          {
+            "strategy": "constraint_decompose",
+            "records": 11,
+            "mean_primary_score": 0.0071,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 55.744,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0,
+              "entity_room_accuracy": 0.0227,
+              "all_rooms_exact": 0.0,
+              "format_valid": 0.6364
+            }
+          },
+          {
+            "strategy": "concise_cot",
+            "records": 11,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 56.283,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0,
+              "entity_room_accuracy": 0.0,
+              "all_rooms_exact": 0.0,
+              "format_valid": 0.8182
+            }
+          },
+          {
+            "strategy": "least_to_most",
+            "records": 11,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 56.185,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0,
+              "entity_room_accuracy": 0.0,
+              "all_rooms_exact": 0.0,
+              "format_valid": 0.6364
+            }
+          },
+          {
+            "strategy": "critique_refine",
+            "records": 10,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 3.0,
+            "mean_wall_time_s": 138.098,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0,
+              "entity_room_accuracy": 0.0,
+              "all_rooms_exact": 0.0,
+              "format_valid": 0.8
+            }
+          }
+        ],
+        "metric_rollup": {
+          "room_exact_accuracy": 0.061,
+          "entity_room_accuracy": 0.1081,
+          "all_rooms_exact": 0.0397,
+          "format_valid": 0.7857
+        }
+      }
+    },
+    {
+      "name": "rb_truthfulqa__260414_162735",
+      "display_name": "TruthfulQA (4B)",
+      "state": "running",
+      "running": true,
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "config_path": "configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_truthfulqa_all_strategies.toml",
+      "output_dir": "outputs/full_truthfulqa__spring26_room_truth_rerun_2026-04-14",
+      "checkpoint_path": "outputs/full_truthfulqa__spring26_room_truth_rerun_2026-04-14/results.jsonl",
+      "log_dir": "logs/rb_truthfulqa__260414_162735",
+      "latest_log": "logs/rb_truthfulqa__260414_162735/run_20260414_162735.log",
+      "dataset_kind": "truthfulqa",
+      "model": "/home/tang/Models/Qwen3.5-4B",
+      "strategy_count": 12,
+      "example_count": 817,
+      "completed_records": 168,
+      "expected_records": 9804,
+      "remaining_records": 9636,
+      "progress_pct": 1.71,
+      "last_progress_line": "[ReasonBench] progress total=147/9804 (1.50%) new=147/9804 elapsed_s=2158.3",
+      "last_error_line": "[ReasonBench] error example_id=12 strategy=constraint_decompose error=TypeError(\"unsupported operand type(s) for -: 'list_iterator' and 'int'\")",
+      "stale_retry_streak": 0,
+      "stuck": false,
+      "stuck_reason": "",
+      "last_exit_code": "",
+      "last_log_lines": [
+        "checkpoint_path: outputs/full_truthfulqa__spring26_room_truth_rerun_2026-04-14/results.jsonl",
+        "cwd: /mnt/Yanlai/ReasonBench",
+        "command: PYTHONUNBUFFERED=1 PYTHONPATH=src /mnt/Yanlai/ReasonBench/.venv/bin/python -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_truthfulqa_all_strategies.toml",
+        "============================================================",
+        "[ReasonBench] experiment=truthfulqa_full_all_strategies__spring26_room_truth_rerun_2026-04-14 examples=817 strategies=12 expected_total=9804 existing_checkpoint_records=0",
+        "[ReasonBench] pending_records=9804 max_workers=4",
+        "[ReasonBench] progress total=1/9804 (0.01%) new=1/9804 elapsed_s=16.2",
+        "[ReasonBench] progress total=49/9804 (0.50%) new=49/9804 elapsed_s=708.5",
+        "[ReasonBench] progress total=98/9804 (1.00%) new=98/9804 elapsed_s=1423.4",
+        "[ReasonBench] error example_id=12 strategy=constraint_decompose error=TypeError(\"unsupported operand type(s) for -: 'list_iterator' and 'int'\")",
+        "[ReasonBench] marked_unscorable example_id=12 strategy=constraint_decompose error_records=1",
+        "[ReasonBench] progress total=147/9804 (1.50%) new=147/9804 elapsed_s=2158.3"
+      ],
+      "live_summary": {
+        "records_scanned": 168,
+        "best_strategy": "direct",
+        "leaderboard": [
+          {
+            "strategy": "direct",
+            "records": 15,
+            "mean_primary_score": 0.5714,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 37.863,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.6428571428571429,
+              "rouge1_acc": 0.5714285714285714
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "concise_cot",
+            "records": 14,
+            "mean_primary_score": 0.5714,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 38.591,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.6428571428571429,
+              "rouge1_acc": 0.5714285714285714
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "budgeted_cascade",
+            "records": 14,
+            "mean_primary_score": 0.5385,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 0.001,
+            "cache_hit_rate": 1.0,
+            "metric_means": {
+              "bleu_acc": 0.6153846153846154,
+              "rouge1_acc": 0.5384615384615384
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "selective_self_consistency",
+            "records": 14,
+            "mean_primary_score": 0.5385,
+            "mean_api_calls": 1.286,
+            "mean_wall_time_s": 37.003,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.46153846153846156,
+              "rouge1_acc": 0.5384615384615384
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "tree_of_thoughts",
+            "records": 13,
+            "mean_primary_score": 0.5,
+            "mean_api_calls": 4.0,
+            "mean_wall_time_s": 106.296,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.4166666666666667,
+              "rouge1_acc": 0.5
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "self_consistency",
+            "records": 14,
+            "mean_primary_score": 0.4615,
+            "mean_api_calls": 3.0,
+            "mean_wall_time_s": 34.414,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.5384615384615384,
+              "rouge1_acc": 0.46153846153846156
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "constraint_decompose",
+            "records": 14,
+            "mean_primary_score": 0.4167,
+            "mean_api_calls": 0.929,
+            "mean_wall_time_s": 45.979,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.5833333333333334,
+              "rouge1_acc": 0.4166666666666667
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "coconut",
+            "records": 13,
+            "mean_primary_score": 0.4167,
+            "mean_api_calls": 5.0,
+            "mean_wall_time_s": 118.603,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.5833333333333334,
+              "rouge1_acc": 0.4166666666666667
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "least_to_most",
+            "records": 15,
+            "mean_primary_score": 0.3846,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 44.909,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.6153846153846154,
+              "rouge1_acc": 0.38461538461538464
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "few_shot_exemplar",
+            "records": 14,
+            "mean_primary_score": 0.3846,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 32.863,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.6923076923076923,
+              "rouge1_acc": 0.38461538461538464
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "self_verify",
+            "records": 14,
+            "mean_primary_score": 0.3846,
+            "mean_api_calls": 2.0,
+            "mean_wall_time_s": 86.869,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.6153846153846154,
+              "rouge1_acc": 0.38461538461538464
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "critique_refine",
+            "records": 14,
+            "mean_primary_score": 0.3077,
+            "mean_api_calls": 3.0,
+            "mean_wall_time_s": 124.229,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.5384615384615384,
+              "rouge1_acc": 0.3076923076923077
+            },
+            "primary_metric": "rouge1_acc"
+          }
+        ],
+        "metric_rollup": {
+          "bleu_acc": 0.5788,
+          "rouge1_acc": 0.4563
+        },
+        "evaluation_mode": "official_truthfulqa",
+        "official_status": "error",
+        "official_message": "Command '['/mnt/Yanlai/ReasonBench/.venv/bin/python', '-m', 'truthfulqa.evaluate', '--input_path', '/mnt/Yanlai/ReasonBench/outputs/full_truthfulqa__spring26_room_truth_rerun_2026-04-14/official_truthfulqa/official_input.csv', '--models', 'direct', 'concise_cot', 'least_to_most', 'constraint_decompose', 'self_verify', 'critique_refine', 'self_consistency', 'selective_self_consistency', 'budgeted_cascade', 'few_shot_exemplar', 'tree_of_thoughts', 'coconut', '--metrics', 'bleu', 'rouge', '--output_path', '/mnt/Yanlai/ReasonBench/outputs/full_truthfulqa__spring26_room_truth_rerun_2026-04-14/official_truthfulqa/official_answers.csv']' died with <Signals.SIGSEGV: 11>. | stderr: un_bleu_and_rouge(model_key, questions)\n/mnt/Yanlai/ReasonBench/external/TruthfulQA/truthfulqa/evaluate.py:175: UserWarning: Answers missing for least_to_most 814!\n  questions = metrics.run_bleu_and_rouge(model_key, questions)\n/mnt/Yanlai/ReasonBench/external/TruthfulQA/truthfulqa/evaluate.py:175: UserWarning: Answers missing for least_to_most 815!\n  questions = metrics.run_bleu_and_rouge(model_key, questions)\n/mnt/Yanlai/ReasonBench/external/TruthfulQA/truthfulqa/evaluate.py:175: UserWarning: Answers missing for least_to_most 816!\n  questions = metrics.run_bleu_and_rouge(model_key, questions)",
+        "official_summary_path": "outputs/full_truthfulqa__spring26_room_truth_rerun_2026-04-14/official_truthfulqa/summary.csv",
+        "primary_metric": "rouge1_acc",
+        "proxy_metric_rollup": {
+          "format_valid": 0.0,
+          "truth_delta": 0.0338,
+          "is_unscorable": 1.0
+        }
+      }
+    },
+    {
+      "name": "rb_room_assignment_27b__260414_162735",
+      "display_name": "Room Assignment (27B)",
+      "state": "running",
+      "running": true,
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "config_path": "configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_room_assignment_all_strategies_27b.toml",
+      "output_dir": "outputs/full_room_assignment_27b__spring26_room_truth_rerun_2026-04-14",
+      "checkpoint_path": "outputs/full_room_assignment_27b__spring26_room_truth_rerun_2026-04-14/results.jsonl",
+      "log_dir": "logs/rb_room_assignment_27b__260414_162735",
+      "latest_log": "logs/rb_room_assignment_27b__260414_162735/run_20260414_162735.log",
+      "dataset_kind": "room_assignment",
+      "model": "Qwen/Qwen3.5-27B-FP8",
+      "strategy_count": 12,
+      "example_count": 37984,
+      "completed_records": 14,
+      "expected_records": 455808,
+      "remaining_records": 455794,
+      "progress_pct": 0.0,
+      "last_progress_line": "",
+      "last_error_line": "[ReasonBench] error example_id=0 strategy=selective_self_consistency error=RetryError(MaxRetryError(\"HTTPSConnectionPool(host='llm.agaii.org', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ResponseError('too many 504 error responses'))\"))",
+      "stale_retry_streak": 0,
+      "stuck": false,
+      "stuck_reason": "",
+      "last_exit_code": "",
+      "last_log_lines": [
+        "[ReasonBench] error example_id=0 strategy=least_to_most error=RetryError(MaxRetryError(\"HTTPSConnectionPool(host='llm.agaii.org', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ResponseError('too many 504 error responses'))\"))",
+        "[ReasonBench] marked_unscorable example_id=0 strategy=least_to_most error_records=3",
+        "[ReasonBench] error example_id=0 strategy=constraint_decompose error=RetryError(MaxRetryError(\"HTTPSConnectionPool(host='llm.agaii.org', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ResponseError('too many 504 error responses'))\"))",
+        "[ReasonBench] marked_unscorable example_id=0 strategy=constraint_decompose error_records=4",
+        "[ReasonBench] error example_id=0 strategy=self_verify error=RetryError(MaxRetryError(\"HTTPSConnectionPool(host='llm.agaii.org', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ResponseError('too many 504 error responses'))\"))",
+        "[ReasonBench] marked_unscorable example_id=0 strategy=self_verify error_records=5",
+        "[ReasonBench] error example_id=0 strategy=critique_refine error=RetryError(MaxRetryError(\"HTTPSConnectionPool(host='llm.agaii.org', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ResponseError('too many 504 error responses'))\"))",
+        "[ReasonBench] marked_unscorable example_id=0 strategy=critique_refine error_records=6",
+        "[ReasonBench] error example_id=0 strategy=self_consistency error=RetryError(MaxRetryError(\"HTTPSConnectionPool(host='llm.agaii.org', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ResponseError('too many 504 error responses'))\"))",
+        "[ReasonBench] marked_unscorable example_id=0 strategy=self_consistency error_records=7",
+        "[ReasonBench] error example_id=0 strategy=selective_self_consistency error=RetryError(MaxRetryError(\"HTTPSConnectionPool(host='llm.agaii.org', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ResponseError('too many 504 error responses'))\"))",
+        "[ReasonBench] marked_unscorable example_id=0 strategy=selective_self_consistency error_records=8"
+      ],
+      "live_summary": {
+        "records_scanned": 14,
+        "best_strategy": "direct",
+        "leaderboard": [
+          {
+            "strategy": "direct",
+            "records": 2,
+            "mean_primary_score": 0.5,
+            "mean_api_calls": 0.5,
+            "mean_wall_time_s": 29.625,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.5,
+              "room_exact_accuracy": 1.0,
+              "entity_room_accuracy": 1.0,
+              "all_rooms_exact": 1.0
+            }
+          },
+          {
+            "strategy": "few_shot_exemplar",
+            "records": 1,
+            "mean_primary_score": 0.5,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 158.524,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.3333,
+              "entity_room_accuracy": 0.6667,
+              "all_rooms_exact": 0.0,
+              "format_valid": 1.0
+            }
+          },
+          {
+            "strategy": "budgeted_cascade",
+            "records": 1,
+            "mean_primary_score": 0.273,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 275.017,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.125,
+              "entity_room_accuracy": 0.6667,
+              "all_rooms_exact": 0.0,
+              "format_valid": 0.0
+            }
+          },
+          {
+            "strategy": "concise_cot",
+            "records": 2,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.5,
+            "mean_wall_time_s": 45.51,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.5,
+              "room_exact_accuracy": 0.0,
+              "entity_room_accuracy": 0.0,
+              "all_rooms_exact": 0.0
+            }
+          },
+          {
+            "strategy": "least_to_most",
+            "records": 1,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.0,
+            "mean_wall_time_s": 0.0,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          },
+          {
+            "strategy": "constraint_decompose",
+            "records": 1,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.0,
+            "mean_wall_time_s": 0.0,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          },
+          {
+            "strategy": "self_verify",
+            "records": 1,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.0,
+            "mean_wall_time_s": 0.0,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          },
+          {
+            "strategy": "critique_refine",
+            "records": 1,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.0,
+            "mean_wall_time_s": 0.0,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          },
+          {
+            "strategy": "self_consistency",
+            "records": 1,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.0,
+            "mean_wall_time_s": 0.0,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          },
+          {
+            "strategy": "selective_self_consistency",
+            "records": 1,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.0,
+            "mean_wall_time_s": 0.0,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          },
+          {
+            "strategy": "tree_of_thoughts",
+            "records": 1,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 4.0,
+            "mean_wall_time_s": 225.289,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0,
+              "entity_room_accuracy": 0.0,
+              "all_rooms_exact": 0.0,
+              "format_valid": 1.0
+            }
+          },
+          {
+            "strategy": "coconut",
+            "records": 1,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 5.0,
+            "mean_wall_time_s": 259.796,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0,
+              "entity_room_accuracy": 0.0,
+              "all_rooms_exact": 0.0,
+              "format_valid": 1.0
+            }
+          }
+        ],
+        "metric_rollup": {
+          "room_exact_accuracy": 0.2431,
+          "entity_room_accuracy": 0.3889,
+          "all_rooms_exact": 0.1667,
+          "format_valid": 0.3571,
+          "is_unscorable": 1.0
+        }
+      }
+    },
+    {
+      "name": "rb_truthfulqa_27b__260414_162735",
+      "display_name": "TruthfulQA (27B)",
+      "state": "running",
+      "running": true,
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "config_path": "configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_truthfulqa_all_strategies_27b.toml",
+      "output_dir": "outputs/full_truthfulqa_27b__spring26_room_truth_rerun_2026-04-14",
+      "checkpoint_path": "outputs/full_truthfulqa_27b__spring26_room_truth_rerun_2026-04-14/results.jsonl",
+      "log_dir": "logs/rb_truthfulqa_27b__260414_162735",
+      "latest_log": "logs/rb_truthfulqa_27b__260414_162735/run_20260414_162735.log",
+      "dataset_kind": "truthfulqa",
+      "model": "Qwen/Qwen3.5-27B-FP8",
+      "strategy_count": 12,
+      "example_count": 817,
+      "completed_records": 63,
+      "expected_records": 9804,
+      "remaining_records": 9741,
+      "progress_pct": 0.64,
+      "last_progress_line": "[ReasonBench] progress total=49/9804 (0.50%) new=49/9804 elapsed_s=2085.2",
+      "last_error_line": "[ReasonBench] error example_id=1 strategy=constraint_decompose error=RetryError(MaxRetryError(\"HTTPSConnectionPool(host='llm.agaii.org', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ResponseError('too many 504 error responses'))\"))",
+      "stale_retry_streak": 0,
+      "stuck": false,
+      "stuck_reason": "",
+      "last_exit_code": "",
+      "last_log_lines": [
+        "started_at: 2026-04-14T16:27:35-04:00",
+        "config_path: configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_truthfulqa_all_strategies_27b.toml",
+        "checkpoint_path: outputs/full_truthfulqa_27b__spring26_room_truth_rerun_2026-04-14/results.jsonl",
+        "cwd: /mnt/Yanlai/ReasonBench",
+        "command: PYTHONUNBUFFERED=1 PYTHONPATH=src /mnt/Yanlai/ReasonBench/.venv/bin/python -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_truthfulqa_all_strategies_27b.toml",
+        "============================================================",
+        "[ReasonBench] experiment=truthfulqa_full_all_strategies_27b__spring26_room_truth_rerun_2026-04-14 examples=817 strategies=12 expected_total=9804 existing_checkpoint_records=0",
+        "[ReasonBench] pending_records=9804 max_workers=2",
+        "[ReasonBench] progress total=1/9804 (0.01%) new=1/9804 elapsed_s=18.5",
+        "[ReasonBench] error example_id=1 strategy=constraint_decompose error=RetryError(MaxRetryError(\"HTTPSConnectionPool(host='llm.agaii.org', port=443): Max retries exceeded with url: /v1/chat/completions (Caused by ResponseError('too many 504 error responses'))\"))",
+        "[ReasonBench] marked_unscorable example_id=1 strategy=constraint_decompose error_records=1",
+        "[ReasonBench] progress total=49/9804 (0.50%) new=49/9804 elapsed_s=2085.2"
+      ],
+      "live_summary": {
+        "records_scanned": 63,
+        "best_strategy": "critique_refine",
+        "leaderboard": [
+          {
+            "strategy": "critique_refine",
+            "records": 5,
+            "mean_primary_score": 0.6,
+            "mean_api_calls": 3.0,
+            "mean_wall_time_s": 190.339,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.6,
+              "rouge1_acc": 0.6
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "few_shot_exemplar",
+            "records": 5,
+            "mean_primary_score": 0.6,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 32.688,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.2,
+              "rouge1_acc": 0.6
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "selective_self_consistency",
+            "records": 5,
+            "mean_primary_score": 0.6,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 25.045,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.6,
+              "rouge1_acc": 0.6
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "direct",
+            "records": 6,
+            "mean_primary_score": 0.5,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 32.799,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.5,
+              "rouge1_acc": 0.5
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "constraint_decompose",
+            "records": 5,
+            "mean_primary_score": 0.5,
+            "mean_api_calls": 0.8,
+            "mean_wall_time_s": 68.136,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.5,
+              "rouge1_acc": 0.5
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "concise_cot",
+            "records": 6,
+            "mean_primary_score": 0.4,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 34.237,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.8,
+              "rouge1_acc": 0.4
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "budgeted_cascade",
+            "records": 5,
+            "mean_primary_score": 0.4,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 0.0,
+            "cache_hit_rate": 1.0,
+            "metric_means": {
+              "bleu_acc": 0.6,
+              "rouge1_acc": 0.4
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "self_consistency",
+            "records": 5,
+            "mean_primary_score": 0.4,
+            "mean_api_calls": 3.0,
+            "mean_wall_time_s": 20.808,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.8,
+              "rouge1_acc": 0.4
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "self_verify",
+            "records": 5,
+            "mean_primary_score": 0.4,
+            "mean_api_calls": 2.0,
+            "mean_wall_time_s": 167.742,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 1.0,
+              "rouge1_acc": 0.4
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "tree_of_thoughts",
+            "records": 5,
+            "mean_primary_score": 0.4,
+            "mean_api_calls": 4.0,
+            "mean_wall_time_s": 117.424,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.8,
+              "rouge1_acc": 0.4
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "least_to_most",
+            "records": 6,
+            "mean_primary_score": 0.2,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 44.048,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.6,
+              "rouge1_acc": 0.2
+            },
+            "primary_metric": "rouge1_acc"
+          },
+          {
+            "strategy": "coconut",
+            "records": 5,
+            "mean_primary_score": 0.2,
+            "mean_api_calls": 5.0,
+            "mean_wall_time_s": 137.657,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "bleu_acc": 0.8,
+              "rouge1_acc": 0.2
+            },
+            "primary_metric": "rouge1_acc"
+          }
+        ],
+        "metric_rollup": {
+          "bleu_acc": 0.65,
+          "rouge1_acc": 0.4333
+        },
+        "evaluation_mode": "official_truthfulqa",
+        "official_status": "ok",
+        "official_message": "Official scoring throttled.",
+        "official_summary_path": "outputs/full_truthfulqa_27b__spring26_room_truth_rerun_2026-04-14/official_truthfulqa/summary.csv",
+        "primary_metric": "rouge1_acc",
+        "proxy_metric_rollup": {
+          "format_valid": 0.0,
+          "truth_delta": 0.0351,
+          "is_unscorable": 1.0
+        }
+      }
+    }
+  ]
+}

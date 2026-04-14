@@ -1,0 +1,9 @@
+============================================================
+session_name: rb_truthfulqa__260408_173521
+attempt: 21
+started_at: 2026-04-10T21:26:48-04:00
+config_path: configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies.toml
+checkpoint_path: outputs/full_truthfulqa__spring26_2026-04-08__17-35-21/results.jsonl
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies.toml
+============================================================

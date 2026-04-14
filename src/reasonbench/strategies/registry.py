@@ -5,10 +5,12 @@ from typing import Callable
 from reasonbench.strategies.base import Strategy
 from reasonbench.strategies.reflection import (
     BudgetedCascadeStrategy,
+    CoconutStrategy,
     CritiqueRefineStrategy,
     SelectiveSelfConsistencyStrategy,
     SelfConsistencyStrategy,
     SelfVerifyStrategy,
+    TreeOfThoughtsStrategy,
 )
 from reasonbench.strategies.simple import ConciseCoTStrategy, ConstraintDecomposeStrategy, DirectStrategy, ExternalDemoStrategy, LeastToMostStrategy
 
@@ -24,6 +26,8 @@ _STRATEGY_BUILDERS: dict[str, Callable[..., Strategy]] = {
     'selective_self_consistency': SelectiveSelfConsistencyStrategy,
     'budgeted_cascade': BudgetedCascadeStrategy,
     'few_shot_exemplar': ExternalDemoStrategy,
+    'tree_of_thoughts': TreeOfThoughtsStrategy,
+    'coconut': CoconutStrategy,
 }
 
 

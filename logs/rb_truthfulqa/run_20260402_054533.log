@@ -1,0 +1,15 @@
+============================================================
+session_name: rb_truthfulqa
+attempt: 38
+started_at: 2026-04-02T05:45:33-04:00
+config_path: configs/experiments/full_truthfulqa_all_strategies.toml
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/full_truthfulqa_all_strategies.toml
+============================================================
+[ReasonBench] experiment=truthfulqa_full_all_strategies examples=817 strategies=10 expected_total=8170 existing_checkpoint_records=2475
+[ReasonBench] pending_records=5695 max_workers=4
+[ReasonBench] progress total=2476/8170 (30.31%) new=1/5695 elapsed_s=0.1
+[ReasonBench] error example_id=247 strategy=selective_self_consistency error=TypeError("unsupported operand type(s) for -: 'list_iterator' and 'int'")
+finished_at: 2026-04-02T05:50:55-04:00
+exit_code: 139
+Run failed (exit 139). Will resume from checkpoint after 20s...

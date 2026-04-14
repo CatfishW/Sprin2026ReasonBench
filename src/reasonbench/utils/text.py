@@ -18,6 +18,21 @@ def strip_code_fences(text: str) -> str:
     return text.strip()
 
 
+def strip_reasoning_prefix(prediction: str, reasoning_content: str | None) -> str:
+    prediction_clean = strip_code_fences(prediction).strip()
+    if not reasoning_content:
+        return prediction_clean
+    reasoning_clean = strip_code_fences(reasoning_content).strip()
+    if not reasoning_clean:
+        return prediction_clean
+    if prediction_clean.startswith(reasoning_clean):
+        suffix = prediction_clean[len(reasoning_clean):].lstrip("\n\r ")
+        suffix = re.sub(r"^([:-])\s+", "", suffix, count=1)
+        if suffix:
+            return suffix
+    return prediction_clean
+
+
 def normalize_text(text: str) -> str:
     text = strip_code_fences(text).lower()
     text = text.translate(str.maketrans("", "", string.punctuation.replace("#", "")))

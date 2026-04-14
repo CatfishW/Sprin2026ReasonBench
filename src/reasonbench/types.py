@@ -42,6 +42,7 @@ class GenerationResult:
     latency_s: float = 0.0
     attempts: int = 1
     from_cache: bool = False
+    reasoning_content: str | None = None
     metadata: dict[str, Any] = field(default_factory=dict)
 
 
@@ -51,6 +52,7 @@ class StrategyResult:
     final_text: str
     api_calls: int
     wall_time_s: float
+    reasoning_content: str | None = None
     trace: list[dict[str, Any]] = field(default_factory=list)
     metadata: dict[str, Any] = field(default_factory=dict)
 
@@ -71,5 +73,6 @@ class ExperimentRecord:
     metrics: dict[str, Any]
     api_calls: int
     wall_time_s: float
+    reasoning_content: str | None = None
     from_cache: bool = False
     metadata: dict[str, Any] = field(default_factory=dict)

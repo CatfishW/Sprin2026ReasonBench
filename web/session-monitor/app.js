@@ -42,6 +42,111 @@ function detailOpenAttr(openState, key, fallbackOpen = false) {
   return '';
 }
 
+let selectedStatusPath = 'status.json';
+
+function normalizeStatusPath(pathValue) {
+  const raw = String(pathValue || '').trim();
+  if (!raw) {
+    return 'status.json';
+  }
+  if (raw.startsWith('/')) {
+    return raw.slice(1);
+  }
+  return raw;
+}
+
+function historyOptionLabel(item) {
+  const title = String(item?.run_title || item?.run_tag || 'snapshot');
+  const launched = formatTimestamp(item?.launched_at || '');
+  const generated = formatTimestamp(item?.generated_at || '');
+  const viewKind = String(item?.view_kind || 'latest').replaceAll('_', ' ');
+  const active = item?.is_active ? ' [active]' : '';
+  return `${title}${active} | ${viewKind} | launched: ${launched} | snapshot: ${generated}`;
+}
+
+function updateHistorySelector(indexPayload) {
+  const select = document.getElementById('historySelect');
+  const hint = document.getElementById('historyHint');
+  if (!select || !hint) {
+    return;
+  }
+
+  const runs = Array.isArray(indexPayload?.runs) ? indexPayload.runs : [];
+  const options = [{
+    value: 'status.json',
+    label: 'Current Live | status.json',
+  }];
+  const seen = new Set(['status.json']);
+
+  for (const item of runs) {
+    // Skip active "latest" mirror because it is equivalent to Current Live.
+    if (item?.is_active && String(item?.view_kind || '') === 'latest') {
+      continue;
+    }
+    const statusPath = normalizeStatusPath(item?.status_path || '');
+    if (!statusPath || statusPath === 'status.json') {
+      continue;
+    }
+    if (seen.has(statusPath)) {
+      continue;
+    }
+    seen.add(statusPath);
+    options.push({
+      value: statusPath,
+      label: historyOptionLabel(item),
+    });
+  }
+
+  const existingValue = normalizeStatusPath(selectedStatusPath);
+  const validValues = new Set(options.map((option) => option.value));
+  if (!validValues.has(existingValue)) {
+    selectedStatusPath = normalizeStatusPath(indexPayload?.active_status_path || 'status.json');
+  }
+
+  select.innerHTML = options
+    .map((option) => `<option value="${esc(option.value)}">${esc(option.label)}</option>`)
+    .join('');
+  select.value = normalizeStatusPath(selectedStatusPath);
+
+  const selectedOption = options.find((option) => option.value === select.value);
+  if (selectedOption && select.value !== 'status.json') {
+    hint.textContent = `Showing archived snapshot: ${selectedOption.label}`;
+  } else {
+    hint.textContent = 'Showing current live status.';
+  }
+}
+
+async function loadRunHistoryIndex() {
+  const now = Date.now();
+  const candidates = [
+    `run_history_v2.json?t=${now}`,
+    `run_history.json?t=${now}`,
+  ];
+
+  for (const url of candidates) {
+    try {
+      const response = await fetch(url, { cache: 'no-store' });
+      if (!response.ok) {
+        continue;
+      }
+      const payload = await response.json();
+      return payload;
+    } catch {
+      // Try next candidate.
+    }
+  }
+  return null;
+}
+
+async function fetchStatusPayload(statusPath) {
+  const normalizedPath = normalizeStatusPath(statusPath);
+  const response = await fetch(`${normalizedPath}?t=${Date.now()}`, { cache: 'no-store' });
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
+  return response.json();
+}
+
 function metricRollupMarkup(liveSummary) {
   const entries = Object.entries(liveSummary?.metric_rollup || {});
   if (entries.length === 0) {
@@ -66,6 +171,8 @@ function metricRollupMarkup(liveSummary) {
 
 function leaderboardMarkup(liveSummary) {
   const rows = liveSummary?.leaderboard || [];
+  const primaryLabelRaw = String(liveSummary?.primary_metric || 'primary');
+  const primaryLabel = primaryLabelRaw.replaceAll('_', ' ');
   if (rows.length === 0) {
     return '<p class="muted">No leaderboard rows yet.</p>';
   }
@@ -76,7 +183,7 @@ function leaderboardMarkup(liveSummary) {
         <thead>
           <tr>
             <th>Strategy</th>
-            <th>Primary</th>
+            <th>${esc(primaryLabel)}</th>
             <th>Records</th>
             <th>API</th>
             <th>Wall(s)</th>
@@ -122,11 +229,24 @@ function sessionCard(session, openState) {
   const isStuck = Boolean(session.stuck);
   const staleRetryStreak = Number(session.stale_retry_streak || 0);
   const stuckReason = session.stuck_reason || '';
+  const evalMode = String(liveSummary.evaluation_mode || 'proxy').replaceAll('_', ' ');
+  const primaryMetric = String(liveSummary.primary_metric || 'primary').replaceAll('_', ' ');
+  const officialStatus = String(liveSummary.official_status || '');
+  const officialMessage = String(liveSummary.official_message || '');
+  const officialSummaryPath = String(liveSummary.official_summary_path || '');
 
   const detailsSummary = [
     `records scanned: ${formatInt(liveSummary.records_scanned || 0)}`,
     `best strategy: ${esc(liveSummary.best_strategy || 'N/A')}`,
+    `eval mode: ${esc(evalMode)}`,
+    `primary metric: ${esc(primaryMetric)}`,
   ].join(' | ');
+
+  const completedRecords = formatInt(session.completed_records);
+  const expectedRecords = formatInt(session.expected_records);
+  const remainingRecords = formatInt(session.remaining_records);
+  const strategyCount = formatInt(session.strategy_count);
+  const exampleCount = formatInt(session.example_count);
 
   return `
     <article class="session-card card" data-session="${esc(session.name)}">
@@ -147,38 +267,33 @@ function sessionCard(session, openState) {
           <label>Progress</label>
           <strong>${pct.toFixed(2)}%</strong>
         </div>
-        <div class="metric">
-          <label>Completed</label>
-          <strong>${esc(session.completed_records)}</strong>
+        <div class="metric metric--wide">
+          <label>Records</label>
+          <strong>${completedRecords} / ${expectedRecords}</strong>
         </div>
         <div class="metric">
-          <label>Expected</label>
-          <strong>${formatInt(session.expected_records)}</strong>
-        </div>
-        <div class="metric">
-          <label>Remaining</label>
-          <strong>${formatInt(session.remaining_records)}</strong>
-        </div>
-        <div class="metric">
-          <label>Strategies</label>
-          <strong>${formatInt(session.strategy_count)}</strong>
-        </div>
-        <div class="metric">
-          <label>Examples</label>
-          <strong>${formatInt(session.example_count)}</strong>
+          <label>Stale Retry</label>
+          <strong>${formatInt(staleRetryStreak)}</strong>
         </div>
       </div>
       <div class="progress-track"><div class="progress-bar" style="width:${pct}%;"></div></div>
 
-      <details class="detail-block" data-section="live" ${detailOpenAttr(openState, `${detailsKeyBase}:live`, session.state === 'running')}>
+      <details class="detail-block" data-section="live" ${detailOpenAttr(openState, `${detailsKeyBase}:live`, false)}>
         <summary>Live Metrics</summary>
         <p class="mono small muted">${detailsSummary}</p>
+        ${officialStatus ? `<p class="mono small muted"><strong>official status:</strong> ${esc(officialStatus)}</p>` : ''}
+        ${officialMessage ? `<p class="mono small muted"><strong>official note:</strong> ${esc(officialMessage)}</p>` : ''}
+        ${officialSummaryPath ? `<p class="mono small muted"><strong>official summary:</strong> ${esc(officialSummaryPath)}</p>` : ''}
         ${metricRollupMarkup(liveSummary)}
         ${leaderboardMarkup(liveSummary)}
       </details>
 
       <details class="detail-block" data-section="signals" ${detailOpenAttr(openState, `${detailsKeyBase}:signals`, isStuck)}>
         <summary>Signals</summary>
+        <p class="signal-line mono"><strong>Completed / Expected:</strong> ${completedRecords} / ${expectedRecords}</p>
+        <p class="signal-line mono"><strong>Remaining:</strong> ${remainingRecords}</p>
+        <p class="signal-line mono"><strong>Examples:</strong> ${exampleCount}</p>
+        <p class="signal-line mono"><strong>Strategies:</strong> ${strategyCount}</p>
         <p class="signal-line mono"><strong>Stale retry streak:</strong> ${formatInt(staleRetryStreak)}${stuckReason ? ` (${esc(stuckReason)})` : ''}</p>
         <p class="signal-line mono"><strong>Last exit code:</strong> ${esc(session.last_exit_code || 'N/A')}</p>
         <p class="signal-line mono"><strong>Last progress:</strong> ${esc(session.last_progress_line || 'N/A')}</p>
@@ -218,12 +333,13 @@ function setAllDetails(open) {
 
 async function refresh() {
   try {
-    const response = await fetch(`status.json?t=${Date.now()}`, { cache: 'no-store' });
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+    const runHistory = await loadRunHistoryIndex();
+    if (runHistory) {
+      updateHistorySelector(runHistory);
     }
 
-    const data = await response.json();
+    const data = await fetchStatusPayload(selectedStatusPath);
+
     const overallPct = Number(data.overall?.progress_pct || 0);
     const overallBar = document.getElementById('overallBar');
     const overallPctText = document.getElementById('overallPct');
@@ -247,6 +363,10 @@ async function refresh() {
     const sessions = data.sessions || [];
     grid.innerHTML = sessions.map((session) => sessionCard(session, openState)).join('');
   } catch (error) {
+    const historyHint = document.getElementById('historyHint');
+    if (historyHint && normalizeStatusPath(selectedStatusPath) !== 'status.json') {
+      historyHint.textContent = `Selected archived snapshot failed to load: ${String(error.message || error)}`;
+    }
     document.getElementById('sessionGrid').innerHTML = `
       <article class="session-card card">
         <h2 class="session-name">Status source unavailable</h2>
@@ -258,6 +378,14 @@ async function refresh() {
 
 document.getElementById('expandAll')?.addEventListener('click', () => setAllDetails(true));
 document.getElementById('collapseAll')?.addEventListener('click', () => setAllDetails(false));
+document.getElementById('historySelect')?.addEventListener('change', (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLSelectElement)) {
+    return;
+  }
+  selectedStatusPath = normalizeStatusPath(target.value || 'status.json');
+  refresh();
+});
 
 refresh();
 setInterval(refresh, 10000);

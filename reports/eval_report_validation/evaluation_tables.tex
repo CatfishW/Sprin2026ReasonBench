@@ -1,0 +1,694 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{adjustbox}
+\usepackage{microtype}
+\captionsetup{font=small,labelfont=bf}
+\setlength{\emergencystretch}{2em}
+\title{ReasonBench Experimental Results (Partial Progress Snapshot)}
+\author{Automated Log/JSONL Extraction Pipeline}
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+This document is written as an experiment-results section for a top AI conference style report. It aggregates every currently completed evaluation record from active ReasonBench runs, with no extrapolation for unfinished jobs. For each run, we present strategy-level core metrics, dataset-specific metric means, completion coverage, and log-derived execution diagnostics.
+\end{abstract}
+\section*{Experimental Setup and Reporting Protocol}
+We evaluate multiple reasoning strategies across several benchmark datasets and model variants. The reporting policy is intentionally conservative: we only aggregate records that are fully completed and written to checkpoint/result JSONL files. Ongoing sessions are treated as partial snapshots rather than final claims.
+
+\textbf{Measurement equations.} Core columns are computed as follows: $\mathrm{cov\%}=100\times n/N_{\text{expected examples}}$, $\mathrm{primary}=\frac{1}{n}\sum_i s_i$, $\mathrm{api}=\frac{1}{n}\sum_i a_i$, $\mathrm{time}=\frac{1}{n}\sum_i t_i$, $\mathrm{cache\%}=100\times\frac{1}{n}\sum_i c_i$.
+\section*{Strategy Definitions}
+All strategies in this report share a common execution wrapper. For an example with $T$ turns (the length of \texttt{example.turns}), SingleShot-style strategies issue one model call per turn and carry forward the chat history. On the final turn, any dataset-provided formatting hint is appended to the user message. In strict benchmark mode, the system prompt includes an explicit leakage guard.
+
+\begin{quote}\footnotesize
+Base system instruction (strict mode): You are a careful reasoning assistant. Follow the task instructions exactly, avoid hallucinations, and prefer explicit uncertainty over fabricated claims. Do not use hidden benchmark examples or benchmark-specific leakage.
+\end{quote}
+
+\begin{table*}[t]
+\centering
+\caption{Reasoning strategies implemented in this evaluation suite.}
+\label{tab:strategy_summary}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabularx}{\textwidth}{>{\RaggedRight\arraybackslash}p{0.14\textwidth} >{\RaggedRight\arraybackslash}p{0.18\textwidth} >{\RaggedRight\arraybackslash}p{0.16\textwidth} >{\Centering\arraybackslash}p{0.10\textwidth} >{\RaggedRight\arraybackslash}X}
+\toprule
+Display & Name & Type & API calls & What it changes \\
+\midrule
+Direct & \texttt{direct} & Single-shot prompting & $T$ & Baseline strategy: a single forward pass that prioritizes concise, format-compliant answers. This is the cheapest option and is used as the fast path for compute-adaptive strategies. \\
+Concise-CoT & \texttt{concise\_\hspace{0pt}cot} & Single-shot prompting & $T$ & Adds a light chain-of-thought style scaffold while still emphasizing a final answer in the required format. Designed to improve multi-step correctness with minimal added verbosity. \\
+Least-to-Most & \texttt{least\_\hspace{0pt}to\_\hspace{0pt}most} & Single-shot prompting & $T$ & Encourages explicit subproblem decomposition (least-to-most) to reduce reasoning jumps. Useful for tasks where one missing step can derail the final output. \\
+Constraint-Decompose & \texttt{constraint\_\hspace{0pt}decompose} & Single-shot prompting & $T$ & A constraint-first variant of decomposition: it makes the model externalize key facts and constraints before solving. This often helps structured tasks (e.g., assignments, consistency constraints) where violating a single constraint breaks correctness. \\
+Self-Verify & \texttt{self\_\hspace{0pt}verify} & Two-pass reflection & $T + 1$ & Runs a draft pass and then a dedicated verification pass that checks the draft for common failure modes and fixes mistakes. Often improves format validity and reduces simple logical errors at roughly 2x the call budget. \\
+Critique-Refine & \texttt{critique\_\hspace{0pt}refine} & Three-pass reflection & $T + 2$ & Adds an explicit critique stage with a stricter reviewer persona, then a refinement stage conditioned on that critique. This can catch subtle formatting and reasoning defects but costs \textasciitilde{}3x calls in single-turn tasks. \\
+Self-Consistency & \texttt{self\_\hspace{0pt}consistency} & Sampling + majority vote & $S \cdot T$ & Samples multiple independent solutions at a higher temperature and returns the most common answer after canonicalization. This reduces variance and can improve reliability when the model is unstable, but increases compute linearly with the number of samples. \\
+Selective-SC & \texttt{selective\_\hspace{0pt}self\_\hspace{0pt}consistency} & Adaptive sampling & $T$ (no escalation) or $S \cdot T$ (escalated) & Runs a cheap first pass and only escalates to a smaller self-consistency vote when the output looks uncertain or malformed. This targets most of the benefit of self-consistency with a significantly lower average call budget. \\
+Budgeted-Cascade & \texttt{budgeted\_\hspace{0pt}cascade} & Fast/slow cascade & $T$ (fast-only) or $2T + 1$ (fast+verify) & A compute-budgeted reliability strategy: try a fast Direct answer first, and only if it fails a lightweight quality gate, fall back to Self-Verify. This often improves format correctness while keeping average cost low. \\
+Few-Shot Exemplar & \texttt{few\_\hspace{0pt}shot\_\hspace{0pt}exemplar} & Few-shot prompting (external demos) & $T$ & Prepends a fixed set of exemplar user and assistant messages from a JSONL demo file. This can improve formatting consistency and provide implicit task priors without changing the number of calls. \\
+\bottomrule
+\end{tabularx}
+\end{adjustbox}
+\normalsize
+\end{table*}
+
+\subsection*{Direct}
+\noindent\textbf{Type.} Single-shot prompting\\
+\textbf{Name.} \texttt{direct}\\
+\textbf{API calls.} $T$\\
+\textbf{Config parameters.} (none)\\
+
+\noindent\textbf{System-prompt addition / instruction.}
+\begin{quote}\footnotesize
+Solve the task directly. Keep the answer concise and avoid unnecessary explanation.
+\end{quote}
+\noindent\textbf{What it does.} Baseline strategy: a single forward pass that prioritizes concise, format-compliant answers. This is the cheapest option and is used as the fast path for compute-adaptive strategies.
+
+\noindent\textbf{Implementation details.} Implementation: inherits SingleShotStrategy. The strategy instruction is appended to the system prompt, then the example is executed over T turns (usually T=1). On the final turn, any dataset-specific format hint is appended to the user message.
+
+\subsection*{Concise-CoT}
+\noindent\textbf{Type.} Single-shot prompting\\
+\textbf{Name.} \texttt{concise\_\hspace{0pt}cot}\\
+\textbf{API calls.} $T$\\
+\textbf{Config parameters.} (none)\\
+
+\noindent\textbf{System-prompt addition / instruction.}
+\begin{quote}\footnotesize
+Reason step by step briefly, then provide the final answer in the requested format.
+\end{quote}
+\noindent\textbf{What it does.} Adds a light chain-of-thought style scaffold while still emphasizing a final answer in the required format. Designed to improve multi-step correctness with minimal added verbosity.
+
+\noindent\textbf{Implementation details.} Implementation: identical call pattern to Direct (SingleShotStrategy over turns), but with an instruction that encourages brief intermediate reasoning. In strict benchmark mode, the leakage guard remains active.
+
+\subsection*{Least-to-Most}
+\noindent\textbf{Type.} Single-shot prompting\\
+\textbf{Name.} \texttt{least\_\hspace{0pt}to\_\hspace{0pt}most}\\
+\textbf{API calls.} $T$\\
+\textbf{Config parameters.} (none)\\
+
+\noindent\textbf{System-prompt addition / instruction.}
+\begin{quote}\footnotesize
+Break the problem into smaller subproblems, solve them in order, and then provide the final answer. Keep the decomposition compact.
+\end{quote}
+\noindent\textbf{What it does.} Encourages explicit subproblem decomposition (least-to-most) to reduce reasoning jumps. Useful for tasks where one missing step can derail the final output.
+
+\noindent\textbf{Implementation details.} Implementation: SingleShotStrategy. The model is asked to generate a compact decomposition and solve sequentially within the same completion. The evaluator only consumes the final answer, but the decomposition can help the model stay consistent.
+
+\subsection*{Constraint-Decompose}
+\noindent\textbf{Type.} Single-shot prompting\\
+\textbf{Name.} \texttt{constraint\_\hspace{0pt}decompose}\\
+\textbf{API calls.} $T$\\
+\textbf{Config parameters.} (none)\\
+
+\noindent\textbf{System-prompt addition / instruction.}
+\begin{quote}\footnotesize
+First extract the critical constraints or facts in a compact list, then solve using those constraints, then give the final answer.
+\end{quote}
+\noindent\textbf{What it does.} A constraint-first variant of decomposition: it makes the model externalize key facts and constraints before solving. This often helps structured tasks (e.g., assignments, consistency constraints) where violating a single constraint breaks correctness.
+
+\noindent\textbf{Implementation details.} Implementation: SingleShotStrategy. The constraint list is produced inside the same completion; no extra tool calls are used. Because the formatting hint is appended to the final user turn, the strategy still has an explicit reminder to output in the expected schema.
+
+\subsection*{Self-Verify}
+\noindent\textbf{Type.} Two-pass reflection\\
+\textbf{Name.} \texttt{self\_\hspace{0pt}verify}\\
+\textbf{API calls.} $T + 1$\\
+\textbf{Config parameters.} (none)\\
+
+\noindent\textbf{System-prompt addition / instruction.}
+\begin{quote}\footnotesize
+Produce a draft answer, mentally verify it against the task requirements, and then return a corrected final answer.
+\end{quote}
+\noindent\textbf{What it does.} Runs a draft pass and then a dedicated verification pass that checks the draft for common failure modes and fixes mistakes. Often improves format validity and reduces simple logical errors at roughly 2x the call budget.
+
+\noindent\textbf{Implementation details.} Implementation: first calls SingleShotStrategy.\_run\_turns to obtain a draft (T calls), then issues one extra call with a user prompt that includes the task text and the draft answer. The verification instruction requests a corrected final answer only. Trace includes an extra step with turn\_index=verify.
+
+\subsection*{Critique-Refine}
+\noindent\textbf{Type.} Three-pass reflection\\
+\textbf{Name.} \texttt{critique\_\hspace{0pt}refine}\\
+\textbf{API calls.} $T + 2$\\
+\textbf{Config parameters.} (none)\\
+
+\noindent\textbf{System-prompt addition / instruction.}
+\begin{quote}\footnotesize
+Draft an answer, critique it for correctness and format, then refine it into the final answer.
+\end{quote}
+\noindent\textbf{What it does.} Adds an explicit critique stage with a stricter reviewer persona, then a refinement stage conditioned on that critique. This can catch subtle formatting and reasoning defects but costs \textasciitilde{}3x calls in single-turn tasks.
+
+\noindent\textbf{Implementation details.} Implementation: (1) draft via \_run\_turns (T calls); (2) critique with a dedicated system message 'You are a strict benchmark reviewer...' at temperature 0.0; (3) refine with the standard system prompt, conditioned on Task + Draft + Critique, returning only the improved final answer. Trace includes turn\_index=critique and turn\_index=refine.
+
+\subsection*{Self-Consistency}
+\noindent\textbf{Type.} Sampling + majority vote\\
+\textbf{Name.} \texttt{self\_\hspace{0pt}consistency}\\
+\textbf{API calls.} $S \cdot T$\\
+\textbf{Config parameters.} num\_samples (default 5), temperature (default max(t, 0.6))\\
+
+\noindent\textbf{System-prompt addition / instruction.}
+\begin{quote}\footnotesize
+Answer carefully.
+\end{quote}
+\noindent\textbf{What it does.} Samples multiple independent solutions at a higher temperature and returns the most common answer after canonicalization. This reduces variance and can improve reliability when the model is unstable, but increases compute linearly with the number of samples.
+
+\noindent\textbf{Implementation details.} Implementation: runs \_run\_turns S times (default S=5) with temperature=max(default\_temperature, 0.6) unless overridden. Each sample is mapped to a vote key via canonical\_vote\_key: for room-assignment style outputs it parses rooms/occupants; otherwise it normalizes text and prefers a 'final answer:' segment if present. The winner is the most frequent vote key; the returned text is the first sample that produced that key.
+
+\noindent\textbf{Voting rule.} We compute a canonical vote key $v=\mathrm{canonical\_vote\_key}(y)$ for each sample output $y$. For room-assignment outputs, $v$ is a normalized, sorted room-to-occupants representation; otherwise $v$ is normalized text (preferring a 'final answer' segment if present). The selected answer is the first output among the samples whose vote key attains the maximum count.
+
+\subsection*{Selective-SC}
+\noindent\textbf{Type.} Adaptive sampling\\
+\textbf{Name.} \texttt{selective\_\hspace{0pt}self\_\hspace{0pt}consistency}\\
+\textbf{API calls.} $T$ (no escalation) or $S \cdot T$ (escalated)\\
+\textbf{Config parameters.} num\_samples (default 4), temperature (default max(t, 0.6))\\
+
+\noindent\textbf{System-prompt addition / instruction.}
+\begin{quote}\footnotesize
+Answer carefully.
+\end{quote}
+\noindent\textbf{What it does.} Runs a cheap first pass and only escalates to a smaller self-consistency vote when the output looks uncertain or malformed. This targets most of the benefit of self-consistency with a significantly lower average call budget.
+
+\noindent\textbf{Implementation details.} Implementation: first executes \_run\_turns once (T calls). It escalates if the text is empty, contains uncertainty markers (maybe/perhaps/not sure), or fails dataset-specific heuristics (e.g., missing a room marker for room\_assignment; too short for truthfulqa). If escalated, it runs S-1 additional samples (default S=4 total, seeding the vote with the first pass) and majority-votes using canonical\_vote\_key. Metadata includes escalated=true/false and a vote histogram.
+
+\noindent\textbf{Escalation heuristic.} Escalate when the first-pass output is empty, contains uncertainty markers (e.g., \emph{maybe}, \emph{not sure}), or appears malformed for a dataset (e.g., missing room markers for room assignment; too-short responses for TruthfulQA). If no escalation, the returned output is the first pass (metadata: escalated=false).
+
+\subsection*{Budgeted-Cascade}
+\noindent\textbf{Type.} Fast/slow cascade\\
+\textbf{Name.} \texttt{budgeted\_\hspace{0pt}cascade}\\
+\textbf{API calls.} $T$ (fast-only) or $2T + 1$ (fast+verify)\\
+\textbf{Config parameters.} (none)\\
+
+\noindent\textbf{System-prompt additions / instructions.}
+\begin{quote}\footnotesize
+Fast path (Direct): Solve the task directly. Keep the answer concise and avoid unnecessary explanation.
+\\
+Slow path (Self-Verify): Produce a draft answer, mentally verify it against the task requirements, and then return a corrected final answer.
+\end{quote}
+\noindent\textbf{What it does.} A compute-budgeted reliability strategy: try a fast Direct answer first, and only if it fails a lightweight quality gate, fall back to Self-Verify. This often improves format correctness while keeping average cost low.
+
+\noindent\textbf{Implementation details.} Implementation: fast path runs DirectStrategy. If the output 'looks good enough' (dataset-specific heuristics; e.g., room marker present; not obviously uncertain), it returns immediately with cascade\_path=fast\_only. Otherwise it runs SelfVerifyStrategy and returns the verified answer with cascade\_path=fast\_then\_verify. When escalated, total calls are T (fast) + (T+1) (self-verify) = 2T+1 (3 calls when T=1). The trace is prefixed with a cascade\_stage=fast entry.
+
+\noindent\textbf{Quality gate.} Accept the fast Direct output if it is non-empty and does not look uncertain. For some datasets, additional schema/marker checks are applied (e.g., room markers for room assignment; minimum length for TruthfulQA). If rejected, run Self-Verify and return the verified answer (metadata: cascade\_path=fast\_then\_verify).
+
+\subsection*{Few-Shot Exemplar}
+\noindent\textbf{Type.} Few-shot prompting (external demos)\\
+\textbf{Name.} \texttt{few\_\hspace{0pt}shot\_\hspace{0pt}exemplar}\\
+\textbf{API calls.} $T$\\
+\textbf{Config parameters.} demo\_path (required)\\
+
+\noindent\textbf{System-prompt addition / instruction.}
+\begin{quote}\footnotesize
+Use the external exemplars as style guidance only, then solve the new problem.
+\end{quote}
+\noindent\textbf{What it does.} Prepends a fixed set of exemplar user and assistant messages from a JSONL demo file. This can improve formatting consistency and provide implicit task priors without changing the number of calls.
+
+\noindent\textbf{Implementation details.} Implementation: FewShotExemplarStrategy loads a demo JSONL containing \{user, assistant\} pairs and injects them as prior messages before the task. This increases context length (token cost) but typically keeps the number of API calls at T. The instruction explicitly frames exemplars as style guidance to reduce overfitting to demo content.
+
+\section*{Illustrations}
+\begin{figure*}[t]
+\centering
+\fbox{\parbox{0.96\textwidth}{
+\textbf{Illustration 1: Aggregation pipeline used in this report.}\\
+(a) Parse each \texttt{results.jsonl} record into \{strategy, primary score, api calls, wall time, metrics\}.\\
+(b) Convert boolean metrics to 0/1, keep numeric metrics as floats, and compute per-strategy means.\\
+(c) Compute coverage against expected examples from the corresponding TOML config.\\
+(d) Emit two tables per run: core metrics + dataset-specific metrics, then merge all runs into one PDF.
+}}
+\caption{End-to-end measurement and reporting pipeline.}
+\label{fig:pipeline}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\fbox{\parbox{0.96\textwidth}{
+\textbf{Illustration 2: How partial-progress runs are interpreted.}\\
+For each run, we report only completed records. Let $R$ be completed records and $E$ be expected records.\\
+Completion rate is $100 \times R/E$. Strategy-level coverage is $100 \times n/N_{\text{expected examples}}$.\\
+This avoids extrapolating unfinished evaluations while keeping all measured evidence visible.
+}}
+\caption{Partial-run accounting policy (strictly completed data only).}
+\label{fig:partial_policy}
+\end{figure*}
+
+\section*{Run Inventory}
+\begin{table*}[t]
+\centering
+\caption{Inventory of all discovered runs and current completion state.}
+\label{tab:run_inventory}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrl}
+\toprule
+Run & CompletedRecords & ExpectedRecords & Completion\% & StrategyCount & Model \\
+\midrule
+full\_ai2\_arc & 11586 & 77870 & 14.88 & 10 & Qwen3.5-4B \\
+full\_ai2\_arc\_27b & 1838 & 77870 & 2.36 & 10 & Qwen3.5-27B-FP8 \\
+full\_livebench & 598 & 14360 & 4.16 & 10 & Qwen3.5-27B-FP8 \\
+full\_room\_assignment & 3583 & 379840 & 0.94 & 10 & Qwen3.5-4B \\
+full\_room\_assignment\_27b & 343 & 379840 & 0.09 & 10 & Qwen3.5-27B-FP8 \\
+full\_truthfulqa & 2532 & 8170 & 30.99 & 10 & Qwen3.5-4B \\
+full\_truthfulqa\_27b & 752 & 8170 & 9.20 & 10 & Qwen3.5-27B-FP8 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}
+\section*{Results Narrative}
+\textbf{full\_ai2\_arc} uses Qwen3.5-4B and currently has 11586 completed records out of 77870 (14.88\%). The best observed strategy at this checkpoint is Self-Verify by mean primary score.
+
+\textbf{full\_ai2\_arc\_27b} uses Qwen3.5-27B-FP8 and currently has 1838 completed records out of 77870 (2.36\%). The best observed strategy at this checkpoint is Critique-Refine by mean primary score.
+
+\textbf{full\_livebench} uses Qwen3.5-27B-FP8 and currently has 598 completed records out of 14360 (4.16\%). The best observed strategy at this checkpoint is Direct by mean primary score.
+
+\textbf{full\_room\_assignment} uses Qwen3.5-4B and currently has 3583 completed records out of 379840 (0.94\%). The best observed strategy at this checkpoint is Self-Verify by mean primary score.
+
+\textbf{full\_room\_assignment\_27b} uses Qwen3.5-27B-FP8 and currently has 343 completed records out of 379840 (0.09\%). The best observed strategy at this checkpoint is Budgeted-Cascade by mean primary score.
+
+\textbf{full\_truthfulqa} uses Qwen3.5-4B and currently has 2532 completed records out of 8170 (30.99\%). The best observed strategy at this checkpoint is Budgeted-Cascade by mean primary score.
+
+\textbf{full\_truthfulqa\_27b} uses Qwen3.5-27B-FP8 and currently has 752 completed records out of 8170 (9.20\%). The best observed strategy at this checkpoint is Budgeted-Cascade by mean primary score.
+\section*{Core Variables and Metric Definitions}
+\begin{table*}[t]
+\centering
+\caption{Core table variables and measurement protocol.}
+\label{tab:variables}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{llll}
+\toprule
+Variable & Meaning & How measured & Unit/Range \\
+\midrule
+$n$ & Completed examples & Number of records aggregated for a strategy in this run. & count \\
+cov\% & Coverage & $100 \times n / N_{\text{expected examples}}$ & percentage \\
+primary & Primary score & Mean of evaluator-provided primary\_score over completed records. & dataset-dependent \\
+api & API calls & Mean number of model API calls used per completed record. & calls/record \\
+time(s) & Latency & Mean wall\_time\_s measured per completed record. & seconds/record \\
+cache\% & Cache hit rate & $100 \times \frac{1}{n}\sum_i c_i$, where $c_i \in \{0,1\}$ & percentage \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Metric glossary: definitions and measurement details for every reported metric.}
+\label{tab:metric_glossary}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{llll}
+\toprule
+Alias & Original metric name & How measured & Range \\
+\midrule
+acc & accuracy & Per record: 1 if extracted label equals gold answer key, else 0. Table value is the mean across records. & [0, 1] \\
+room-exact & room\_exact\_accuracy & For each record, proportion of rooms whose full occupant set exactly matches gold; table shows mean. & [0, 1] \\
+entity-room & entity\_room\_accuracy & For each record, proportion of entities assigned to the correct room; table shows mean. & [0, 1] \\
+all-rooms & all\_rooms\_exact & Boolean metric per record (all rooms exactly correct); converted to rate by averaging 0/1. & [0, 1] \\
+fmt-valid & format\_valid & Boolean per record (parser accepted required format); converted to rate by averaging 0/1. & [0, 1] \\
+pred-rooms & predicted\_room\_count & Number of room entries parsed from prediction per record; table shows mean. & Non-negative \\
+truth-delta & truth\_delta & Per record: max similarity to correct answers minus max similarity to incorrect answers; table shows mean. & Approximately [-1, 1] \\
+correct-sim & max\_correct\_similarity & Maximum soft similarity between prediction and any correct reference answer; table shows mean. & [0, 1] \\
+incorrect-sim & max\_incorrect\_similarity & Maximum soft similarity between prediction and any incorrect reference answer; table shows mean. & [0, 1] \\
+best-sim & best\_answer\_similarity & Soft similarity between prediction and canonical best answer; table shows mean. & [0, 1] \\
+info-proxy & informativeness\_proxy & Length/verbosity-based informativeness score from evaluator; table shows mean. & [0, 1] \\
+uninformative & looks\_uninformative & Boolean heuristic per record for non-informative answers; converted to rate by averaging 0/1. & [0, 1] \\
+proxy-exact & proxy\_exact\_match & Per record: exact normalized match against provided ground truth (proxy evaluator); table shows mean. & [0, 1] \\
+proxy-contains & proxy\_contains\_match & Per record: normalized ground truth appears in prediction (proxy evaluator); table shows mean. & [0, 1] \\
+official-flag & official\_scorer\_recommended & Boolean marker emitted by evaluator; converted to rate by averaging 0/1. & [0, 1] \\
+choice-count & choice\_count & Number of choices available in the ARC item; table shows mean. & Positive \\
+text-match & text\_match\_score & When label extraction fails, fallback best text similarity to options; table reports mean score. & [0, 1] \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}
+
+\section*{Per-Run Strategy Results}
+\begin{table*}[t]
+\centering
+\caption{Core results for full\_ai2\_arc.}
+\label{tab:full_ai2_arc_core}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+Strategy & $n$ & cov\% & primary & api & time(s) & cache\% \\
+\midrule
+Direct & 1159 & 14.88 & 0.2140 & 1.000 & 18.127 & 0.09 \\
+Concise-CoT & 1159 & 14.88 & 0.2140 & 1.000 & 20.541 & 0.09 \\
+Least-to-Most & 1159 & 14.88 & 0.2140 & 1.000 & 22.895 & 0.09 \\
+Constraint-Decompose & 1158 & 14.87 & 0.2142 & 1.000 & 24.200 & 0.09 \\
+Self-Verify & 1159 & 14.88 & 0.2148 & 2.000 & 40.926 & 0.09 \\
+Critique-Refine & 1158 & 14.87 & 0.2142 & 3.000 & 64.139 & 0.00 \\
+Self-Consistency & 1159 & 14.88 & 0.2140 & 3.000 & 19.482 & 0.00 \\
+Selective-SC & 1158 & 14.87 & 0.2142 & 1.135 & 20.201 & 0.09 \\
+Budgeted-Cascade & 1159 & 14.88 & 0.2140 & 1.102 & 1.089 & 95.25 \\
+Few-Shot Exemplar & 1158 & 14.87 & 0.2142 & 1.000 & 17.902 & 0.09 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}\parbox{0.98\textwidth}{\footnotesize Completed records: 11586 / 77870 (14.88\%). Expected examples per strategy: 7787. Primary excludes records flagged unscorable. Model: Qwen3.5-4B. Best observed strategy so far (by primary): Self-Verify.}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Dataset-specific metric means for full\_ai2\_arc.}
+\label{tab:full_ai2_arc_dataset}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrr}
+\toprule
+Strategy & acc & fmt-valid & choice-count & text-match \\
+\midrule
+Direct & 0.2140 & 1.0000 & 3.9991 & 0.0000 \\
+Concise-CoT & 0.2140 & 1.0000 & 3.9991 & 0.0000 \\
+Least-to-Most & 0.2140 & 1.0000 & 3.9991 & 0.0000 \\
+Constraint-Decompose & 0.2142 & 1.0000 & 3.9991 & 0.0000 \\
+Self-Verify & 0.2148 & 1.0000 & 3.9991 & 0.0000 \\
+Critique-Refine & 0.2142 & 0.9991 & 3.9991 & 0.0000 \\
+Self-Consistency & 0.2140 & 1.0000 & 3.9991 & 0.0000 \\
+Selective-SC & 0.2142 & 1.0000 & 3.9991 & 0.0000 \\
+Budgeted-Cascade & 0.2140 & 1.0000 & 3.9991 & 0.0000 \\
+Few-Shot Exemplar & 0.2142 & 1.0000 & 3.9991 & 0.0000 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}\parbox{0.98\textwidth}{\footnotesize Metric aliases are expanded in the Metric Glossary section.}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Core results for full\_ai2\_arc\_27b.}
+\label{tab:full_ai2_arc_27b_core}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+Strategy & $n$ & cov\% & primary & api & time(s) & cache\% \\
+\midrule
+Direct & 185 & 2.38 & 0.3135 & 1.000 & 55.925 & 0.00 \\
+Concise-CoT & 185 & 2.38 & 0.2486 & 1.000 & 61.129 & 0.00 \\
+Least-to-Most & 185 & 2.38 & 0.2541 & 1.000 & 59.184 & 0.00 \\
+Constraint-Decompose & 185 & 2.38 & 0.2541 & 1.000 & 70.439 & 0.00 \\
+Self-Verify & 183 & 2.35 & 0.3005 & 2.000 & 113.973 & 0.00 \\
+Critique-Refine & 183 & 2.35 & 0.3497 & 3.000 & 178.838 & 0.00 \\
+Self-Consistency & 183 & 2.35 & 0.2842 & 3.000 & 50.998 & 0.00 \\
+Selective-SC & 183 & 2.35 & 0.2896 & 1.077 & 55.039 & 0.00 \\
+Budgeted-Cascade & 183 & 2.35 & 0.3115 & 1.109 & 0.000 & 100.00 \\
+Few-Shot Exemplar & 183 & 2.35 & 0.2896 & 1.000 & 57.056 & 0.00 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}\parbox{0.98\textwidth}{\footnotesize Completed records: 1838 / 77870 (2.36\%). Expected examples per strategy: 7787. Primary excludes records flagged unscorable. Model: Qwen3.5-27B-FP8. Best observed strategy so far (by primary): Critique-Refine.}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Dataset-specific metric means for full\_ai2\_arc\_27b.}
+\label{tab:full_ai2_arc_27b_dataset}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrr}
+\toprule
+Strategy & acc & fmt-valid & choice-count & text-match \\
+\midrule
+Direct & 0.3135 & 1.0000 & 4.0000 & 0.0000 \\
+Concise-CoT & 0.2486 & 1.0000 & 4.0000 & 0.0000 \\
+Least-to-Most & 0.2541 & 1.0000 & 4.0000 & 0.0000 \\
+Constraint-Decompose & 0.2541 & 1.0000 & 4.0000 & 0.0000 \\
+Self-Verify & 0.3005 & 1.0000 & 4.0000 & 0.0000 \\
+Critique-Refine & 0.3497 & 1.0000 & 4.0000 & 0.0000 \\
+Self-Consistency & 0.2842 & 1.0000 & 4.0000 & 0.0000 \\
+Selective-SC & 0.2896 & 1.0000 & 4.0000 & 0.0000 \\
+Budgeted-Cascade & 0.3115 & 1.0000 & 4.0000 & 0.0000 \\
+Few-Shot Exemplar & 0.2896 & 1.0000 & 4.0000 & 0.0000 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}\parbox{0.98\textwidth}{\footnotesize Metric aliases are expanded in the Metric Glossary section.}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Core results for full\_livebench.}
+\label{tab:full_livebench_core}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+Strategy & $n$ & cov\% & primary & api & time(s) & cache\% \\
+\midrule
+Direct & 60 & 4.18 & 0.0000 & 1.000 & 96.214 & 0.00 \\
+Concise-CoT & 60 & 4.18 & 0.0000 & 1.000 & 97.943 & 0.00 \\
+Least-to-Most & 60 & 4.18 & 0.0000 & 1.000 & 93.906 & 0.00 \\
+Constraint-Decompose & 60 & 4.18 & 0.0000 & 1.000 & 92.207 & 0.00 \\
+Self-Verify & 60 & 4.18 & 0.0000 & 2.000 & 182.435 & 0.00 \\
+Critique-Refine & 60 & 4.18 & 0.0000 & 3.000 & 209.885 & 0.00 \\
+Self-Consistency & 60 & 4.18 & 0.0000 & 3.000 & 96.902 & 0.00 \\
+Selective-SC & 59 & 4.11 & 0.0000 & 2.254 & 95.457 & 0.00 \\
+Budgeted-Cascade & 60 & 4.18 & 0.0000 & 2.200 & 4.766 & 93.33 \\
+Few-Shot Exemplar & 59 & 4.11 & 0.0000 & 1.000 & 88.780 & 0.00 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}\parbox{0.98\textwidth}{\footnotesize Completed records: 598 / 14360 (4.16\%). Expected examples per strategy: 1436. Primary excludes records flagged unscorable. Model: Qwen3.5-27B-FP8. Best observed strategy so far (by primary): Direct.}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Dataset-specific metric means for full\_livebench.}
+\label{tab:full_livebench_dataset}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrr}
+\toprule
+Strategy & proxy-exact & proxy-contains & official-flag \\
+\midrule
+Direct & 0.0000 & 0.0000 & 1.0000 \\
+Concise-CoT & 0.0000 & 0.0000 & 1.0000 \\
+Least-to-Most & 0.0000 & 0.0000 & 1.0000 \\
+Constraint-Decompose & 0.0000 & 0.0000 & 1.0000 \\
+Self-Verify & 0.0000 & 0.0000 & 1.0000 \\
+Critique-Refine & 0.0000 & 0.0000 & 1.0000 \\
+Self-Consistency & 0.0000 & 0.0000 & 1.0000 \\
+Selective-SC & 0.0000 & 0.0000 & 1.0000 \\
+Budgeted-Cascade & 0.0000 & 0.0000 & 1.0000 \\
+Few-Shot Exemplar & 0.0000 & 0.0000 & 1.0000 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}\parbox{0.98\textwidth}{\footnotesize Metric aliases are expanded in the Metric Glossary section.}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Core results for full\_room\_assignment.}
+\label{tab:full_room_assignment_core}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+Strategy & $n$ & cov\% & primary & api & time(s) & cache\% \\
+\midrule
+Direct & 359 & 0.95 & 0.0232 & 1.000 & 67.592 & 0.00 \\
+Concise-CoT & 359 & 0.95 & 0.0120 & 1.000 & 66.666 & 0.00 \\
+Least-to-Most & 359 & 0.95 & 0.0098 & 1.000 & 66.316 & 0.00 \\
+Constraint-Decompose & 358 & 0.94 & 0.0132 & 1.000 & 65.734 & 0.00 \\
+Self-Verify & 358 & 0.94 & 0.0997 & 2.000 & 134.012 & 0.00 \\
+Critique-Refine & 358 & 0.94 & 0.0493 & 3.000 & 171.969 & 0.00 \\
+Self-Consistency & 358 & 0.94 & 0.0307 & 3.000 & 66.713 & 0.00 \\
+Selective-SC & 358 & 0.94 & 0.0241 & 2.547 & 68.344 & 0.00 \\
+Budgeted-Cascade & 358 & 0.94 & 0.0261 & 1.061 & 3.786 & 96.93 \\
+Few-Shot Exemplar & 358 & 0.94 & 0.0218 & 1.000 & 65.213 & 0.00 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}\parbox{0.98\textwidth}{\footnotesize Completed records: 3583 / 379840 (0.94\%). Expected examples per strategy: 37984. Primary excludes records flagged unscorable. Model: Qwen3.5-4B. Best observed strategy so far (by primary): Self-Verify.}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Dataset-specific metric means for full\_room\_assignment.}
+\label{tab:full_room_assignment_dataset}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrr}
+\toprule
+Strategy & room-exact & entity-room & all-rooms & fmt-valid & pred-rooms \\
+\midrule
+Direct & 0.0179 & 0.0286 & 0.0056 & 0.9499 & 9.9443 \\
+Concise-CoT & 0.0074 & 0.0166 & 0.0028 & 0.9053 & 8.7632 \\
+Least-to-Most & 0.0060 & 0.0136 & 0.0028 & 0.9081 & 8.6045 \\
+Constraint-Decompose & 0.0090 & 0.0175 & 0.0000 & 0.8659 & 8.0922 \\
+Self-Verify & 0.0919 & 0.1075 & 0.0726 & 0.9441 & 12.5838 \\
+Critique-Refine & 0.0439 & 0.0547 & 0.0307 & 0.9944 & 12.5866 \\
+Self-Consistency & 0.0280 & 0.0335 & 0.0140 & 0.9413 & 11.1006 \\
+Selective-SC & 0.0212 & 0.0270 & 0.0112 & 0.9274 & 10.9972 \\
+Budgeted-Cascade & 0.0207 & 0.0315 & 0.0084 & 0.9525 & 10.0223 \\
+Few-Shot Exemplar & 0.0170 & 0.0265 & 0.0028 & 0.9749 & 8.1844 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}\parbox{0.98\textwidth}{\footnotesize Metric aliases are expanded in the Metric Glossary section.}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Core results for full\_room\_assignment\_27b.}
+\label{tab:full_room_assignment_27b_core}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+Strategy & $n$ & cov\% & primary & api & time(s) & cache\% \\
+\midrule
+Direct & 35 & 0.09 & 0.4732 & 1.000 & 95.236 & 0.00 \\
+Concise-CoT & 35 & 0.09 & 0.2581 & 1.000 & 101.051 & 0.00 \\
+Least-to-Most & 35 & 0.09 & 0.1914 & 1.000 & 105.805 & 0.00 \\
+Constraint-Decompose & 34 & 0.09 & 0.1332 & 1.000 & 100.735 & 0.00 \\
+Self-Verify & 34 & 0.09 & 0.4831 & 2.000 & 176.307 & 0.00 \\
+Critique-Refine & 34 & 0.09 & 0.2283 & 3.000 & 237.385 & 0.00 \\
+Self-Consistency & 34 & 0.09 & 0.4026 & 3.000 & 100.384 & 0.00 \\
+Selective-SC & 34 & 0.09 & 0.3761 & 1.882 & 98.698 & 0.00 \\
+Budgeted-Cascade & 34 & 0.09 & 0.4857 & 1.059 & 0.000 & 100.00 \\
+Few-Shot Exemplar & 34 & 0.09 & 0.4559 & 1.000 & 98.386 & 0.00 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}\parbox{0.98\textwidth}{\footnotesize Completed records: 343 / 379840 (0.09\%). Expected examples per strategy: 37984. Primary excludes records flagged unscorable. Model: Qwen3.5-27B-FP8. Best observed strategy so far (by primary): Budgeted-Cascade.}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Dataset-specific metric means for full\_room\_assignment\_27b.}
+\label{tab:full_room_assignment_27b_dataset}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrr}
+\toprule
+Strategy & room-exact & entity-room & all-rooms & fmt-valid & pred-rooms \\
+\midrule
+Direct & 0.4643 & 0.4821 & 0.4286 & 1.0000 & 15.4857 \\
+Concise-CoT & 0.2567 & 0.2595 & 0.2000 & 1.0000 & 15.1429 \\
+Least-to-Most & 0.1914 & 0.1914 & 0.1714 & 1.0000 & 16.5429 \\
+Constraint-Decompose & 0.1299 & 0.1365 & 0.0882 & 1.0000 & 15.2941 \\
+Self-Verify & 0.5059 & 0.4603 & 0.4706 & 1.0000 & 10.8529 \\
+Critique-Refine & 0.2088 & 0.2478 & 0.1471 & 1.0000 & 9.9118 \\
+Self-Consistency & 0.3971 & 0.4081 & 0.3529 & 1.0000 & 15.2647 \\
+Selective-SC & 0.3618 & 0.3904 & 0.2647 & 1.0000 & 15.5588 \\
+Budgeted-Cascade & 0.4779 & 0.4934 & 0.4412 & 1.0000 & 15.2647 \\
+Few-Shot Exemplar & 0.4632 & 0.4485 & 0.4412 & 0.9706 & 14.7647 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}\parbox{0.98\textwidth}{\footnotesize Metric aliases are expanded in the Metric Glossary section.}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Core results for full\_truthfulqa.}
+\label{tab:full_truthfulqa_core}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+Strategy & $n$ & cov\% & primary & api & time(s) & cache\% \\
+\midrule
+Direct & 254 & 31.09 & 0.0024 & 1.000 & 41.948 & 6.30 \\
+Concise-CoT & 254 & 31.09 & 0.0018 & 1.000 & 48.023 & 7.48 \\
+Least-to-Most & 253 & 30.97 & 0.0015 & 1.000 & 53.313 & 7.51 \\
+Constraint-Decompose & 253 & 30.97 & 0.0013 & 1.000 & 56.686 & 7.91 \\
+Self-Verify & 253 & 30.97 & 0.0024 & 2.000 & 87.245 & 6.32 \\
+Critique-Refine & 253 & 30.97 & 0.0019 & 3.000 & 140.701 & 0.00 \\
+Self-Consistency & 253 & 30.97 & 0.0022 & 3.000 & 48.962 & 0.00 \\
+Selective-SC & 253 & 30.97 & 0.0024 & 3.000 & 57.288 & 0.00 \\
+Budgeted-Cascade & 253 & 30.97 & 0.0025 & 3.000 & 31.350 & 41.11 \\
+Few-Shot Exemplar & 253 & 30.97 & 0.0020 & 1.000 & 43.946 & 6.32 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}\parbox{0.98\textwidth}{\footnotesize Completed records: 2532 / 8170 (30.99\%). Expected examples per strategy: 817. Primary excludes records flagged unscorable. Model: Qwen3.5-4B. Best observed strategy so far (by primary): Budgeted-Cascade.}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Dataset-specific metric means for full\_truthfulqa.}
+\label{tab:full_truthfulqa_dataset}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+Strategy & truth-delta & correct-sim & incorrect-sim & best-sim & info-proxy & uninformative \\
+\midrule
+Direct & 0.0024 & 0.0188 & 0.0164 & 0.0140 & 1.0000 & 0.0000 \\
+Concise-CoT & 0.0018 & 0.0157 & 0.0139 & 0.0117 & 1.0000 & 0.0000 \\
+Least-to-Most & 0.0015 & 0.0134 & 0.0119 & 0.0101 & 1.0000 & 0.0000 \\
+Constraint-Decompose & 0.0013 & 0.0117 & 0.0104 & 0.0089 & 1.0000 & 0.0000 \\
+Self-Verify & 0.0024 & 0.0221 & 0.0196 & 0.0169 & 1.0000 & 0.0000 \\
+Critique-Refine & 0.0019 & 0.0158 & 0.0139 & 0.0120 & 1.0000 & 0.0000 \\
+Self-Consistency & 0.0022 & 0.0180 & 0.0158 & 0.0137 & 1.0000 & 0.0000 \\
+Selective-SC & 0.0024 & 0.0188 & 0.0164 & 0.0143 & 1.0000 & 0.0000 \\
+Budgeted-Cascade & 0.0025 & 0.0239 & 0.0213 & 0.0179 & 1.0000 & 0.0000 \\
+Few-Shot Exemplar & 0.0020 & 0.0179 & 0.0160 & 0.0134 & 1.0000 & 0.0000 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}\parbox{0.98\textwidth}{\footnotesize Metric aliases are expanded in the Metric Glossary section.}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Core results for full\_truthfulqa\_27b.}
+\label{tab:full_truthfulqa_27b_core}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+Strategy & $n$ & cov\% & primary & api & time(s) & cache\% \\
+\midrule
+Direct & 76 & 9.30 & 0.0044 & 1.000 & 38.026 & 5.26 \\
+Concise-CoT & 76 & 9.30 & 0.0065 & 1.000 & 37.572 & 3.95 \\
+Least-to-Most & 76 & 9.30 & 0.0055 & 1.000 & 60.796 & 5.26 \\
+Constraint-Decompose & 74 & 9.06 & 0.0019 & 1.000 & 70.322 & 5.41 \\
+Self-Verify & 75 & 9.18 & 0.0095 & 2.000 & 92.957 & 2.67 \\
+Critique-Refine & 75 & 9.18 & 0.0091 & 3.000 & 133.494 & 0.00 \\
+Self-Consistency & 75 & 9.18 & 0.0043 & 3.000 & 39.073 & 0.00 \\
+Selective-SC & 75 & 9.18 & 0.0043 & 2.840 & 39.121 & 0.00 \\
+Budgeted-Cascade & 75 & 9.18 & 0.0112 & 2.840 & 0.002 & 100.00 \\
+Few-Shot Exemplar & 75 & 9.18 & 0.0048 & 1.000 & 32.544 & 5.33 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}\parbox{0.98\textwidth}{\footnotesize Completed records: 752 / 8170 (9.20\%). Expected examples per strategy: 817. Primary excludes records flagged unscorable. Model: Qwen3.5-27B-FP8. Best observed strategy so far (by primary): Budgeted-Cascade.}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Dataset-specific metric means for full\_truthfulqa\_27b.}
+\label{tab:full_truthfulqa_27b_dataset}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+Strategy & truth-delta & correct-sim & incorrect-sim & best-sim & info-proxy & uninformative \\
+\midrule
+Direct & 0.0044 & 0.0389 & 0.0345 & 0.0287 & 1.0000 & 0.0000 \\
+Concise-CoT & 0.0065 & 0.0514 & 0.0449 & 0.0363 & 0.9879 & 0.0000 \\
+Least-to-Most & 0.0055 & 0.0333 & 0.0277 & 0.0247 & 1.0000 & 0.0000 \\
+Constraint-Decompose & 0.0019 & 0.0235 & 0.0216 & 0.0183 & 1.0000 & 0.0000 \\
+Self-Verify & 0.0095 & 0.0687 & 0.0592 & 0.0514 & 1.0000 & 0.0000 \\
+Critique-Refine & 0.0091 & 0.0872 & 0.0781 & 0.0682 & 1.0000 & 0.0000 \\
+Self-Consistency & 0.0043 & 0.0397 & 0.0354 & 0.0287 & 1.0000 & 0.0000 \\
+Selective-SC & 0.0043 & 0.0450 & 0.0407 & 0.0340 & 1.0000 & 0.0000 \\
+Budgeted-Cascade & 0.0112 & 0.0651 & 0.0540 & 0.0490 & 1.0000 & 0.0000 \\
+Few-Shot Exemplar & 0.0048 & 0.0482 & 0.0434 & 0.0333 & 1.0000 & 0.0000 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\vspace{2pt}\parbox{0.98\textwidth}{\footnotesize Metric aliases are expanded in the Metric Glossary section.}
+\end{table*}
+
+\section*{Log-Derived Execution Summary}
+\begin{table*}[t]
+\centering
+\caption{Execution log summary by session (derived from run log files).}
+\label{tab:log_summary}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lrrrrrl}
+\toprule
+Session & Attempts & Finished & Success & Failed & LastExit & LatestLog \\
+\midrule
+rb\_ai2\_arc & 1 & 0 & 0 & 0 & -- & run\_20260401\_181910.log \\
+rb\_ai2\_arc\_27b & 2 & 1 & 0 & 1 & 139 & run\_20260401\_182217.log \\
+rb\_livebench & 4 & 1 & 1 & 0 & 0 & run\_20260401\_175234.log \\
+rb\_room\_assignment & 4 & 1 & 1 & 0 & 0 & run\_20260401\_175234.log \\
+rb\_room\_assignment\_27b & 1 & 0 & 0 & 0 & -- & run\_20260401\_182155.log \\
+rb\_truthfulqa & 44 & 40 & 1 & 39 & 139 & run\_20260402\_055318.log \\
+rb\_truthfulqa\_27b & 13 & 12 & 0 & 12 & 139 & run\_20260402\_094739.log \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}
+
+\end{document}

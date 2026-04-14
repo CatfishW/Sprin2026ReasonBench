@@ -1,0 +1,1327 @@
+{
+  "generated_at": "2026-04-08T17:35:21+00:00",
+  "run_tag": "spring26_2026-04-08__17-35-21",
+  "run_title": "Spring 2026 • spring26_2026-04-08__17-35-21",
+  "launched_at": "2026-04-08T17:35:21+00:00",
+  "run_manifest": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14",
+  "overall": {
+    "completed_records": 36821,
+    "expected_records": 946120,
+    "progress_pct": 3.89
+  },
+  "sessions": [
+    {
+      "name": "rb_room_assignment_27b",
+      "display_name": "Room Assignment (27B)",
+      "state": "stopped_resumable",
+      "running": false,
+      "run_tag": "spring26_2026-04-08__17-35-21",
+      "config_path": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14/configs/experiments/generated/spring26_2026-04-08__17-35-21/full_room_assignment_all_strategies_27b.toml",
+      "output_dir": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14/outputs/full_room_assignment_27b__spring26_2026-04-08__17-35-21",
+      "checkpoint_path": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14/outputs/full_room_assignment_27b__spring26_2026-04-08__17-35-21/results.jsonl",
+      "log_dir": "logs/rb_room_assignment_27b__260408_173521",
+      "latest_log": "logs/rb_room_assignment_27b__260408_173521/run_20260408_180047.log",
+      "dataset_kind": "room_assignment",
+      "model": "Qwen/Qwen3.5-27B-FP8",
+      "strategy_count": 10,
+      "example_count": 37984,
+      "completed_records": 39,
+      "expected_records": 379840,
+      "remaining_records": 379801,
+      "progress_pct": 0.01,
+      "last_progress_line": "",
+      "last_error_line": "[ReasonBench] error example_id=3 strategy=self_consistency error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+      "stale_retry_streak": 0,
+      "stuck": false,
+      "stuck_reason": "",
+      "last_exit_code": "",
+      "last_log_lines": [
+        "[ReasonBench] request_retry attempt=2/7 backoff_s=2.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=4/7 backoff_s=8.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=3/7 backoff_s=4.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=5/7 backoff_s=12.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=4/7 backoff_s=8.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=6/7 backoff_s=12.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=5/7 backoff_s=12.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] error example_id=3 strategy=self_consistency error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] marked_unscorable example_id=3 strategy=self_consistency error_records=23",
+        "[ReasonBench] request_retry attempt=6/7 backoff_s=12.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=1/7 backoff_s=1.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=2/7 backoff_s=2.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))"
+      ],
+      "live_summary": {
+        "records_scanned": 39,
+        "best_strategy": "budgeted_cascade",
+        "leaderboard": [
+          {
+            "strategy": "budgeted_cascade",
+            "records": 4,
+            "mean_primary_score": 0.75,
+            "mean_api_calls": 0.75,
+            "mean_wall_time_s": 2296.841,
+            "cache_hit_rate": 0.5,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.75,
+              "room_exact_accuracy": 1.0,
+              "entity_room_accuracy": 1.0,
+              "all_rooms_exact": 1.0
+            }
+          },
+          {
+            "strategy": "direct",
+            "records": 4,
+            "mean_primary_score": 0.5,
+            "mean_api_calls": 0.5,
+            "mean_wall_time_s": 1275.336,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.5,
+              "room_exact_accuracy": 1.0,
+              "entity_room_accuracy": 1.0,
+              "all_rooms_exact": 1.0
+            }
+          },
+          {
+            "strategy": "few_shot_exemplar",
+            "records": 3,
+            "mean_primary_score": 0.3333,
+            "mean_api_calls": 0.667,
+            "mean_wall_time_s": 801.794,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.5,
+              "entity_room_accuracy": 0.5,
+              "all_rooms_exact": 0.5,
+              "format_valid": 0.6667,
+              "is_unscorable": 1.0
+            }
+          },
+          {
+            "strategy": "self_verify",
+            "records": 4,
+            "mean_primary_score": 0.25,
+            "mean_api_calls": 0.5,
+            "mean_wall_time_s": 3094.378,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.25,
+              "room_exact_accuracy": 1.0,
+              "entity_room_accuracy": 1.0,
+              "all_rooms_exact": 1.0
+            }
+          },
+          {
+            "strategy": "selective_self_consistency",
+            "records": 4,
+            "mean_primary_score": 0.0541,
+            "mean_api_calls": 0.25,
+            "mean_wall_time_s": 2991.084,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.25,
+              "room_exact_accuracy": 0.125,
+              "entity_room_accuracy": 0.5,
+              "all_rooms_exact": 0.0
+            }
+          },
+          {
+            "strategy": "concise_cot",
+            "records": 4,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.5,
+            "mean_wall_time_s": 1530.594,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.5,
+              "room_exact_accuracy": 0.0,
+              "entity_room_accuracy": 0.0,
+              "all_rooms_exact": 0.0
+            }
+          },
+          {
+            "strategy": "least_to_most",
+            "records": 4,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.5,
+            "mean_wall_time_s": 2915.172,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.25,
+              "room_exact_accuracy": 0.0,
+              "entity_room_accuracy": 0.0,
+              "all_rooms_exact": 0.0
+            }
+          },
+          {
+            "strategy": "constraint_decompose",
+            "records": 4,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.0,
+            "mean_wall_time_s": 0.0,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          },
+          {
+            "strategy": "critique_refine",
+            "records": 4,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.75,
+            "mean_wall_time_s": 4716.725,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0,
+              "entity_room_accuracy": 0.0,
+              "all_rooms_exact": 0.0,
+              "format_valid": 0.25,
+              "is_unscorable": 1.0
+            }
+          },
+          {
+            "strategy": "self_consistency",
+            "records": 4,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.0,
+            "mean_wall_time_s": 0.0,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          }
+        ],
+        "metric_rollup": {
+          "room_exact_accuracy": 0.5089,
+          "entity_room_accuracy": 0.5357,
+          "all_rooms_exact": 0.5,
+          "format_valid": 0.3333,
+          "is_unscorable": 1.0
+        }
+      }
+    },
+    {
+      "name": "rb_room_assignment",
+      "display_name": "Room Assignment (4B)",
+      "state": "stopped_resumable",
+      "running": false,
+      "run_tag": "spring26_2026-04-08__17-35-21",
+      "config_path": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14/configs/experiments/generated/spring26_2026-04-08__17-35-21/full_room_assignment_all_strategies.toml",
+      "output_dir": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14/outputs/full_room_assignment__spring26_2026-04-08__17-35-21",
+      "checkpoint_path": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14/outputs/full_room_assignment__spring26_2026-04-08__17-35-21/results.jsonl",
+      "log_dir": "logs/rb_room_assignment__260408_173521",
+      "latest_log": "logs/rb_room_assignment__260408_173521/run_20260408_180047.log",
+      "dataset_kind": "room_assignment",
+      "model": "/home/tang/Models/Qwen3.5-4B",
+      "strategy_count": 10,
+      "example_count": 37984,
+      "completed_records": 5487,
+      "expected_records": 379840,
+      "remaining_records": 374353,
+      "progress_pct": 1.44,
+      "last_progress_line": "[ReasonBench] progress total=3818/379840 (1.01%) new=3798/379820 elapsed_s=150324.4",
+      "last_error_line": "[ReasonBench] error example_id=539 strategy=self_verify error=RetryError(MaxRetryError(\"HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))\"))",
+      "stale_retry_streak": 0,
+      "stuck": false,
+      "stuck_reason": "",
+      "last_exit_code": "",
+      "last_log_lines": [
+        "[ReasonBench] marked_unscorable example_id=300 strategy=self_consistency error_records=152",
+        "[ReasonBench] error example_id=301 strategy=critique_refine error=RetryError(MaxRetryError(\"HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))\"))",
+        "[ReasonBench] marked_unscorable example_id=301 strategy=critique_refine error_records=153",
+        "[ReasonBench] error example_id=301 strategy=selective_self_consistency error=RetryError(MaxRetryError(\"HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))\"))",
+        "[ReasonBench] marked_unscorable example_id=301 strategy=selective_self_consistency error_records=154",
+        "[ReasonBench] progress total=3818/379840 (1.01%) new=3798/379820 elapsed_s=150324.4",
+        "[ReasonBench] error example_id=537 strategy=self_verify error=RetryError(MaxRetryError(\"HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))\"))",
+        "[ReasonBench] marked_unscorable example_id=537 strategy=self_verify error_records=155",
+        "[ReasonBench] error example_id=538 strategy=critique_refine error=RetryError(MaxRetryError(\"HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))\"))",
+        "[ReasonBench] marked_unscorable example_id=538 strategy=critique_refine error_records=156",
+        "[ReasonBench] error example_id=539 strategy=self_verify error=RetryError(MaxRetryError(\"HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))\"))",
+        "[ReasonBench] marked_unscorable example_id=539 strategy=self_verify error_records=157"
+      ],
+      "live_summary": {
+        "records_scanned": 5487,
+        "best_strategy": "self_verify",
+        "leaderboard": [
+          {
+            "strategy": "self_verify",
+            "records": 548,
+            "mean_primary_score": 0.0407,
+            "mean_api_calls": 1.927,
+            "mean_wall_time_s": 187.27,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0276,
+              "entity_room_accuracy": 0.0795,
+              "all_rooms_exact": 0.0076,
+              "format_valid": 0.7299,
+              "is_unscorable": 1.0
+            }
+          },
+          {
+            "strategy": "few_shot_exemplar",
+            "records": 548,
+            "mean_primary_score": 0.0262,
+            "mean_api_calls": 0.984,
+            "mean_wall_time_s": 97.642,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0182,
+              "entity_room_accuracy": 0.0403,
+              "all_rooms_exact": 0.0056,
+              "format_valid": 0.8504,
+              "is_unscorable": 1.0
+            }
+          },
+          {
+            "strategy": "critique_refine",
+            "records": 548,
+            "mean_primary_score": 0.0226,
+            "mean_api_calls": 2.874,
+            "mean_wall_time_s": 234.953,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0172,
+              "entity_room_accuracy": 0.0366,
+              "all_rooms_exact": 0.0114,
+              "format_valid": 0.8066,
+              "is_unscorable": 1.0
+            }
+          },
+          {
+            "strategy": "budgeted_cascade",
+            "records": 549,
+            "mean_primary_score": 0.013,
+            "mean_api_calls": 1.033,
+            "mean_wall_time_s": 6.502,
+            "cache_hit_rate": 0.9399,
+            "metric_means": {
+              "room_exact_accuracy": 0.0072,
+              "entity_room_accuracy": 0.0221,
+              "all_rooms_exact": 0.0,
+              "format_valid": 0.7723,
+              "is_unscorable": 1.0
+            }
+          },
+          {
+            "strategy": "selective_self_consistency",
+            "records": 549,
+            "mean_primary_score": 0.0128,
+            "mean_api_calls": 2.423,
+            "mean_wall_time_s": 95.841,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0079,
+              "entity_room_accuracy": 0.0241,
+              "all_rooms_exact": 0.0038,
+              "format_valid": 0.7741,
+              "is_unscorable": 1.0
+            }
+          },
+          {
+            "strategy": "self_consistency",
+            "records": 549,
+            "mean_primary_score": 0.0122,
+            "mean_api_calls": 2.913,
+            "mean_wall_time_s": 96.777,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "room_exact_accuracy": 0.0081,
+              "entity_room_accuracy": 0.0236,
+              "all_rooms_exact": 0.0038,
+              "format_valid": 0.7413,
+              "is_unscorable": 1.0
+            }
+          },
+          {
+            "strategy": "least_to_most",
+            "records": 549,
+            "mean_primary_score": 0.0115,
+            "mean_api_calls": 0.971,
+            "mean_wall_time_s": 90.402,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.7723,
+              "room_exact_accuracy": 0.0054,
+              "entity_room_accuracy": 0.0201,
+              "all_rooms_exact": 0.0
+            }
+          },
+          {
+            "strategy": "direct",
+            "records": 549,
+            "mean_primary_score": 0.0114,
+            "mean_api_calls": 0.967,
+            "mean_wall_time_s": 97.515,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.7596,
+              "room_exact_accuracy": 0.006,
+              "entity_room_accuracy": 0.0196,
+              "all_rooms_exact": 0.0
+            }
+          },
+          {
+            "strategy": "concise_cot",
+            "records": 549,
+            "mean_primary_score": 0.011,
+            "mean_api_calls": 0.969,
+            "mean_wall_time_s": 94.782,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.7996,
+              "room_exact_accuracy": 0.005,
+              "entity_room_accuracy": 0.0195,
+              "all_rooms_exact": 0.0
+            }
+          },
+          {
+            "strategy": "constraint_decompose",
+            "records": 549,
+            "mean_primary_score": 0.0096,
+            "mean_api_calls": 0.973,
+            "mean_wall_time_s": 93.821,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.7213,
+              "room_exact_accuracy": 0.0042,
+              "entity_room_accuracy": 0.0178,
+              "all_rooms_exact": 0.0
+            }
+          }
+        ],
+        "metric_rollup": {
+          "room_exact_accuracy": 0.0107,
+          "entity_room_accuracy": 0.0303,
+          "all_rooms_exact": 0.0032,
+          "format_valid": 0.7727,
+          "is_unscorable": 1.0
+        }
+      }
+    },
+    {
+      "name": "rb_truthfulqa_27b",
+      "display_name": "TruthfulQA (27B)",
+      "state": "stopped_resumable",
+      "running": false,
+      "run_tag": "spring26_2026-04-08__17-35-21",
+      "config_path": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14/configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies_27b.toml",
+      "output_dir": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14/outputs/full_truthfulqa_27b__spring26_2026-04-08__17-35-21",
+      "checkpoint_path": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14/outputs/full_truthfulqa_27b__spring26_2026-04-08__17-35-21/results.jsonl",
+      "log_dir": "logs/rb_truthfulqa_27b__260408_173521",
+      "latest_log": "logs/rb_truthfulqa_27b__260408_173521/run_20260408_180047.log",
+      "dataset_kind": "truthfulqa",
+      "model": "Qwen/Qwen3.5-27B-FP8",
+      "strategy_count": 10,
+      "example_count": 817,
+      "completed_records": 95,
+      "expected_records": 8170,
+      "remaining_records": 8075,
+      "progress_pct": 1.16,
+      "last_progress_line": "",
+      "last_error_line": "[ReasonBench] error example_id=8 strategy=critique_refine error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+      "stale_retry_streak": 0,
+      "stuck": false,
+      "stuck_reason": "",
+      "last_exit_code": "",
+      "last_log_lines": [
+        "[ReasonBench] request_retry attempt=1/7 backoff_s=1.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=5/7 backoff_s=12.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=6/7 backoff_s=12.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=1/7 backoff_s=1.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] error example_id=8 strategy=critique_refine error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] marked_unscorable example_id=8 strategy=critique_refine error_records=7",
+        "[ReasonBench] request_retry attempt=1/7 backoff_s=1.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=1/7 backoff_s=1.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=1/7 backoff_s=1.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=1/7 backoff_s=1.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=2/7 backoff_s=2.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=2/7 backoff_s=2.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))"
+      ],
+      "live_summary": {
+        "records_scanned": 95,
+        "best_strategy": "budgeted_cascade",
+        "leaderboard": [
+          {
+            "strategy": "budgeted_cascade",
+            "records": 9,
+            "mean_primary_score": 0.0783,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 134.357,
+            "cache_hit_rate": 0.8889,
+            "metric_means": {
+              "truth_delta": 0.0783
+            }
+          },
+          {
+            "strategy": "selective_self_consistency",
+            "records": 9,
+            "mean_primary_score": 0.0547,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 1994.684,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "truth_delta": 0.0547
+            }
+          },
+          {
+            "strategy": "constraint_decompose",
+            "records": 10,
+            "mean_primary_score": 0.0496,
+            "mean_api_calls": 0.9,
+            "mean_wall_time_s": 4109.025,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "truth_delta": 0.0551,
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          },
+          {
+            "strategy": "direct",
+            "records": 10,
+            "mean_primary_score": 0.0451,
+            "mean_api_calls": 0.9,
+            "mean_wall_time_s": 2874.179,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "truth_delta": 0.0502
+            }
+          },
+          {
+            "strategy": "concise_cot",
+            "records": 10,
+            "mean_primary_score": 0.0388,
+            "mean_api_calls": 0.9,
+            "mean_wall_time_s": 1386.61,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "truth_delta": 0.0432
+            }
+          },
+          {
+            "strategy": "least_to_most",
+            "records": 10,
+            "mean_primary_score": 0.0355,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 2262.164,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "truth_delta": 0.0355
+            }
+          },
+          {
+            "strategy": "self_consistency",
+            "records": 9,
+            "mean_primary_score": 0.0339,
+            "mean_api_calls": 3.0,
+            "mean_wall_time_s": 2051.6,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "truth_delta": 0.0339
+            }
+          },
+          {
+            "strategy": "few_shot_exemplar",
+            "records": 9,
+            "mean_primary_score": 0.0327,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 2494.427,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "truth_delta": 0.0327
+            }
+          },
+          {
+            "strategy": "self_verify",
+            "records": 10,
+            "mean_primary_score": 0.0274,
+            "mean_api_calls": 1.6,
+            "mean_wall_time_s": 5132.339,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "truth_delta": 0.0343,
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          },
+          {
+            "strategy": "critique_refine",
+            "records": 9,
+            "mean_primary_score": 0.0188,
+            "mean_api_calls": 1.667,
+            "mean_wall_time_s": 5931.452,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "truth_delta": 0.0339,
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          }
+        ],
+        "metric_rollup": {
+          "format_valid": 0.0,
+          "truth_delta": 0.0457,
+          "is_unscorable": 1.0
+        }
+      }
+    },
+    {
+      "name": "rb_truthfulqa",
+      "display_name": "TruthfulQA (4B)",
+      "state": "stopped_resumable",
+      "running": false,
+      "run_tag": "spring26_2026-04-08__17-35-21",
+      "config_path": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14/configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies.toml",
+      "output_dir": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14/outputs/full_truthfulqa__spring26_2026-04-08__17-35-21",
+      "checkpoint_path": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14/outputs/full_truthfulqa__spring26_2026-04-08__17-35-21/results.jsonl",
+      "log_dir": "logs/rb_truthfulqa__260408_173521",
+      "latest_log": "logs/rb_truthfulqa__260408_173521/run_20260410_212648.log",
+      "dataset_kind": "truthfulqa",
+      "model": "/home/tang/Models/Qwen3.5-4B",
+      "strategy_count": 10,
+      "example_count": 817,
+      "completed_records": 6852,
+      "expected_records": 8170,
+      "remaining_records": 1318,
+      "progress_pct": 83.87,
+      "last_progress_line": "",
+      "last_error_line": "",
+      "stale_retry_streak": 0,
+      "stuck": false,
+      "stuck_reason": "",
+      "last_exit_code": "139",
+      "last_log_lines": [
+        "============================================================",
+        "session_name: rb_truthfulqa__260408_173521",
+        "attempt: 21",
+        "started_at: 2026-04-10T21:26:48-04:00",
+        "config_path: configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies.toml",
+        "checkpoint_path: outputs/full_truthfulqa__spring26_2026-04-08__17-35-21/results.jsonl",
+        "cwd: /mnt/Yanlai/ReasonBench",
+        "command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies.toml",
+        "============================================================"
+      ],
+      "live_summary": {
+        "records_scanned": 6852,
+        "best_strategy": "budgeted_cascade",
+        "leaderboard": [
+          {
+            "strategy": "budgeted_cascade",
+            "records": 685,
+            "mean_primary_score": 0.0325,
+            "mean_api_calls": 1.406,
+            "mean_wall_time_s": 21.171,
+            "cache_hit_rate": 0.8117,
+            "metric_means": {
+              "truth_delta": 0.0326,
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          },
+          {
+            "strategy": "direct",
+            "records": 686,
+            "mean_primary_score": 0.0318,
+            "mean_api_calls": 0.99,
+            "mean_wall_time_s": 73.314,
+            "cache_hit_rate": 0.0029,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "truth_delta": 0.0322
+            }
+          },
+          {
+            "strategy": "self_consistency",
+            "records": 685,
+            "mean_primary_score": 0.0309,
+            "mean_api_calls": 2.974,
+            "mean_wall_time_s": 74.519,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "truth_delta": 0.0311
+            }
+          },
+          {
+            "strategy": "few_shot_exemplar",
+            "records": 685,
+            "mean_primary_score": 0.0289,
+            "mean_api_calls": 0.987,
+            "mean_wall_time_s": 69.792,
+            "cache_hit_rate": 0.0015,
+            "metric_means": {
+              "truth_delta": 0.0293,
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          },
+          {
+            "strategy": "selective_self_consistency",
+            "records": 685,
+            "mean_primary_score": 0.0262,
+            "mean_api_calls": 1.461,
+            "mean_wall_time_s": 79.717,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "truth_delta": 0.0265
+            }
+          },
+          {
+            "strategy": "self_verify",
+            "records": 685,
+            "mean_primary_score": 0.0246,
+            "mean_api_calls": 1.953,
+            "mean_wall_time_s": 163.535,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "truth_delta": 0.0251
+            }
+          },
+          {
+            "strategy": "concise_cot",
+            "records": 686,
+            "mean_primary_score": 0.0209,
+            "mean_api_calls": 0.993,
+            "mean_wall_time_s": 76.84,
+            "cache_hit_rate": 0.0029,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "truth_delta": 0.021
+            }
+          },
+          {
+            "strategy": "critique_refine",
+            "records": 684,
+            "mean_primary_score": 0.0184,
+            "mean_api_calls": 2.917,
+            "mean_wall_time_s": 209.748,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "truth_delta": 0.0189
+            }
+          },
+          {
+            "strategy": "least_to_most",
+            "records": 686,
+            "mean_primary_score": 0.0154,
+            "mean_api_calls": 0.985,
+            "mean_wall_time_s": 85.785,
+            "cache_hit_rate": 0.0058,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "truth_delta": 0.0156
+            }
+          },
+          {
+            "strategy": "constraint_decompose",
+            "records": 685,
+            "mean_primary_score": 0.0089,
+            "mean_api_calls": 0.977,
+            "mean_wall_time_s": 93.573,
+            "cache_hit_rate": 0.0088,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "truth_delta": 0.0091
+            }
+          }
+        ],
+        "metric_rollup": {
+          "format_valid": 0.0,
+          "truth_delta": 0.0242,
+          "is_unscorable": 1.0
+        }
+      }
+    },
+    {
+      "name": "rb_ai2_arc_27b",
+      "display_name": "AI2-ARC (27B)",
+      "state": "stopped_resumable",
+      "running": false,
+      "run_tag": "spring26_2026-04-08__17-35-21",
+      "config_path": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14/configs/experiments/generated/spring26_2026-04-08__17-35-21/full_ai2_arc_all_strategies_27b.toml",
+      "output_dir": "outputs/full_ai2_arc_27b__spring26_2026-04-08__17-35-21",
+      "checkpoint_path": "outputs/full_ai2_arc_27b__spring26_2026-04-08__17-35-21/results.jsonl",
+      "log_dir": "logs/rb_ai2_arc_27b__260408_173521",
+      "latest_log": "logs/rb_ai2_arc_27b__260408_173521/run_20260408_180047.log",
+      "dataset_kind": "ai2_arc",
+      "model": "Qwen/Qwen3.5-27B-FP8",
+      "strategy_count": 10,
+      "example_count": 7787,
+      "completed_records": 153,
+      "expected_records": 77870,
+      "remaining_records": 77717,
+      "progress_pct": 0.2,
+      "last_progress_line": "",
+      "last_error_line": "",
+      "stale_retry_streak": 0,
+      "stuck": false,
+      "stuck_reason": "",
+      "last_exit_code": "",
+      "last_log_lines": [
+        "[ReasonBench] request_retry attempt=1/7 backoff_s=1.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=2/7 backoff_s=2.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=1/7 backoff_s=1.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=1/7 backoff_s=1.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=1/7 backoff_s=1.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=2/7 backoff_s=2.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=1/7 backoff_s=1.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=3/7 backoff_s=4.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=4/7 backoff_s=8.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=1/7 backoff_s=1.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=5/7 backoff_s=12.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=6/7 backoff_s=12.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))"
+      ],
+      "live_summary": {
+        "records_scanned": 152,
+        "best_strategy": "critique_refine",
+        "leaderboard": [
+          {
+            "strategy": "critique_refine",
+            "records": 15,
+            "mean_primary_score": 1.0,
+            "mean_api_calls": 3.0,
+            "mean_wall_time_s": 6144.662,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "accuracy": 1.0,
+              "format_valid": 1.0,
+              "text_match_score": 0.0
+            }
+          },
+          {
+            "strategy": "self_consistency",
+            "records": 15,
+            "mean_primary_score": 1.0,
+            "mean_api_calls": 3.0,
+            "mean_wall_time_s": 1478.427,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "accuracy": 1.0,
+              "format_valid": 1.0,
+              "text_match_score": 0.0
+            }
+          },
+          {
+            "strategy": "budgeted_cascade",
+            "records": 15,
+            "mean_primary_score": 1.0,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 93.623,
+            "cache_hit_rate": 0.9333,
+            "metric_means": {
+              "accuracy": 1.0,
+              "format_valid": 1.0,
+              "text_match_score": 0.0
+            }
+          },
+          {
+            "strategy": "few_shot_exemplar",
+            "records": 15,
+            "mean_primary_score": 1.0,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 1251.906,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "accuracy": 1.0,
+              "format_valid": 1.0,
+              "text_match_score": 0.0
+            }
+          },
+          {
+            "strategy": "direct",
+            "records": 16,
+            "mean_primary_score": 0.9375,
+            "mean_api_calls": 0.938,
+            "mean_wall_time_s": 1609.492,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.9375,
+              "accuracy": 1.0,
+              "text_match_score": 0.0
+            }
+          },
+          {
+            "strategy": "least_to_most",
+            "records": 15,
+            "mean_primary_score": 0.9333,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 2095.39,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "accuracy": 0.9333,
+              "format_valid": 1.0,
+              "text_match_score": 0.0
+            }
+          },
+          {
+            "strategy": "selective_self_consistency",
+            "records": 15,
+            "mean_primary_score": 0.9333,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 2184.827,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "accuracy": 0.9333,
+              "format_valid": 0.9333,
+              "text_match_score": 0.0003
+            }
+          },
+          {
+            "strategy": "concise_cot",
+            "records": 16,
+            "mean_primary_score": 0.875,
+            "mean_api_calls": 0.938,
+            "mean_wall_time_s": 2010.66,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.9375,
+              "accuracy": 0.9333,
+              "text_match_score": 0.0
+            }
+          },
+          {
+            "strategy": "self_verify",
+            "records": 15,
+            "mean_primary_score": 0.8667,
+            "mean_api_calls": 2.0,
+            "mean_wall_time_s": 4346.326,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "accuracy": 0.8667,
+              "format_valid": 1.0,
+              "text_match_score": 0.0
+            }
+          },
+          {
+            "strategy": "constraint_decompose",
+            "records": 15,
+            "mean_primary_score": 0.8,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 3473.613,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "accuracy": 0.8,
+              "format_valid": 1.0,
+              "text_match_score": 0.0
+            }
+          }
+        ],
+        "metric_rollup": {
+          "accuracy": 0.9467,
+          "format_valid": 0.9803,
+          "is_unscorable": 1.0,
+          "text_match_score": 0.0
+        }
+      }
+    },
+    {
+      "name": "rb_ai2_arc",
+      "display_name": "AI2-ARC (4B)",
+      "state": "stopped_resumable",
+      "running": false,
+      "run_tag": "spring26_2026-04-08__17-35-21",
+      "config_path": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14/configs/experiments/generated/spring26_2026-04-08__17-35-21/full_ai2_arc_all_strategies.toml",
+      "output_dir": "outputs/full_ai2_arc__spring26_2026-04-08__17-35-21",
+      "checkpoint_path": "outputs/full_ai2_arc__spring26_2026-04-08__17-35-21/results.jsonl",
+      "log_dir": "logs/rb_ai2_arc__260408_173521",
+      "latest_log": "logs/rb_ai2_arc__260408_173521/run_20260408_180047.log",
+      "dataset_kind": "ai2_arc",
+      "model": "/home/tang/Models/Qwen3.5-4B",
+      "strategy_count": 10,
+      "example_count": 7787,
+      "completed_records": 24135,
+      "expected_records": 77870,
+      "remaining_records": 53735,
+      "progress_pct": 30.99,
+      "last_progress_line": "[ReasonBench] progress total=23770/77870 (30.53%) new=23668/77768 elapsed_s=180000.4",
+      "last_error_line": "",
+      "stale_retry_streak": 0,
+      "stuck": false,
+      "stuck_reason": "",
+      "last_exit_code": "",
+      "last_log_lines": [
+        "[ReasonBench] progress total=19502/77870 (25.04%) new=19400/77768 elapsed_s=162539.0",
+        "[ReasonBench] progress total=19890/77870 (25.54%) new=19788/77768 elapsed_s=163990.9",
+        "[ReasonBench] progress total=20278/77870 (26.04%) new=20176/77768 elapsed_s=165485.1",
+        "[ReasonBench] progress total=20666/77870 (26.54%) new=20564/77768 elapsed_s=166922.4",
+        "[ReasonBench] progress total=21054/77870 (27.04%) new=20952/77768 elapsed_s=168378.1",
+        "[ReasonBench] progress total=21442/77870 (27.54%) new=21340/77768 elapsed_s=169869.0",
+        "[ReasonBench] progress total=21830/77870 (28.03%) new=21728/77768 elapsed_s=171386.1",
+        "[ReasonBench] progress total=22218/77870 (28.53%) new=22116/77768 elapsed_s=172930.3",
+        "[ReasonBench] progress total=22606/77870 (29.03%) new=22504/77768 elapsed_s=174477.4",
+        "[ReasonBench] progress total=22994/77870 (29.53%) new=22892/77768 elapsed_s=175981.0",
+        "[ReasonBench] progress total=23382/77870 (30.03%) new=23280/77768 elapsed_s=177469.9",
+        "[ReasonBench] progress total=23770/77870 (30.53%) new=23668/77768 elapsed_s=180000.4"
+      ],
+      "live_summary": {
+        "records_scanned": 24134,
+        "best_strategy": "few_shot_exemplar",
+        "leaderboard": [
+          {
+            "strategy": "few_shot_exemplar",
+            "records": 2413,
+            "mean_primary_score": 0.9163,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 20.607,
+            "cache_hit_rate": 0.0004,
+            "metric_means": {
+              "accuracy": 0.9163,
+              "format_valid": 0.9938,
+              "text_match_score": 0.0001
+            }
+          },
+          {
+            "strategy": "self_consistency",
+            "records": 2413,
+            "mean_primary_score": 0.915,
+            "mean_api_calls": 2.999,
+            "mean_wall_time_s": 21.774,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.9954,
+              "accuracy": 0.9154,
+              "text_match_score": 0.0001
+            }
+          },
+          {
+            "strategy": "budgeted_cascade",
+            "records": 2413,
+            "mean_primary_score": 0.9117,
+            "mean_api_calls": 1.086,
+            "mean_wall_time_s": 1.287,
+            "cache_hit_rate": 0.9569,
+            "metric_means": {
+              "accuracy": 0.9117,
+              "format_valid": 0.9909,
+              "text_match_score": 0.0002
+            }
+          },
+          {
+            "strategy": "direct",
+            "records": 2414,
+            "mean_primary_score": 0.9114,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 22.261,
+            "cache_hit_rate": 0.0004,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.9909,
+              "accuracy": 0.9117,
+              "text_match_score": 0.0002
+            }
+          },
+          {
+            "strategy": "selective_self_consistency",
+            "records": 2413,
+            "mean_primary_score": 0.8972,
+            "mean_api_calls": 1.09,
+            "mean_wall_time_s": 22.961,
+            "cache_hit_rate": 0.0004,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.9979,
+              "accuracy": 0.8976,
+              "text_match_score": 0.0
+            }
+          },
+          {
+            "strategy": "self_verify",
+            "records": 2413,
+            "mean_primary_score": 0.8512,
+            "mean_api_calls": 1.999,
+            "mean_wall_time_s": 54.614,
+            "cache_hit_rate": 0.0004,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.995,
+              "accuracy": 0.8516,
+              "text_match_score": 0.0001
+            }
+          },
+          {
+            "strategy": "concise_cot",
+            "records": 2414,
+            "mean_primary_score": 0.8314,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 25.739,
+            "cache_hit_rate": 0.0004,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.9905,
+              "accuracy": 0.8317,
+              "text_match_score": 0.0002
+            }
+          },
+          {
+            "strategy": "least_to_most",
+            "records": 2414,
+            "mean_primary_score": 0.7614,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 29.89,
+            "cache_hit_rate": 0.0004,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.9917,
+              "accuracy": 0.7617,
+              "text_match_score": 0.0008
+            }
+          },
+          {
+            "strategy": "constraint_decompose",
+            "records": 2414,
+            "mean_primary_score": 0.5969,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 32.469,
+            "cache_hit_rate": 0.0004,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.9913,
+              "accuracy": 0.5972,
+              "text_match_score": 0.0002
+            }
+          },
+          {
+            "strategy": "critique_refine",
+            "records": 2413,
+            "mean_primary_score": 0.4716,
+            "mean_api_calls": 2.999,
+            "mean_wall_time_s": 80.013,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.8637,
+              "accuracy": 0.4718,
+              "text_match_score": 0.0019
+            }
+          }
+        ],
+        "metric_rollup": {
+          "accuracy": 0.8067,
+          "format_valid": 0.9801,
+          "is_unscorable": 1.0,
+          "text_match_score": 0.0004
+        }
+      }
+    },
+    {
+      "name": "rb_livebench",
+      "display_name": "LiveBench (27B)",
+      "state": "stopped_resumable",
+      "running": false,
+      "run_tag": "spring26_2026-04-08__17-35-21",
+      "config_path": "previous_configs_results/before_spring26_room_truth_rerun_2026-04-14/configs/experiments/generated/spring26_2026-04-08__17-35-21/full_livebench_all_strategies.toml",
+      "output_dir": "outputs/full_livebench__spring26_2026-04-08__17-35-21",
+      "checkpoint_path": "outputs/full_livebench__spring26_2026-04-08__17-35-21/results.jsonl",
+      "log_dir": "logs/rb_livebench__260408_173521",
+      "latest_log": "logs/rb_livebench__260408_173521/run_20260408_180047.log",
+      "dataset_kind": "livebench",
+      "model": "Qwen/Qwen3.5-27B-FP8",
+      "strategy_count": 10,
+      "example_count": 1436,
+      "completed_records": 60,
+      "expected_records": 14360,
+      "remaining_records": 14300,
+      "progress_pct": 0.42,
+      "last_progress_line": "",
+      "last_error_line": "[ReasonBench] error example_id=88d41d97990a9e7f990eb8eb71440d007fd194758ce2c3fe00b77e186fd65c3d strategy=budgeted_cascade error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+      "stale_retry_streak": 0,
+      "stuck": false,
+      "stuck_reason": "",
+      "last_exit_code": "",
+      "last_log_lines": [
+        "[ReasonBench] request_retry attempt=4/7 backoff_s=8.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=1/7 backoff_s=1.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=1/7 backoff_s=1.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=5/7 backoff_s=12.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=2/7 backoff_s=2.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=2/7 backoff_s=2.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=6/7 backoff_s=12.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=3/7 backoff_s=4.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] request_retry attempt=3/7 backoff_s=4.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] error example_id=88d41d97990a9e7f990eb8eb71440d007fd194758ce2c3fe00b77e186fd65c3d strategy=budgeted_cascade error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))",
+        "[ReasonBench] marked_unscorable example_id=88d41d97990a9e7f990eb8eb71440d007fd194758ce2c3fe00b77e186fd65c3d strategy=budgeted_cascade error_records=35",
+        "[ReasonBench] request_retry attempt=4/7 backoff_s=8.0 error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host=\\'game.agaii.org\\', port=443): Read timed out. (read timeout=240)\"))'))"
+      ],
+      "live_summary": {
+        "records_scanned": 60,
+        "best_strategy": "direct",
+        "leaderboard": [
+          {
+            "strategy": "direct",
+            "records": 7,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.714,
+            "mean_wall_time_s": 3361.401,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "proxy_exact_match": 0.0,
+              "proxy_contains_match": 0.0
+            }
+          },
+          {
+            "strategy": "concise_cot",
+            "records": 6,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.333,
+            "mean_wall_time_s": 2153.037,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "proxy_exact_match": 0.0,
+              "proxy_contains_match": 0.0
+            }
+          },
+          {
+            "strategy": "least_to_most",
+            "records": 6,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.167,
+            "mean_wall_time_s": 1022.637,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "proxy_exact_match": 0.0,
+              "proxy_contains_match": 0.0
+            }
+          },
+          {
+            "strategy": "constraint_decompose",
+            "records": 6,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.333,
+            "mean_wall_time_s": 2276.081,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "proxy_exact_match": 0.0,
+              "proxy_contains_match": 0.0
+            }
+          },
+          {
+            "strategy": "self_verify",
+            "records": 6,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.0,
+            "mean_wall_time_s": 0.0,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          },
+          {
+            "strategy": "critique_refine",
+            "records": 6,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 1.0,
+            "mean_wall_time_s": 4158.005,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "proxy_exact_match": 0.0,
+              "proxy_contains_match": 0.0
+            }
+          },
+          {
+            "strategy": "self_consistency",
+            "records": 6,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 1.5,
+            "mean_wall_time_s": 1771.227,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "proxy_exact_match": 0.0,
+              "proxy_contains_match": 0.0,
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          },
+          {
+            "strategy": "selective_self_consistency",
+            "records": 6,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.167,
+            "mean_wall_time_s": 111.017,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "proxy_exact_match": 0.0,
+              "proxy_contains_match": 0.0
+            }
+          },
+          {
+            "strategy": "budgeted_cascade",
+            "records": 6,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.333,
+            "mean_wall_time_s": 0.0,
+            "cache_hit_rate": 0.3333,
+            "metric_means": {
+              "is_unscorable": 1.0,
+              "format_valid": 0.0,
+              "proxy_exact_match": 0.0,
+              "proxy_contains_match": 0.0
+            }
+          },
+          {
+            "strategy": "few_shot_exemplar",
+            "records": 5,
+            "mean_primary_score": 0.0,
+            "mean_api_calls": 0.8,
+            "mean_wall_time_s": 3808.274,
+            "cache_hit_rate": 0.0,
+            "metric_means": {
+              "proxy_exact_match": 0.0,
+              "proxy_contains_match": 0.0,
+              "is_unscorable": 1.0,
+              "format_valid": 0.0
+            }
+          }
+        ],
+        "metric_rollup": {
+          "format_valid": 0.0,
+          "proxy_exact_match": 0.0,
+          "proxy_contains_match": 0.0,
+          "is_unscorable": 1.0
+        }
+      }
+    }
+  ]
+}

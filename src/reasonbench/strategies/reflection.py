@@ -46,6 +46,7 @@ class SelfVerifyStrategy(SingleShotStrategy):
             final_text=verify.text,
             api_calls=draft_result.api_calls + 1,
             wall_time_s=time.perf_counter() - started,
+            reasoning_content=verify.reasoning_content,
             trace=trace,
             metadata={"from_cache": draft_result.metadata.get("from_cache", False) and verify.from_cache},
         )
@@ -98,6 +99,7 @@ class CritiqueRefineStrategy(SingleShotStrategy):
             final_text=refined.text,
             api_calls=draft_result.api_calls + 2,
             wall_time_s=time.perf_counter() - started,
+            reasoning_content=refined.reasoning_content,
             trace=trace,
         )
 
@@ -111,6 +113,7 @@ class SelfConsistencyStrategy(SingleShotStrategy):
         temperature = float(self.params.get("temperature", max(context.default_temperature, 0.6)))
         votes: Counter[str] = Counter()
         winning_texts: dict[str, str] = {}
+        winning_reasoning: dict[str, str | None] = {}
         trace: list[dict[str, Any]] = []
         api_calls = 0
         for sample_index in range(samples):
@@ -119,7 +122,16 @@ class SelfConsistencyStrategy(SingleShotStrategy):
             vote_key = canonical_vote_key(result.final_text)
             votes[vote_key] += 1
             winning_texts.setdefault(vote_key, result.final_text)
-            trace.append({"sample_index": sample_index, "vote_key": vote_key, "final_text": result.final_text, "wall_time_s": result.wall_time_s})
+            winning_reasoning.setdefault(vote_key, result.reasoning_content)
+            trace.append(
+                {
+                    "sample_index": sample_index,
+                    "vote_key": vote_key,
+                    "final_text": result.final_text,
+                    "reasoning_content": result.reasoning_content,
+                    "wall_time_s": result.wall_time_s,
+                }
+            )
         winner_key, _ = votes.most_common(1)[0]
         final_text = winning_texts[winner_key]
         return StrategyResult(
@@ -127,6 +139,7 @@ class SelfConsistencyStrategy(SingleShotStrategy):
             final_text=final_text,
             api_calls=api_calls,
             wall_time_s=time.perf_counter() - started,
+            reasoning_content=winning_reasoning.get(winner_key),
             trace=trace,
             metadata={"vote_histogram": dict(votes)},
         )
@@ -160,9 +173,11 @@ class SelectiveSelfConsistencyStrategy(SelfConsistencyStrategy):
         temperature = float(self.params.get("temperature", max(context.default_temperature, 0.6)))
         votes: Counter[str] = Counter()
         winning_texts: dict[str, str] = {}
+        winning_reasoning: dict[str, str | None] = {}
         trace: list[dict[str, Any]] = [{
             "stage": "first_pass",
             "final_text": first_pass.final_text,
+            "reasoning_content": first_pass.reasoning_content,
             "wall_time_s": first_pass.wall_time_s,
         }]
         api_calls = first_pass.api_calls
@@ -170,6 +185,7 @@ class SelectiveSelfConsistencyStrategy(SelfConsistencyStrategy):
         seed_key = canonical_vote_key(first_pass.final_text)
         votes[seed_key] += 1
         winning_texts.setdefault(seed_key, first_pass.final_text)
+        winning_reasoning.setdefault(seed_key, first_pass.reasoning_content)
 
         for sample_index in range(samples - 1):
             result = self._run_turns(example, client, context, temperature=temperature)
@@ -177,11 +193,13 @@ class SelectiveSelfConsistencyStrategy(SelfConsistencyStrategy):
             vote_key = canonical_vote_key(result.final_text)
             votes[vote_key] += 1
             winning_texts.setdefault(vote_key, result.final_text)
+            winning_reasoning.setdefault(vote_key, result.reasoning_content)
             trace.append({
                 "stage": "escalated_sample",
                 "sample_index": sample_index,
                 "vote_key": vote_key,
                 "final_text": result.final_text,
+                "reasoning_content": result.reasoning_content,
                 "wall_time_s": result.wall_time_s,
             })
 
@@ -191,6 +209,7 @@ class SelectiveSelfConsistencyStrategy(SelfConsistencyStrategy):
             final_text=winning_texts[winner_key],
             api_calls=api_calls,
             wall_time_s=time.perf_counter() - started,
+            reasoning_content=winning_reasoning.get(winner_key),
             trace=trace,
             metadata={
                 "vote_histogram": dict(votes),
@@ -231,3 +250,261 @@ class BudgetedCascadeStrategy(Strategy):
         slow_result.trace = [{"cascade_stage": "fast", "final_text": fast_result.final_text}] + slow_result.trace
         slow_result.metadata["cascade_path"] = "fast_then_verify"
         return slow_result
+
+
+class TreeOfThoughtsStrategy(Strategy):
+    name = "tree_of_thoughts"
+
+    _EXPERT_STYLES: list[tuple[str, str]] = [
+        (
+            "Logic Expert",
+            "Focus on strict constraints and eliminate contradictions quickly.",
+        ),
+        (
+            "Scenario Expert",
+            "Propose plausible candidate solutions and stress-test edge cases.",
+        ),
+        (
+            "Reviewer",
+            "Audit prior candidate reasoning, then recommend the most robust final answer.",
+        ),
+        (
+            "Skeptic",
+            "Search for hidden failure modes and ambiguous assumptions before finalizing.",
+        ),
+    ]
+
+    def _system_instruction(self, context: StrategyRuntimeContext) -> str:
+        base = (
+            "You are a careful reasoning assistant. Use deliberate branching when needed, "
+            "avoid fabricated claims, and keep outputs benchmark-safe."
+        )
+        if context.strict_benchmark_mode:
+            base += " Do not use hidden benchmark examples or benchmark-specific leakage."
+        return base
+
+    def run(self, example: Example, client: BaseLLMClient, context: StrategyRuntimeContext) -> StrategyResult:
+        started = time.perf_counter()
+        branches = max(2, int(self.params.get("branches", 3)))
+        branch_temperature = float(self.params.get("temperature", max(context.default_temperature, 0.6)))
+        branch_max_tokens = max(256, context.default_max_tokens // 2)
+
+        branch_outputs: list[dict[str, Any]] = []
+        api_calls = 0
+
+        for branch_index in range(branches):
+            expert_name, expert_style = self._EXPERT_STYLES[branch_index % len(self._EXPERT_STYLES)]
+            branch_prompt = (
+                f"Task:\n{example.prompt_text}\n\n"
+                f"Role: {expert_name}\n"
+                f"Style: {expert_style}\n\n"
+                "Generate one candidate reasoning path and a candidate final answer. "
+                "Keep it concise and avoid verbose scratchpad text."
+            )
+            branch_result = client.generate(
+                GenerationRequest(
+                    messages=[
+                        ChatMessage("system", self._system_instruction(context)),
+                        ChatMessage("user", branch_prompt),
+                    ],
+                    temperature=branch_temperature,
+                    max_tokens=branch_max_tokens,
+                )
+            )
+            api_calls += 1
+            branch_outputs.append(
+                {
+                    "branch_index": branch_index,
+                    "expert": expert_name,
+                    "assistant": branch_result.text,
+                    "reasoning_content": branch_result.reasoning_content,
+                    "latency_s": branch_result.latency_s,
+                    "from_cache": branch_result.from_cache,
+                }
+            )
+
+        branch_digest = "\n\n".join(
+            f"[{item['expert']} / branch {item['branch_index']}]\n{item['assistant']}" for item in branch_outputs
+        )
+        synthesis_prompt = (
+            f"Task:\n{example.prompt_text}\n\n"
+            f"Candidate branches:\n{branch_digest}\n\n"
+            "Select the best reasoning path, fix contradictions, and return ONLY the final answer in the required format."
+        )
+        format_hint = str(example.metadata.get("format_hint") or "").strip()
+        if format_hint:
+            synthesis_prompt += f"\n\nFormatting requirement:\n{format_hint}"
+
+        final_result = client.generate(
+            GenerationRequest(
+                messages=[
+                    ChatMessage("system", self._system_instruction(context)),
+                    ChatMessage("user", synthesis_prompt),
+                ],
+                temperature=context.default_temperature,
+                max_tokens=context.default_max_tokens,
+            )
+        )
+        api_calls += 1
+
+        trace = list(branch_outputs)
+        trace.append(
+            {
+                "stage": "synthesis",
+                "assistant": final_result.text,
+                "reasoning_content": final_result.reasoning_content,
+                "latency_s": final_result.latency_s,
+                "from_cache": final_result.from_cache,
+            }
+        )
+
+        all_cached = all(item.get("from_cache", False) for item in trace) if trace else False
+        return StrategyResult(
+            strategy_name=self.name,
+            final_text=final_result.text,
+            api_calls=api_calls,
+            wall_time_s=time.perf_counter() - started,
+            reasoning_content=final_result.reasoning_content,
+            trace=trace,
+            metadata={"from_cache": all_cached},
+        )
+
+
+class CoconutStrategy(Strategy):
+    name = "coconut"
+
+    _STEP_RE = re.compile(r"^\s*(?:\d+[\).:-]|[-*])\s*(.+?)\s*$")
+
+    def _system_instruction(self, context: StrategyRuntimeContext) -> str:
+        base = (
+            "You are a consistent multi-turn reasoning assistant. Build on prior facts, "
+            "track constraints, and avoid speculative leaps."
+        )
+        if context.strict_benchmark_mode:
+            base += " Do not use hidden benchmark examples or benchmark-specific leakage."
+        return base
+
+    def _parse_steps(self, planner_text: str, max_steps: int) -> list[str]:
+        steps: list[str] = []
+        for line in planner_text.splitlines():
+            match = self._STEP_RE.match(line)
+            candidate = match.group(1).strip() if match else line.strip()
+            if candidate:
+                steps.append(candidate)
+            if len(steps) >= max_steps:
+                break
+        if steps:
+            return steps
+        return [
+            "Extract key constraints or facts.",
+            "Resolve the core reasoning bottleneck.",
+            "Produce a final answer that satisfies all constraints.",
+        ][:max_steps]
+
+    def run(self, example: Example, client: BaseLLMClient, context: StrategyRuntimeContext) -> StrategyResult:
+        started = time.perf_counter()
+        memory_turns = max(2, int(self.params.get("memory_turns", 3)))
+        thinking_temperature = float(self.params.get("temperature", max(context.default_temperature, 0.4)))
+
+        planner_prompt = (
+            f"Task:\n{example.prompt_text}\n\n"
+            f"Create a compact sequence of {memory_turns} reasoning steps for continuous multi-turn solving. "
+            "Return one step per line."
+        )
+        planner = client.generate(
+            GenerationRequest(
+                messages=[
+                    ChatMessage("system", self._system_instruction(context)),
+                    ChatMessage("user", planner_prompt),
+                ],
+                temperature=thinking_temperature,
+                max_tokens=max(192, context.default_max_tokens // 3),
+            )
+        )
+
+        steps = self._parse_steps(planner.text, memory_turns)
+        memory_state = ""
+        trace: list[dict[str, Any]] = [
+            {
+                "stage": "plan",
+                "assistant": planner.text,
+                "reasoning_content": planner.reasoning_content,
+                "latency_s": planner.latency_s,
+                "from_cache": planner.from_cache,
+                "steps": steps,
+            }
+        ]
+        api_calls = 1
+
+        for step_index, step_text in enumerate(steps, start=1):
+            memory_prompt = (
+                f"Task:\n{example.prompt_text}\n\n"
+                f"Current working memory:\n{memory_state or '(empty)'}\n\n"
+                f"Step {step_index}/{len(steps)}: {step_text}\n\n"
+                "Update the working memory with only essential facts and partial conclusions. "
+                "Do not give the final answer yet."
+            )
+            memory_result = client.generate(
+                GenerationRequest(
+                    messages=[
+                        ChatMessage("system", self._system_instruction(context)),
+                        ChatMessage("user", memory_prompt),
+                    ],
+                    temperature=thinking_temperature,
+                    max_tokens=max(256, context.default_max_tokens // 2),
+                )
+            )
+            api_calls += 1
+            memory_state = memory_result.text.strip() or memory_state
+            trace.append(
+                {
+                    "stage": "memory_turn",
+                    "step_index": step_index,
+                    "step": step_text,
+                    "assistant": memory_result.text,
+                    "reasoning_content": memory_result.reasoning_content,
+                    "latency_s": memory_result.latency_s,
+                    "from_cache": memory_result.from_cache,
+                }
+            )
+
+        final_prompt = (
+            f"Task:\n{example.prompt_text}\n\n"
+            f"Final working memory:\n{memory_state}\n\n"
+            "Produce the final answer only."
+        )
+        format_hint = str(example.metadata.get("format_hint") or "").strip()
+        if format_hint:
+            final_prompt += f"\n\nFormatting requirement:\n{format_hint}"
+
+        final = client.generate(
+            GenerationRequest(
+                messages=[
+                    ChatMessage("system", self._system_instruction(context)),
+                    ChatMessage("user", final_prompt),
+                ],
+                temperature=context.default_temperature,
+                max_tokens=context.default_max_tokens,
+            )
+        )
+        api_calls += 1
+
+        trace.append(
+            {
+                "stage": "final",
+                "assistant": final.text,
+                "reasoning_content": final.reasoning_content,
+                "latency_s": final.latency_s,
+                "from_cache": final.from_cache,
+            }
+        )
+        all_cached = all(item.get("from_cache", False) for item in trace) if trace else False
+        return StrategyResult(
+            strategy_name=self.name,
+            final_text=final.text,
+            api_calls=api_calls,
+            wall_time_s=time.perf_counter() - started,
+            reasoning_content=final.reasoning_content,
+            trace=trace,
+            metadata={"from_cache": all_cached},
+        )

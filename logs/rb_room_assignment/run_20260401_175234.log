@@ -9,3 +9,5 @@ command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cl
 [ReasonBench] experiment=room_assignment_full_all_strategies examples=37984 strategies=10 expected_total=379840 existing_checkpoint_records=11
 [ReasonBench] pending_records=379829 max_workers=4
 [ReasonBench] progress total=12/379840 (0.00%) new=1/379829 elapsed_s=94.1
+[ReasonBench] progress total=1910/379840 (0.50%) new=1899/379829 elapsed_s=38089.8
+[ReasonBench] error example_id=358 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))

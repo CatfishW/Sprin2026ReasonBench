@@ -106,6 +106,7 @@ def _archive_previous_assets(
     run_tag: str,
     generated_root_rel: str,
     archive_root_rel: str,
+    experiments: list[BaseExperiment],
 ) -> tuple[Path | None, list[str]]:
     moved: list[tuple[Path, Path]] = []
 
@@ -118,7 +119,7 @@ def _archive_previous_assets(
 
     output_basenames = {
         _output_dir_basename_from_config(repo_root, exp.config_path)
-        for exp in BASE_EXPERIMENTS
+        for exp in experiments
     }
     outputs_root = repo_root / "outputs"
     if outputs_root.exists():
@@ -220,10 +221,23 @@ def main() -> None:
         action="store_true",
         help="Archive previous generated configs and outputs, then exit without preparing a new run",
     )
+    parser.add_argument(
+        "--include-base-sessions",
+        nargs="*",
+        default=None,
+        help="Optional list of base session names to include (e.g. rb_room_assignment rb_truthfulqa).",
+    )
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
     run_tag = args.run_tag or _default_run_tag()
+
+    selected_experiments = list(BASE_EXPERIMENTS)
+    if args.include_base_sessions:
+        include = {item.strip() for item in args.include_base_sessions if item.strip()}
+        selected_experiments = [exp for exp in BASE_EXPERIMENTS if exp.base_session_name in include]
+        if not selected_experiments:
+            raise ValueError(f"No experiments matched --include-base-sessions: {sorted(include)}")
 
     if not args.skip_archive:
         archive_dir, moved_rel_paths = _archive_previous_assets(
@@ -231,6 +245,7 @@ def main() -> None:
             run_tag=run_tag,
             generated_root_rel=args.generated_config_root,
             archive_root_rel=args.archive_root,
+            experiments=selected_experiments,
         )
         if archive_dir:
             print(f"Archived previous configs/results to: {archive_dir}")
@@ -245,7 +260,7 @@ def main() -> None:
     short_suffix = _short_suffix(run_tag)
 
     sessions: list[dict[str, str]] = []
-    for exp in BASE_EXPERIMENTS:
+    for exp in selected_experiments:
         generated_config_rel, output_dir_rel, checkpoint_rel, experiment_name = _prepare_generated_config(
             repo_root=repo_root,
             src_config_rel=exp.config_path,

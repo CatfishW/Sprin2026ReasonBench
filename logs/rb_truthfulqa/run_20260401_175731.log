@@ -9,3 +9,10 @@ command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cl
 [ReasonBench] experiment=truthfulqa_full_all_strategies examples=817 strategies=10 expected_total=8170 existing_checkpoint_records=40
 [ReasonBench] pending_records=8130 max_workers=4
 [ReasonBench] progress total=41/8170 (0.50%) new=1/8130 elapsed_s=0.2
+[ReasonBench] progress total=80/8170 (0.98%) new=40/8130 elapsed_s=559.3
+[ReasonBench] progress total=120/8170 (1.47%) new=80/8130 elapsed_s=1103.7
+[ReasonBench] progress total=160/8170 (1.96%) new=120/8130 elapsed_s=1645.0
+[ReasonBench] progress total=200/8170 (2.45%) new=160/8130 elapsed_s=2269.1
+finished_at: 2026-04-01T18:37:10-04:00
+exit_code: 139
+Run failed (exit 139). Will resume from checkpoint after 20s...

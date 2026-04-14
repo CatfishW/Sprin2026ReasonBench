@@ -1,0 +1,15 @@
+============================================================
+session_name: rb_truthfulqa_27b
+attempt: 12
+started_at: 2026-04-02T00:16:39-04:00
+config_path: configs/experiments/full_truthfulqa_all_strategies_27b.toml
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/full_truthfulqa_all_strategies_27b.toml
+============================================================
+[ReasonBench] experiment=truthfulqa_full_all_strategies_27b examples=817 strategies=10 expected_total=8170 existing_checkpoint_records=718
+[ReasonBench] pending_records=7452 max_workers=2
+[ReasonBench] progress total=719/8170 (8.80%) new=1/7452 elapsed_s=0.1
+[ReasonBench] error example_id=73 strategy=constraint_decompose error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\'game.agaii.org\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError("HTTPSConnectionPool(host=\'game.agaii.org\', port=443): Read timed out. (read timeout=180)"))'))
+finished_at: 2026-04-02T09:47:19-04:00
+exit_code: 139
+Run failed (exit 139). Will resume from checkpoint after 20s...

@@ -1,0 +1,28 @@
+============================================================
+session_name: rb_ai2_arc__260408_173521
+attempt: 1
+started_at: 2026-04-08T17:35:22-04:00
+config_path: configs/experiments/generated/spring26_2026-04-08__17-35-21/full_ai2_arc_all_strategies.toml
+checkpoint_path: outputs/full_ai2_arc__spring26_2026-04-08__17-35-21/results.jsonl
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_2026-04-08__17-35-21/full_ai2_arc_all_strategies.toml
+============================================================
+[ReasonBench] experiment=ai2_arc_full_all_strategies__spring26_2026-04-08__17-35-21 examples=7787 strategies=10 expected_total=77870 existing_checkpoint_records=0
+[ReasonBench] pending_records=77870 max_workers=4
+[ReasonBench] error example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=concise_cot error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=concise_cot error_records=1
+[ReasonBench] progress total=1/77870 (0.00%) new=1/77870 elapsed_s=486.9
+[ReasonBench] error example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=direct error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=direct error_records=2
+[ReasonBench] error example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=least_to_most error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=least_to_most error_records=3
+[ReasonBench] error example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=constraint_decompose error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 504 error responses'))"))
+[ReasonBench] marked_unscorable example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=constraint_decompose error_records=4
+[ReasonBench] error example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=selective_self_consistency error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 502 error responses'))"))
+[ReasonBench] marked_unscorable example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=selective_self_consistency error_records=5
+[ReasonBench] error example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=self_verify error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 502 error responses'))"))
+[ReasonBench] marked_unscorable example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=self_verify error_records=6
+[ReasonBench] error example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=critique_refine error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 502 error responses'))"))
+[ReasonBench] marked_unscorable example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=critique_refine error_records=7
+[ReasonBench] error example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=self_consistency error=RetryError(MaxRetryError("HTTPSConnectionPool(host='game.agaii.org', port=443): Max retries exceeded with url: /llm/v1/chat/completions (Caused by ResponseError('too many 502 error responses'))"))
+[ReasonBench] marked_unscorable example_id=ARC-Challenge:train:Mercury_SC_415702 strategy=self_consistency error_records=8

@@ -1,0 +1,19 @@
+============================================================
+session_name: rb_truthfulqa_27b
+attempt: 11
+started_at: 2026-04-01T22:35:26-04:00
+config_path: configs/experiments/full_truthfulqa_all_strategies_27b.toml
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/full_truthfulqa_all_strategies_27b.toml
+============================================================
+[ReasonBench] experiment=truthfulqa_full_all_strategies_27b examples=817 strategies=10 expected_total=8170 existing_checkpoint_records=558
+[ReasonBench] pending_records=7612 max_workers=2
+[ReasonBench] progress total=559/8170 (6.84%) new=1/7612 elapsed_s=0.1
+[ReasonBench] progress total=596/8170 (7.29%) new=38/7612 elapsed_s=947.1
+[ReasonBench] progress total=634/8170 (7.76%) new=76/7612 elapsed_s=1750.8
+[ReasonBench] progress total=672/8170 (8.23%) new=114/7612 elapsed_s=2557.9
+[ReasonBench] progress total=710/8170 (8.69%) new=152/7612 elapsed_s=3628.8
+[ReasonBench] error example_id=71 strategy=critique_refine error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\'game.agaii.org\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError("HTTPSConnectionPool(host=\'game.agaii.org\', port=443): Read timed out. (read timeout=180)"))'))
+finished_at: 2026-04-02T00:16:19-04:00
+exit_code: 139
+Run failed (exit 139). Will resume from checkpoint after 20s...

@@ -1,0 +1,19 @@
+============================================================
+session_name: rb_truthfulqa
+attempt: 33
+started_at: 2026-04-02T04:20:49-04:00
+config_path: configs/experiments/full_truthfulqa_all_strategies.toml
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/full_truthfulqa_all_strategies.toml
+============================================================
+[ReasonBench] experiment=truthfulqa_full_all_strategies examples=817 strategies=10 expected_total=8170 existing_checkpoint_records=2155
+[ReasonBench] pending_records=6015 max_workers=4
+[ReasonBench] progress total=2156/8170 (26.39%) new=1/6015 elapsed_s=0.1
+[ReasonBench] progress total=2185/8170 (26.74%) new=30/6015 elapsed_s=388.9
+[ReasonBench] progress total=2215/8170 (27.11%) new=60/6015 elapsed_s=876.1
+[ReasonBench] progress total=2245/8170 (27.48%) new=90/6015 elapsed_s=1439.0
+[ReasonBench] progress total=2275/8170 (27.85%) new=120/6015 elapsed_s=1935.7
+malloc(): corrupted unsorted chunks 2
+finished_at: 2026-04-02T04:54:20-04:00
+exit_code: 134
+Run failed (exit 134). Will resume from checkpoint after 20s...

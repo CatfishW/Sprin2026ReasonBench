@@ -1,0 +1,70 @@
+============================================================
+session_name: rb_truthfulqa__260408_173521
+attempt: 3
+started_at: 2026-04-09T00:15:06-04:00
+config_path: configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies.toml
+checkpoint_path: outputs/full_truthfulqa__spring26_2026-04-08__17-35-21/results.jsonl
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies.toml
+============================================================
+[ReasonBench] experiment=truthfulqa_full_all_strategies__spring26_2026-04-08__17-35-21 examples=817 strategies=10 expected_total=8170 existing_checkpoint_records=1113
+[ReasonBench] pending_records=7057 max_workers=4
+[ReasonBench] progress total=1114/8170 (13.64%) new=1/7057 elapsed_s=0.1
+[ReasonBench] progress total=1148/8170 (14.05%) new=35/7057 elapsed_s=919.4
+[ReasonBench] progress total=1183/8170 (14.48%) new=70/7057 elapsed_s=1613.9
+[ReasonBench] progress total=1218/8170 (14.91%) new=105/7057 elapsed_s=2301.7
+[ReasonBench] progress total=1253/8170 (15.34%) new=140/7057 elapsed_s=2927.6
+[ReasonBench] progress total=1288/8170 (15.76%) new=175/7057 elapsed_s=3928.1
+[ReasonBench] progress total=1323/8170 (16.19%) new=210/7057 elapsed_s=5054.5
+[ReasonBench] progress total=1358/8170 (16.62%) new=245/7057 elapsed_s=6197.3
+[ReasonBench] progress total=1393/8170 (17.05%) new=280/7057 elapsed_s=7036.5
+[ReasonBench] progress total=1428/8170 (17.48%) new=315/7057 elapsed_s=7961.9
+[ReasonBench] progress total=1463/8170 (17.91%) new=350/7057 elapsed_s=8838.5
+[ReasonBench] progress total=1498/8170 (18.34%) new=385/7057 elapsed_s=9652.3
+[ReasonBench] progress total=1533/8170 (18.76%) new=420/7057 elapsed_s=10459.7
+[ReasonBench] progress total=1568/8170 (19.19%) new=455/7057 elapsed_s=11321.1
+[ReasonBench] progress total=1603/8170 (19.62%) new=490/7057 elapsed_s=12074.8
+[ReasonBench] progress total=1638/8170 (20.05%) new=525/7057 elapsed_s=13001.2
+[ReasonBench] progress total=1673/8170 (20.48%) new=560/7057 elapsed_s=13753.8
+[ReasonBench] progress total=1708/8170 (20.91%) new=595/7057 elapsed_s=14618.9
+[ReasonBench] progress total=1743/8170 (21.33%) new=630/7057 elapsed_s=15413.1
+[ReasonBench] progress total=1778/8170 (21.76%) new=665/7057 elapsed_s=16348.3
+[ReasonBench] progress total=1813/8170 (22.19%) new=700/7057 elapsed_s=17176.6
+[ReasonBench] progress total=1848/8170 (22.62%) new=735/7057 elapsed_s=18137.8
+[ReasonBench] progress total=1883/8170 (23.05%) new=770/7057 elapsed_s=19009.5
+[ReasonBench] progress total=1918/8170 (23.48%) new=805/7057 elapsed_s=19948.8
+[ReasonBench] progress total=1953/8170 (23.90%) new=840/7057 elapsed_s=20667.5
+[ReasonBench] progress total=1988/8170 (24.33%) new=875/7057 elapsed_s=21453.3
+[ReasonBench] progress total=2023/8170 (24.76%) new=910/7057 elapsed_s=22385.0
+[ReasonBench] progress total=2058/8170 (25.19%) new=945/7057 elapsed_s=23180.8
+[ReasonBench] progress total=2093/8170 (25.62%) new=980/7057 elapsed_s=24033.5
+[ReasonBench] progress total=2128/8170 (26.05%) new=1015/7057 elapsed_s=24949.5
+[ReasonBench] progress total=2163/8170 (26.47%) new=1050/7057 elapsed_s=25791.5
+[ReasonBench] progress total=2198/8170 (26.90%) new=1085/7057 elapsed_s=26642.6
+[ReasonBench] progress total=2233/8170 (27.33%) new=1120/7057 elapsed_s=27436.5
+[ReasonBench] progress total=2268/8170 (27.76%) new=1155/7057 elapsed_s=28236.0
+[ReasonBench] progress total=2303/8170 (28.19%) new=1190/7057 elapsed_s=29075.2
+[ReasonBench] progress total=2338/8170 (28.62%) new=1225/7057 elapsed_s=29801.1
+[ReasonBench] progress total=2373/8170 (29.05%) new=1260/7057 elapsed_s=30484.7
+[ReasonBench] progress total=2408/8170 (29.47%) new=1295/7057 elapsed_s=31216.2
+[ReasonBench] progress total=2443/8170 (29.90%) new=1330/7057 elapsed_s=31997.9
+[ReasonBench] progress total=2478/8170 (30.33%) new=1365/7057 elapsed_s=32900.8
+[ReasonBench] progress total=2513/8170 (30.76%) new=1400/7057 elapsed_s=33915.6
+[ReasonBench] progress total=2548/8170 (31.19%) new=1435/7057 elapsed_s=34914.2
+[ReasonBench] progress total=2583/8170 (31.62%) new=1470/7057 elapsed_s=35697.9
+[ReasonBench] progress total=2618/8170 (32.04%) new=1505/7057 elapsed_s=36470.7
+[ReasonBench] progress total=2653/8170 (32.47%) new=1540/7057 elapsed_s=37282.6
+[ReasonBench] progress total=2688/8170 (32.90%) new=1575/7057 elapsed_s=38065.3
+[ReasonBench] progress total=2723/8170 (33.33%) new=1610/7057 elapsed_s=38863.1
+[ReasonBench] progress total=2758/8170 (33.76%) new=1645/7057 elapsed_s=39496.1
+[ReasonBench] progress total=2793/8170 (34.19%) new=1680/7057 elapsed_s=40315.8
+[ReasonBench] progress total=2828/8170 (34.61%) new=1715/7057 elapsed_s=41066.0
+[ReasonBench] progress total=2863/8170 (35.04%) new=1750/7057 elapsed_s=41777.2
+[ReasonBench] progress total=2898/8170 (35.47%) new=1785/7057 elapsed_s=42467.6
+[ReasonBench] progress total=2933/8170 (35.90%) new=1820/7057 elapsed_s=43412.7
+finished_at: 2026-04-09T12:25:01-04:00
+exit_code: 139
+checkpoint_records_before: 1113
+checkpoint_records_after: 2951
+checkpoint_records_added: 1838
+Run failed (exit 139). stale_attempts=0. Will resume from checkpoint after 20s...

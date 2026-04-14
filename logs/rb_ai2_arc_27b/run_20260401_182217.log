@@ -1,0 +1,16 @@
+============================================================
+session_name: rb_ai2_arc_27b
+attempt: 2
+started_at: 2026-04-01T18:22:17-04:00
+config_path: configs/experiments/full_ai2_arc_all_strategies_27b.toml
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/full_ai2_arc_all_strategies_27b.toml
+============================================================
+[ReasonBench] experiment=ai2_arc_full_all_strategies_27b examples=7787 strategies=10 expected_total=77870 existing_checkpoint_records=0
+[ReasonBench] pending_records=77870 max_workers=2
+[ReasonBench] progress total=1/77870 (0.00%) new=1/77870 elapsed_s=10.4
+[ReasonBench] progress total=389/77870 (0.50%) new=389/77870 elapsed_s=4951.7
+[ReasonBench] progress total=778/77870 (1.00%) new=778/77870 elapsed_s=9948.9
+[ReasonBench] progress total=1167/77870 (1.50%) new=1167/77870 elapsed_s=15175.2
+[ReasonBench] progress total=1556/77870 (2.00%) new=1556/77870 elapsed_s=32833.8
+[ReasonBench] error example_id=ARC-Challenge:train:Mercury_7221743 strategy=critique_refine error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\'game.agaii.org\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError("HTTPSConnectionPool(host=\'game.agaii.org\', port=443): Read timed out. (read timeout=180)"))'))

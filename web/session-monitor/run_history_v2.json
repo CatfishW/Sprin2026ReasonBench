@@ -1,0 +1,592 @@
+{
+  "generated_at": "2026-04-14T21:31:06.708099+00:00",
+  "active_status_path": "status.json",
+  "active_run_tag": "spring26_room_truth_rerun_2026-04-14",
+  "runs": [
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:31:03.242008+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/status.json",
+      "is_active": true,
+      "view_kind": "latest"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:31:03.242008+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_31_03_242008_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:30:49.496606+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_30_49_496606_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:30:35.825781+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_30_35_825781_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:30:22.153213+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_30_22_153213_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:29:50.137055+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_29_50_137055_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:29:32.502556+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_29_32_502556_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:29:18.807057+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_29_18_807057_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:29:05.149397+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_29_05_149397_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:28:50.839429+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_28_50_839429_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:28:37.158364+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_28_37_158364_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:28:23.465048+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_28_23_465048_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:28:09.706511+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_28_09_706511_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:27:56.005111+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_27_56_005111_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:27:39.858474+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_27_39_858474_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:27:21.509694+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_27_21_509694_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:27:07.765066+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_27_07_765066_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:26:54.062413+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_26_54_062413_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:26:40.335154+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_26_40_335154_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:26:26.577181+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_26_26_577181_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:26:12.816370+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_26_12_816370_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:25:59.147063+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_25_59_147063_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:25:28.150192+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_25_28_150192_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:25:10.676199+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_25_10_676199_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:24:56.873490+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_24_56_873490_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:24:43.078139+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_24_43_078139_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:24:29.345136+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_24_29_345136_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:24:15.491466+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_24_15_491466_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:24:01.680971+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_24_01_680971_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:23:47.944750+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_23_47_944750_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:23:34.218500+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_23_34_218500_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:23:18.492492+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_23_18_492492_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:23:01.429387+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_23_01_429387_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:22:47.542065+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_22_47_542065_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:22:33.725554+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_22_33_725554_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:22:19.960882+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_22_19_960882_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:22:05.991346+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_22_05_991346_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:21:52.076845+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_21_52_076845_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:21:38.441388+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_21_38_441388_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:21:07.951723+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_21_07_951723_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:20:50.651877+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_20_50_651877_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:20:36.842784+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_20_36_842784_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:20:22.976763+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_20_22_976763_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:20:09.188586+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_20_09_188586_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:19:55.094248+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_19_55_094248_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:19:41.358784+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_19_41_358784_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:19:27.727732+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_19_27_727732_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:18:58.160633+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_18_58_160633_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:18:40.688961+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_18_40_688961_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:18:26.950859+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_18_26_950859_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:18:13.171522+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_18_13_171522_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:17:59.457091+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_17_59_457091_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:17:45.754607+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_17_45_754607_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:17:31.990126+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_17_31_990126_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:17:18.169585+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_17_18_169585_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:16:48.800296+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_16_48_800296_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:16:31.470937+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_16_31_470937_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:16:17.659592+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_16_17_659592_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:16:03.865745+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_16_03_865745_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:15:50.217916+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_15_50_217916_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+      "launched_at": "2026-04-14T20:27:35.629142+00:00",
+      "generated_at": "2026-04-14T21:15:36.526044+00:00",
+      "status_path": "history/spring26_room_truth_rerun_2026-04-14/snapshots/status_2026_04_14T21_15_36_526044_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_2026-04-08__17-35-21",
+      "run_title": "Spring 2026 • spring26_2026-04-08__17-35-21",
+      "launched_at": "2026-04-08T17:35:21+00:00",
+      "generated_at": "2026-04-08T17:35:21+00:00",
+      "status_path": "history/spring26_2026-04-08__17-35-21/status.json",
+      "is_active": false,
+      "view_kind": "latest"
+    },
+    {
+      "run_tag": "spring26_2026-04-08__17-35-21",
+      "run_title": "Spring 2026 • spring26_2026-04-08__17-35-21",
+      "launched_at": "2026-04-08T17:35:21+00:00",
+      "generated_at": "2026-04-08T17:35:21+00:00",
+      "status_path": "history/spring26_2026-04-08__17-35-21/snapshots/status_2026_04_08T17_35_21_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    },
+    {
+      "run_tag": "spring26_2026-04-02__20-14-57",
+      "run_title": "Spring 2026 • spring26_2026-04-02__20-14-57",
+      "launched_at": "2026-04-02T20:14:57+00:00",
+      "generated_at": "2026-04-02T20:14:57+00:00",
+      "status_path": "history/spring26_2026-04-02__20-14-57/status.json",
+      "is_active": false,
+      "view_kind": "latest"
+    },
+    {
+      "run_tag": "spring26_2026-04-02__20-14-57",
+      "run_title": "Spring 2026 • spring26_2026-04-02__20-14-57",
+      "launched_at": "2026-04-02T20:14:57+00:00",
+      "generated_at": "2026-04-02T20:14:57+00:00",
+      "status_path": "history/spring26_2026-04-02__20-14-57/snapshots/status_2026_04_02T20_14_57_00_00.json",
+      "is_active": false,
+      "view_kind": "snapshot"
+    }
+  ]
+}

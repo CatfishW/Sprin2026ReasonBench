@@ -1,0 +1,51 @@
+{
+  "run_tag": "spring26_room_truth_rerun_2026-04-14",
+  "run_title": "Spring 2026 • spring26_room_truth_rerun_2026-04-14",
+  "launched_at": "2026-04-14T20:27:35.629142+00:00",
+  "sessions": [
+    {
+      "display_name": "Room Assignment (4B)",
+      "base_session_name": "rb_room_assignment",
+      "session_name": "rb_room_assignment__260414_162735",
+      "config_path": "configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_room_assignment_all_strategies.toml",
+      "output_dir": "outputs/full_room_assignment__spring26_room_truth_rerun_2026-04-14",
+      "checkpoint_path": "outputs/full_room_assignment__spring26_room_truth_rerun_2026-04-14/results.jsonl",
+      "log_dir": "logs/rb_room_assignment__260414_162735",
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "experiment_name": "room_assignment_full_all_strategies__spring26_room_truth_rerun_2026-04-14"
+    },
+    {
+      "display_name": "TruthfulQA (4B)",
+      "base_session_name": "rb_truthfulqa",
+      "session_name": "rb_truthfulqa__260414_162735",
+      "config_path": "configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_truthfulqa_all_strategies.toml",
+      "output_dir": "outputs/full_truthfulqa__spring26_room_truth_rerun_2026-04-14",
+      "checkpoint_path": "outputs/full_truthfulqa__spring26_room_truth_rerun_2026-04-14/results.jsonl",
+      "log_dir": "logs/rb_truthfulqa__260414_162735",
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "experiment_name": "truthfulqa_full_all_strategies__spring26_room_truth_rerun_2026-04-14"
+    },
+    {
+      "display_name": "Room Assignment (27B)",
+      "base_session_name": "rb_room_assignment_27b",
+      "session_name": "rb_room_assignment_27b__260414_162735",
+      "config_path": "configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_room_assignment_all_strategies_27b.toml",
+      "output_dir": "outputs/full_room_assignment_27b__spring26_room_truth_rerun_2026-04-14",
+      "checkpoint_path": "outputs/full_room_assignment_27b__spring26_room_truth_rerun_2026-04-14/results.jsonl",
+      "log_dir": "logs/rb_room_assignment_27b__260414_162735",
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "experiment_name": "room_assignment_full_all_strategies_27b__spring26_room_truth_rerun_2026-04-14"
+    },
+    {
+      "display_name": "TruthfulQA (27B)",
+      "base_session_name": "rb_truthfulqa_27b",
+      "session_name": "rb_truthfulqa_27b__260414_162735",
+      "config_path": "configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_truthfulqa_all_strategies_27b.toml",
+      "output_dir": "outputs/full_truthfulqa_27b__spring26_room_truth_rerun_2026-04-14",
+      "checkpoint_path": "outputs/full_truthfulqa_27b__spring26_room_truth_rerun_2026-04-14/results.jsonl",
+      "log_dir": "logs/rb_truthfulqa_27b__260414_162735",
+      "run_tag": "spring26_room_truth_rerun_2026-04-14",
+      "experiment_name": "truthfulqa_full_all_strategies_27b__spring26_room_truth_rerun_2026-04-14"
+    }
+  ]
+}

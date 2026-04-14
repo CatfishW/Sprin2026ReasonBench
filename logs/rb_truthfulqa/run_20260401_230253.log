@@ -1,0 +1,11 @@
+============================================================
+session_name: rb_truthfulqa
+attempt: 15
+started_at: 2026-04-01T23:02:53-04:00
+config_path: configs/experiments/full_truthfulqa_all_strategies.toml
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/full_truthfulqa_all_strategies.toml
+============================================================
+finished_at: 2026-04-01T23:02:54-04:00
+exit_code: 139
+Run failed (exit 139). Will resume from checkpoint after 20s...

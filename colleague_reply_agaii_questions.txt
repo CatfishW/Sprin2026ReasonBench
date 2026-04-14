@@ -1,0 +1,62 @@
+Hi Ryan — great questions. I checked both the codebase and the current spring26 run details.
+
+Short answers
+1) Room Assignment scoring
+The current agaii run is using the native ReasonBench Room Assignment evaluator (not a simple exact-match-only check). The primary score is:
+- 0.5 * room_exact_accuracy
+- + 0.5 * entity_room_f1
+It also tracks/penalizes format issues, hallucinated entities, missing entities, and duplicate entities.
+
+2) TruthfulQA evaluation
+Your intuition is right: the current TruthfulQA metric is a proxy. It uses truth_delta = max similarity to correct answers minus max similarity to incorrect answers, plus informativeness heuristics. This is useful for fast directional tracking, but it is not the official TruthfulQA headline evaluation. The official TruthfulQA bridge exists in the codebase, but this live run is still using the native proxy evaluator.
+
+3) What methods are we testing right now?
+For this spring26 run, we are testing 10 strategies (all enabled), not just one or two:
+- direct
+- concise_cot
+- least_to_most
+- constraint_decompose
+- self_verify
+- critique_refine
+- self_consistency
+- selective_self_consistency
+- budgeted_cascade
+- few_shot_exemplar
+
+4) Are these the same as Vincent/Travis methods?
+Partially aligned, but not a strict 1:1 with the draft’s named 5 methods.
+
+Mapping from the draft’s main 5 methods to current run methods
+- Zero-Shot (Direct) -> direct
+- Chain-of-Thought -> concise_cot (and related decomposition variants: least_to_most, constraint_decompose)
+- Critic (Self-Verify) -> self_verify (plus critique_refine as a stronger 3-pass variant)
+- Tree of Thoughts (ToT) -> no explicit ToT strategy currently registered as its own method
+- Continuous Reasoning (COCONUT) -> no explicit COCONUT strategy currently registered
+
+Also, the draft’s inference-time ideas map as:
+- Inference Scaling (n-voting) -> self_consistency, selective_self_consistency
+- Reasoning Distillation (teacher/student) -> no explicit distillation strategy currently registered in this run
+
+5) “Methods make little difference on 4B”
+This is mostly true for TruthfulQA in particular, especially among the top methods (differences are small in absolute terms).
+For Room Assignment (4B), current live numbers show larger spread than TruthfulQA, with self_verify currently leading.
+
+Current 4B metric examples from the live monitor
+- Room Assignment (4B): self_verify 0.0407 vs direct 0.0114 (few_shot_exemplar 0.0262)
+- TruthfulQA (4B): budgeted_cascade 0.0325, direct 0.0318, self_consistency 0.0309, few_shot_exemplar 0.0289
+
+Archived summary (older snapshot) also shows tiny TruthfulQA spread on 4B
+- direct: 0.0024415
+- budgeted_cascade: 0.0025298
+- absolute gap: ~0.0000883
+
+Current spring26 snapshot context
+- Room Assignment (4B): 1.44% complete, best strategy currently self_verify
+- TruthfulQA (4B): 83.87% complete, best strategy currently budgeted_cascade
+
+Important caveat
+- Since some runs are still in progress, rankings can still move.
+- There are non-trivial generation-error placeholders in current checkpoints (room 4B: 161/5487, truthfulqa 4B: 98/6852), so ranking stability should be interpreted with caution until completion.
+- For TruthfulQA publication-grade claims, we should run/report official TruthfulQA scoring in addition to the current proxy.
+
+If you want, I can next send a compact “paper-consistent method taxonomy” table so the dashboard labels, config names, and draft terminology are all unified in one place.

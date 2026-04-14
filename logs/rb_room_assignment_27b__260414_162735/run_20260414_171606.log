@@ -1,0 +1,9 @@
+============================================================
+session_name: rb_room_assignment_27b__260414_162735
+attempt: 1
+started_at: 2026-04-14T17:16:06-04:00
+config_path: configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_room_assignment_all_strategies_27b.toml
+checkpoint_path: outputs/full_room_assignment_27b__spring26_room_truth_rerun_2026-04-14/results.jsonl
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /mnt/Yanlai/ReasonBench/.venv/bin/python -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_room_assignment_all_strategies_27b.toml
+============================================================

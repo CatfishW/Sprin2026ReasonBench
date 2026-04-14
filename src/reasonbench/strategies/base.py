@@ -69,6 +69,7 @@ class SingleShotStrategy(Strategy):
         history: list[ChatMessage] = []
         trace: list[dict[str, Any]] = []
         final_text = ""
+        final_reasoning_content: str | None = None
         api_calls = 0
         extra_messages = extra_messages or []
         for turn_index, turn_text in enumerate(example.turns):
@@ -81,12 +82,14 @@ class SingleShotStrategy(Strategy):
             result = client.generate(request)
             api_calls += 1
             final_text = result.text
+            final_reasoning_content = result.reasoning_content
             history.extend([ChatMessage("user", rendered_turn), ChatMessage("assistant", result.text)])
             trace.append(
                 {
                     "turn_index": turn_index,
                     "user": rendered_turn,
                     "assistant": result.text,
+                    "reasoning_content": result.reasoning_content,
                     "latency_s": result.latency_s,
                     "from_cache": result.from_cache,
                     **result.metadata,
@@ -97,6 +100,7 @@ class SingleShotStrategy(Strategy):
             final_text=final_text,
             api_calls=api_calls,
             wall_time_s=time.perf_counter() - started,
+            reasoning_content=final_reasoning_content,
             trace=trace,
             metadata={"from_cache": all(item.get("from_cache", False) for item in trace)} if trace else {},
         )

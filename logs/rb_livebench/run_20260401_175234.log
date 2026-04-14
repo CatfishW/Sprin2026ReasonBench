@@ -9,3 +9,12 @@ command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cl
 [ReasonBench] experiment=livebench_full_all_strategies examples=1436 strategies=10 expected_total=14360 existing_checkpoint_records=7
 [ReasonBench] pending_records=14353 max_workers=3
 [ReasonBench] progress total=8/14360 (0.06%) new=1/14353 elapsed_s=89.2
+[ReasonBench] progress total=78/14360 (0.54%) new=71/14353 elapsed_s=2232.4
+[ReasonBench] progress total=149/14360 (1.04%) new=142/14353 elapsed_s=4753.1
+[ReasonBench] progress total=220/14360 (1.53%) new=213/14353 elapsed_s=7253.0
+[ReasonBench] progress total=291/14360 (2.03%) new=284/14353 elapsed_s=9709.0
+[ReasonBench] progress total=362/14360 (2.52%) new=355/14353 elapsed_s=12178.1
+[ReasonBench] progress total=433/14360 (3.02%) new=426/14353 elapsed_s=14817.2
+[ReasonBench] progress total=504/14360 (3.51%) new=497/14353 elapsed_s=17398.0
+[ReasonBench] progress total=575/14360 (4.00%) new=568/14353 elapsed_s=20056.7
+[ReasonBench] error example_id=af9c90d1566582311697d76693eb2be23401bc8fbb7e8b0e595a4080a53e3fa6 strategy=selective_self_consistency error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\'game.agaii.org\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError("HTTPSConnectionPool(host=\'game.agaii.org\', port=443): Read timed out. (read timeout=180)"))'))

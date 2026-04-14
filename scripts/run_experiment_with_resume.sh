@@ -11,10 +11,11 @@ CONFIG_PATH="$1"
 SESSION_NAME="$2"
 LOG_DIR="$ROOT_DIR/logs/$SESSION_NAME"
 mkdir -p "$LOG_DIR"
+PYTHON_BIN="${RB_PYTHON_BIN:-/usr/bin/python3}"
 
 CHECKPOINT_PATH="$(
   cd "$ROOT_DIR"
-  PYTHONPATH=src /usr/bin/python3 - <<PY
+  PYTHONPATH=src "$PYTHON_BIN" - <<PY
 from reasonbench.config import load_experiment_config
 
 cfg = load_experiment_config("$CONFIG_PATH")
@@ -51,7 +52,7 @@ while true; do
     echo "config_path: $CONFIG_PATH"
     echo "checkpoint_path: $CHECKPOINT_PATH"
     echo "cwd: $ROOT_DIR"
-    echo "command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config $CONFIG_PATH"
+    echo "command: PYTHONUNBUFFERED=1 PYTHONPATH=src $PYTHON_BIN -u -m reasonbench.cli.run --config $CONFIG_PATH"
     echo "============================================================"
   } | tee -a "$RUN_LOG"
 
@@ -60,7 +61,7 @@ while true; do
   set +e
   (
     cd "$ROOT_DIR"
-    PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config "$CONFIG_PATH"
+    PYTHONUNBUFFERED=1 PYTHONPATH=src "$PYTHON_BIN" -u -m reasonbench.cli.run --config "$CONFIG_PATH"
   ) 2>&1 | tee -a "$RUN_LOG"
   EXIT_CODE=${PIPESTATUS[0]}
   set -e

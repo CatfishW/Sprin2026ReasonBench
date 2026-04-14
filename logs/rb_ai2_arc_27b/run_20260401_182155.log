@@ -1,0 +1,11 @@
+============================================================
+session_name: rb_ai2_arc_27b
+attempt: 1
+started_at: 2026-04-01T18:21:55-04:00
+config_path: configs/experiments/full_ai2_arc_all_strategies_27b.toml
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/full_ai2_arc_all_strategies_27b.toml
+============================================================
+finished_at: 2026-04-01T18:21:57-04:00
+exit_code: 139
+Run failed (exit 139). Will resume from checkpoint after 20s...

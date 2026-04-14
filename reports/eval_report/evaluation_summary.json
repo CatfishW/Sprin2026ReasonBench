@@ -1,0 +1,1413 @@
+{
+  "generated_at": "2026-04-02T23:19:10.240643+00:00",
+  "runs": [
+    {
+      "run_name": "full_ai2_arc",
+      "result_file": "/mnt/Yanlai/ReasonBench/outputs/full_ai2_arc/results.jsonl",
+      "completed_records": 11586,
+      "completion_pct": 14.878643893668935,
+      "meta": {
+        "dataset_kind": "ai2_arc",
+        "model": "/home/tang/Models/Qwen3.5-4B",
+        "base_url": "https://game.agaii.org/llm/v1/chat/completions",
+        "config_path": "configs/experiments/full_ai2_arc_all_strategies.toml",
+        "strategy_count": 10,
+        "expected_examples": 7787,
+        "expected_records": 77870
+      },
+      "numeric_metrics": [
+        "accuracy",
+        "format_valid",
+        "choice_count",
+        "text_match_score"
+      ],
+      "per_strategy": [
+        {
+          "strategy": "direct",
+          "strategy_display": "Direct",
+          "n": 1159,
+          "coverage_pct": 14.883780660074484,
+          "primary_score_mean": 0.21397756686798963,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 18.127122960611832,
+          "cache_hit_rate": 0.0008628127696289905,
+          "metrics": {
+            "accuracy": 0.21397756686798963,
+            "format_valid": 1.0,
+            "choice_count": 3.999137187230371,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "concise_cot",
+          "strategy_display": "Concise-CoT",
+          "n": 1159,
+          "coverage_pct": 14.883780660074484,
+          "primary_score_mean": 0.21397756686798963,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 20.541493475295997,
+          "cache_hit_rate": 0.0008628127696289905,
+          "metrics": {
+            "accuracy": 0.21397756686798963,
+            "format_valid": 1.0,
+            "choice_count": 3.999137187230371,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "least_to_most",
+          "strategy_display": "Least-to-Most",
+          "n": 1159,
+          "coverage_pct": 14.883780660074484,
+          "primary_score_mean": 0.21397756686798963,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 22.894717365302743,
+          "cache_hit_rate": 0.0008628127696289905,
+          "metrics": {
+            "accuracy": 0.21397756686798963,
+            "format_valid": 1.0,
+            "choice_count": 3.999137187230371,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "constraint_decompose",
+          "strategy_display": "Constraint-Decompose",
+          "n": 1158,
+          "coverage_pct": 14.870938744060615,
+          "primary_score_mean": 0.2141623488773748,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 24.199729089017183,
+          "cache_hit_rate": 0.0008635578583765112,
+          "metrics": {
+            "accuracy": 0.2141623488773748,
+            "format_valid": 1.0,
+            "choice_count": 3.9991364421416233,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "self_verify",
+          "strategy_display": "Self-Verify",
+          "n": 1159,
+          "coverage_pct": 14.883780660074484,
+          "primary_score_mean": 0.21484037963761865,
+          "api_calls_mean": 2.0,
+          "wall_time_mean": 40.92622482847988,
+          "cache_hit_rate": 0.0008628127696289905,
+          "metrics": {
+            "accuracy": 0.21484037963761865,
+            "format_valid": 1.0,
+            "choice_count": 3.999137187230371,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "critique_refine",
+          "strategy_display": "Critique-Refine",
+          "n": 1158,
+          "coverage_pct": 14.870938744060615,
+          "primary_score_mean": 0.2141623488773748,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 64.13890156989456,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "accuracy": 0.2141623488773748,
+            "format_valid": 0.9991364421416234,
+            "choice_count": 3.9991364421416233,
+            "text_match_score": 3.7996545768566495e-06
+          }
+        },
+        {
+          "strategy": "self_consistency",
+          "strategy_display": "Self-Consistency",
+          "n": 1159,
+          "coverage_pct": 14.883780660074484,
+          "primary_score_mean": 0.21397756686798963,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 19.482088193848288,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "accuracy": 0.21397756686798963,
+            "format_valid": 1.0,
+            "choice_count": 3.999137187230371,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "selective_self_consistency",
+          "strategy_display": "Selective-SC",
+          "n": 1158,
+          "coverage_pct": 14.870938744060615,
+          "primary_score_mean": 0.2141623488773748,
+          "api_calls_mean": 1.1347150259067358,
+          "wall_time_mean": 20.200575532784104,
+          "cache_hit_rate": 0.0008635578583765112,
+          "metrics": {
+            "accuracy": 0.2141623488773748,
+            "format_valid": 1.0,
+            "choice_count": 3.9991364421416233,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "budgeted_cascade",
+          "strategy_display": "Budgeted-Cascade",
+          "n": 1159,
+          "coverage_pct": 14.883780660074484,
+          "primary_score_mean": 0.21397756686798963,
+          "api_calls_mean": 1.1018119068162209,
+          "wall_time_mean": 1.0886915614208552,
+          "cache_hit_rate": 0.9525452976704055,
+          "metrics": {
+            "accuracy": 0.21397756686798963,
+            "format_valid": 1.0,
+            "choice_count": 3.999137187230371,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "few_shot_exemplar",
+          "strategy_display": "Few-Shot Exemplar",
+          "n": 1158,
+          "coverage_pct": 14.870938744060615,
+          "primary_score_mean": 0.2141623488773748,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 17.902247540464547,
+          "cache_hit_rate": 0.0008635578583765112,
+          "metrics": {
+            "accuracy": 0.2141623488773748,
+            "format_valid": 1.0,
+            "choice_count": 3.9991364421416233,
+            "text_match_score": 0.0
+          }
+        }
+      ],
+      "best_strategy": "Self-Verify"
+    },
+    {
+      "run_name": "full_ai2_arc_27b",
+      "result_file": "/mnt/Yanlai/ReasonBench/outputs/full_ai2_arc_27b/results.jsonl",
+      "completed_records": 1838,
+      "completion_pct": 2.3603441633491715,
+      "meta": {
+        "dataset_kind": "ai2_arc",
+        "model": "Qwen/Qwen3.5-27B-FP8",
+        "base_url": "https://game.agaii.org/mllm/v1/chat/completions",
+        "config_path": "configs/experiments/full_ai2_arc_all_strategies_27b.toml",
+        "strategy_count": 10,
+        "expected_examples": 7787,
+        "expected_records": 77870
+      },
+      "numeric_metrics": [
+        "accuracy",
+        "format_valid",
+        "choice_count",
+        "text_match_score"
+      ],
+      "per_strategy": [
+        {
+          "strategy": "direct",
+          "strategy_display": "Direct",
+          "n": 185,
+          "coverage_pct": 2.3757544625658147,
+          "primary_score_mean": 0.31351351351351353,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 55.92523154734611,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "accuracy": 0.31351351351351353,
+            "format_valid": 1.0,
+            "choice_count": 4.0,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "concise_cot",
+          "strategy_display": "Concise-CoT",
+          "n": 185,
+          "coverage_pct": 2.3757544625658147,
+          "primary_score_mean": 0.24864864864864866,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 61.12892281115675,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "accuracy": 0.24864864864864866,
+            "format_valid": 1.0,
+            "choice_count": 4.0,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "least_to_most",
+          "strategy_display": "Least-to-Most",
+          "n": 185,
+          "coverage_pct": 2.3757544625658147,
+          "primary_score_mean": 0.25405405405405407,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 59.18429177500543,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "accuracy": 0.25405405405405407,
+            "format_valid": 1.0,
+            "choice_count": 4.0,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "constraint_decompose",
+          "strategy_display": "Constraint-Decompose",
+          "n": 185,
+          "coverage_pct": 2.3757544625658147,
+          "primary_score_mean": 0.25405405405405407,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 70.43873013029177,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "accuracy": 0.25405405405405407,
+            "format_valid": 1.0,
+            "choice_count": 4.0,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "self_verify",
+          "strategy_display": "Self-Verify",
+          "n": 183,
+          "coverage_pct": 2.350070630538076,
+          "primary_score_mean": 0.3005464480874317,
+          "api_calls_mean": 2.0,
+          "wall_time_mean": 113.97287546736626,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "accuracy": 0.3005464480874317,
+            "format_valid": 1.0,
+            "choice_count": 4.0,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "critique_refine",
+          "strategy_display": "Critique-Refine",
+          "n": 183,
+          "coverage_pct": 2.350070630538076,
+          "primary_score_mean": 0.34972677595628415,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 178.83834692565026,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "accuracy": 0.34972677595628415,
+            "format_valid": 1.0,
+            "choice_count": 4.0,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "self_consistency",
+          "strategy_display": "Self-Consistency",
+          "n": 183,
+          "coverage_pct": 2.350070630538076,
+          "primary_score_mean": 0.28415300546448086,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 50.99807193484165,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "accuracy": 0.28415300546448086,
+            "format_valid": 1.0,
+            "choice_count": 4.0,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "selective_self_consistency",
+          "strategy_display": "Selective-SC",
+          "n": 183,
+          "coverage_pct": 2.350070630538076,
+          "primary_score_mean": 0.2896174863387978,
+          "api_calls_mean": 1.0765027322404372,
+          "wall_time_mean": 55.03948159747515,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "accuracy": 0.2896174863387978,
+            "format_valid": 1.0,
+            "choice_count": 4.0,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "budgeted_cascade",
+          "strategy_display": "Budgeted-Cascade",
+          "n": 183,
+          "coverage_pct": 2.350070630538076,
+          "primary_score_mean": 0.3114754098360656,
+          "api_calls_mean": 1.1092896174863387,
+          "wall_time_mean": 0.0003362757759264166,
+          "cache_hit_rate": 1.0,
+          "metrics": {
+            "accuracy": 0.3114754098360656,
+            "format_valid": 1.0,
+            "choice_count": 4.0,
+            "text_match_score": 0.0
+          }
+        },
+        {
+          "strategy": "few_shot_exemplar",
+          "strategy_display": "Few-Shot Exemplar",
+          "n": 183,
+          "coverage_pct": 2.350070630538076,
+          "primary_score_mean": 0.2896174863387978,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 57.05627395990162,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "accuracy": 0.2896174863387978,
+            "format_valid": 1.0,
+            "choice_count": 4.0,
+            "text_match_score": 0.0
+          }
+        }
+      ],
+      "best_strategy": "Critique-Refine"
+    },
+    {
+      "run_name": "full_livebench",
+      "result_file": "/mnt/Yanlai/ReasonBench/outputs/full_livebench/results.jsonl",
+      "completed_records": 598,
+      "completion_pct": 4.164345403899722,
+      "meta": {
+        "dataset_kind": "livebench",
+        "model": "Qwen/Qwen3.5-27B-FP8",
+        "base_url": "https://game.agaii.org/mllm/v1/chat/completions",
+        "config_path": "configs/experiments/full_livebench_all_strategies.toml",
+        "strategy_count": 10,
+        "expected_examples": 1436,
+        "expected_records": 14360
+      },
+      "numeric_metrics": [
+        "proxy_exact_match",
+        "proxy_contains_match",
+        "official_scorer_recommended"
+      ],
+      "per_strategy": [
+        {
+          "strategy": "direct",
+          "strategy_display": "Direct",
+          "n": 60,
+          "coverage_pct": 4.178272980501393,
+          "primary_score_mean": 0.0,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 96.21350055390036,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "proxy_exact_match": 0.0,
+            "proxy_contains_match": 0.0,
+            "official_scorer_recommended": 1.0
+          }
+        },
+        {
+          "strategy": "concise_cot",
+          "strategy_display": "Concise-CoT",
+          "n": 60,
+          "coverage_pct": 4.178272980501393,
+          "primary_score_mean": 0.0,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 97.94346610068324,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "proxy_exact_match": 0.0,
+            "proxy_contains_match": 0.0,
+            "official_scorer_recommended": 1.0
+          }
+        },
+        {
+          "strategy": "least_to_most",
+          "strategy_display": "Least-to-Most",
+          "n": 60,
+          "coverage_pct": 4.178272980501393,
+          "primary_score_mean": 0.0,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 93.90587562819978,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "proxy_exact_match": 0.0,
+            "proxy_contains_match": 0.0,
+            "official_scorer_recommended": 1.0
+          }
+        },
+        {
+          "strategy": "constraint_decompose",
+          "strategy_display": "Constraint-Decompose",
+          "n": 60,
+          "coverage_pct": 4.178272980501393,
+          "primary_score_mean": 0.0,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 92.20730924088335,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "proxy_exact_match": 0.0,
+            "proxy_contains_match": 0.0,
+            "official_scorer_recommended": 1.0
+          }
+        },
+        {
+          "strategy": "self_verify",
+          "strategy_display": "Self-Verify",
+          "n": 60,
+          "coverage_pct": 4.178272980501393,
+          "primary_score_mean": 0.0,
+          "api_calls_mean": 2.0,
+          "wall_time_mean": 182.4345954571334,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "proxy_exact_match": 0.0,
+            "proxy_contains_match": 0.0,
+            "official_scorer_recommended": 1.0
+          }
+        },
+        {
+          "strategy": "critique_refine",
+          "strategy_display": "Critique-Refine",
+          "n": 60,
+          "coverage_pct": 4.178272980501393,
+          "primary_score_mean": 0.0,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 209.88527707788327,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "proxy_exact_match": 0.0,
+            "proxy_contains_match": 0.0,
+            "official_scorer_recommended": 1.0
+          }
+        },
+        {
+          "strategy": "self_consistency",
+          "strategy_display": "Self-Consistency",
+          "n": 60,
+          "coverage_pct": 4.178272980501393,
+          "primary_score_mean": 0.0,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 96.9023197402836,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "proxy_exact_match": 0.0,
+            "proxy_contains_match": 0.0,
+            "official_scorer_recommended": 1.0
+          }
+        },
+        {
+          "strategy": "selective_self_consistency",
+          "strategy_display": "Selective-SC",
+          "n": 59,
+          "coverage_pct": 4.108635097493036,
+          "primary_score_mean": 0.0,
+          "api_calls_mean": 2.2542372881355934,
+          "wall_time_mean": 95.4568292736273,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "proxy_exact_match": 0.0,
+            "proxy_contains_match": 0.0,
+            "official_scorer_recommended": 1.0
+          }
+        },
+        {
+          "strategy": "budgeted_cascade",
+          "strategy_display": "Budgeted-Cascade",
+          "n": 60,
+          "coverage_pct": 4.178272980501393,
+          "primary_score_mean": 0.0,
+          "api_calls_mean": 2.2,
+          "wall_time_mean": 4.765527395549998,
+          "cache_hit_rate": 0.9333333333333333,
+          "metrics": {
+            "proxy_exact_match": 0.0,
+            "proxy_contains_match": 0.0,
+            "official_scorer_recommended": 1.0
+          }
+        },
+        {
+          "strategy": "few_shot_exemplar",
+          "strategy_display": "Few-Shot Exemplar",
+          "n": 59,
+          "coverage_pct": 4.108635097493036,
+          "primary_score_mean": 0.0,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 88.78008252579642,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "proxy_exact_match": 0.0,
+            "proxy_contains_match": 0.0,
+            "official_scorer_recommended": 1.0
+          }
+        }
+      ],
+      "best_strategy": "Direct"
+    },
+    {
+      "run_name": "full_room_assignment",
+      "result_file": "/mnt/Yanlai/ReasonBench/outputs/full_room_assignment/results.jsonl",
+      "completed_records": 3583,
+      "completion_pct": 0.9432919123841618,
+      "meta": {
+        "dataset_kind": "room_assignment",
+        "model": "/home/tang/Models/Qwen3.5-4B",
+        "base_url": "https://game.agaii.org/llm/v1/chat/completions",
+        "config_path": "configs/experiments/full_room_assignment_all_strategies.toml",
+        "strategy_count": 10,
+        "expected_examples": 37984,
+        "expected_records": 379840
+      },
+      "numeric_metrics": [
+        "room_exact_accuracy",
+        "entity_room_accuracy",
+        "all_rooms_exact",
+        "format_valid",
+        "predicted_room_count"
+      ],
+      "per_strategy": [
+        {
+          "strategy": "direct",
+          "strategy_display": "Direct",
+          "n": 359,
+          "coverage_pct": 0.9451347935973041,
+          "primary_score_mean": 0.023235840297121634,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 67.59224425025374,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.01787372330547818,
+            "entity_room_accuracy": 0.02859795728876509,
+            "all_rooms_exact": 0.005571030640668524,
+            "format_valid": 0.9498607242339833,
+            "predicted_room_count": 9.944289693593316
+          }
+        },
+        {
+          "strategy": "concise_cot",
+          "strategy_display": "Concise-CoT",
+          "n": 359,
+          "coverage_pct": 0.9451347935973041,
+          "primary_score_mean": 0.01202414113277623,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 66.66639731639249,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.007428040854224698,
+            "entity_room_accuracy": 0.01662024141132776,
+            "all_rooms_exact": 0.002785515320334262,
+            "format_valid": 0.9052924791086351,
+            "predicted_room_count": 8.763231197771587
+          }
+        },
+        {
+          "strategy": "least_to_most",
+          "strategy_display": "Least-to-Most",
+          "n": 359,
+          "coverage_pct": 0.9451347935973041,
+          "primary_score_mean": 0.00979572887650882,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 66.3155994782593,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.0060352831940575676,
+            "entity_room_accuracy": 0.013556174558960075,
+            "all_rooms_exact": 0.002785515320334262,
+            "format_valid": 0.9080779944289693,
+            "predicted_room_count": 8.604456824512535
+          }
+        },
+        {
+          "strategy": "constraint_decompose",
+          "strategy_display": "Constraint-Decompose",
+          "n": 358,
+          "coverage_pct": 0.9425021061499579,
+          "primary_score_mean": 0.013221601489757914,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 65.73384257639121,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.00898510242085661,
+            "entity_room_accuracy": 0.017458100558659217,
+            "all_rooms_exact": 0.0,
+            "format_valid": 0.8659217877094972,
+            "predicted_room_count": 8.09217877094972
+          }
+        },
+        {
+          "strategy": "self_verify",
+          "strategy_display": "Self-Verify",
+          "n": 358,
+          "coverage_pct": 0.9425021061499579,
+          "primary_score_mean": 0.09970903165735567,
+          "api_calls_mean": 2.0,
+          "wall_time_mean": 134.01186368494686,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.09194599627560521,
+            "entity_room_accuracy": 0.10747206703910614,
+            "all_rooms_exact": 0.07262569832402235,
+            "format_valid": 0.9441340782122905,
+            "predicted_room_count": 12.583798882681565
+          }
+        },
+        {
+          "strategy": "critique_refine",
+          "strategy_display": "Critique-Refine",
+          "n": 358,
+          "coverage_pct": 0.9425021061499579,
+          "primary_score_mean": 0.049301675977653635,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 171.96924363696937,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.04394785847299814,
+            "entity_room_accuracy": 0.05465549348230912,
+            "all_rooms_exact": 0.030726256983240222,
+            "format_valid": 0.994413407821229,
+            "predicted_room_count": 12.58659217877095
+          }
+        },
+        {
+          "strategy": "self_consistency",
+          "strategy_display": "Self-Consistency",
+          "n": 358,
+          "coverage_pct": 0.9425021061499579,
+          "primary_score_mean": 0.030749534450651768,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 66.71275086459512,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.028026070763500933,
+            "entity_room_accuracy": 0.033472998137802606,
+            "all_rooms_exact": 0.013966480446927373,
+            "format_valid": 0.9413407821229051,
+            "predicted_room_count": 11.100558659217876
+          }
+        },
+        {
+          "strategy": "selective_self_consistency",
+          "strategy_display": "Selective-SC",
+          "n": 358,
+          "coverage_pct": 0.9425021061499579,
+          "primary_score_mean": 0.024115456238361265,
+          "api_calls_mean": 2.547486033519553,
+          "wall_time_mean": 68.34389719608069,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.021229050279329607,
+            "entity_room_accuracy": 0.027001862197392923,
+            "all_rooms_exact": 0.0111731843575419,
+            "format_valid": 0.9273743016759777,
+            "predicted_room_count": 10.997206703910615
+          }
+        },
+        {
+          "strategy": "budgeted_cascade",
+          "strategy_display": "Budgeted-Cascade",
+          "n": 358,
+          "coverage_pct": 0.9425021061499579,
+          "primary_score_mean": 0.026094040968342645,
+          "api_calls_mean": 1.0614525139664805,
+          "wall_time_mean": 3.7864062489217107,
+          "cache_hit_rate": 0.9692737430167597,
+          "metrics": {
+            "room_exact_accuracy": 0.020716945996275604,
+            "entity_room_accuracy": 0.031471135940409685,
+            "all_rooms_exact": 0.008379888268156424,
+            "format_valid": 0.952513966480447,
+            "predicted_room_count": 10.022346368715084
+          }
+        },
+        {
+          "strategy": "few_shot_exemplar",
+          "strategy_display": "Few-Shot Exemplar",
+          "n": 358,
+          "coverage_pct": 0.9425021061499579,
+          "primary_score_mean": 0.021752793296089385,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 65.2127590976927,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.017039106145251396,
+            "entity_room_accuracy": 0.026466480446927374,
+            "all_rooms_exact": 0.002793296089385475,
+            "format_valid": 0.9748603351955307,
+            "predicted_room_count": 8.184357541899441
+          }
+        }
+      ],
+      "best_strategy": "Self-Verify"
+    },
+    {
+      "run_name": "full_room_assignment_27b",
+      "result_file": "/mnt/Yanlai/ReasonBench/outputs/full_room_assignment_27b/results.jsonl",
+      "completed_records": 343,
+      "completion_pct": 0.0903011794439764,
+      "meta": {
+        "dataset_kind": "room_assignment",
+        "model": "Qwen/Qwen3.5-27B-FP8",
+        "base_url": "https://game.agaii.org/mllm/v1/chat/completions",
+        "config_path": "configs/experiments/full_room_assignment_all_strategies_27b.toml",
+        "strategy_count": 10,
+        "expected_examples": 37984,
+        "expected_records": 379840
+      },
+      "numeric_metrics": [
+        "room_exact_accuracy",
+        "entity_room_accuracy",
+        "all_rooms_exact",
+        "format_valid",
+        "predicted_room_count"
+      ],
+      "per_strategy": [
+        {
+          "strategy": "direct",
+          "strategy_display": "Direct",
+          "n": 35,
+          "coverage_pct": 0.09214406065711879,
+          "primary_score_mean": 0.4732142857142857,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 95.23639028122874,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.4642857142857143,
+            "entity_room_accuracy": 0.48214285714285715,
+            "all_rooms_exact": 0.42857142857142855,
+            "format_valid": 1.0,
+            "predicted_room_count": 15.485714285714286
+          }
+        },
+        {
+          "strategy": "concise_cot",
+          "strategy_display": "Concise-CoT",
+          "n": 35,
+          "coverage_pct": 0.09214406065711879,
+          "primary_score_mean": 0.2580952380952381,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 101.05092280720008,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.25666666666666665,
+            "entity_room_accuracy": 0.25952380952380955,
+            "all_rooms_exact": 0.2,
+            "format_valid": 1.0,
+            "predicted_room_count": 15.142857142857142
+          }
+        },
+        {
+          "strategy": "least_to_most",
+          "strategy_display": "Least-to-Most",
+          "n": 35,
+          "coverage_pct": 0.09214406065711879,
+          "primary_score_mean": 0.19142857142857142,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 105.80464140331414,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.19142857142857142,
+            "entity_room_accuracy": 0.19142857142857142,
+            "all_rooms_exact": 0.17142857142857143,
+            "format_valid": 1.0,
+            "predicted_room_count": 16.542857142857144
+          }
+        },
+        {
+          "strategy": "constraint_decompose",
+          "strategy_display": "Constraint-Decompose",
+          "n": 34,
+          "coverage_pct": 0.08951137320977254,
+          "primary_score_mean": 0.1332107843137255,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 100.73460560991167,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.12990196078431374,
+            "entity_room_accuracy": 0.13651960784313724,
+            "all_rooms_exact": 0.08823529411764706,
+            "format_valid": 1.0,
+            "predicted_room_count": 15.294117647058824
+          }
+        },
+        {
+          "strategy": "self_verify",
+          "strategy_display": "Self-Verify",
+          "n": 34,
+          "coverage_pct": 0.08951137320977254,
+          "primary_score_mean": 0.48308823529411765,
+          "api_calls_mean": 2.0,
+          "wall_time_mean": 176.3068154822943,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.5058823529411764,
+            "entity_room_accuracy": 0.46029411764705885,
+            "all_rooms_exact": 0.47058823529411764,
+            "format_valid": 1.0,
+            "predicted_room_count": 10.852941176470589
+          }
+        },
+        {
+          "strategy": "critique_refine",
+          "strategy_display": "Critique-Refine",
+          "n": 34,
+          "coverage_pct": 0.08951137320977254,
+          "primary_score_mean": 0.22830882352941176,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 237.3851566584118,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.2088235294117647,
+            "entity_room_accuracy": 0.24779411764705883,
+            "all_rooms_exact": 0.14705882352941177,
+            "format_valid": 1.0,
+            "predicted_room_count": 9.911764705882353
+          }
+        },
+        {
+          "strategy": "self_consistency",
+          "strategy_display": "Self-Consistency",
+          "n": 34,
+          "coverage_pct": 0.08951137320977254,
+          "primary_score_mean": 0.4025735294117647,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 100.38425549376467,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.39705882352941174,
+            "entity_room_accuracy": 0.40808823529411764,
+            "all_rooms_exact": 0.35294117647058826,
+            "format_valid": 1.0,
+            "predicted_room_count": 15.264705882352942
+          }
+        },
+        {
+          "strategy": "selective_self_consistency",
+          "strategy_display": "Selective-SC",
+          "n": 34,
+          "coverage_pct": 0.08951137320977254,
+          "primary_score_mean": 0.3761029411764706,
+          "api_calls_mean": 1.8823529411764706,
+          "wall_time_mean": 98.69807743611727,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.36176470588235293,
+            "entity_room_accuracy": 0.39044117647058824,
+            "all_rooms_exact": 0.2647058823529412,
+            "format_valid": 1.0,
+            "predicted_room_count": 15.558823529411764
+          }
+        },
+        {
+          "strategy": "budgeted_cascade",
+          "strategy_display": "Budgeted-Cascade",
+          "n": 34,
+          "coverage_pct": 0.08951137320977254,
+          "primary_score_mean": 0.48566176470588235,
+          "api_calls_mean": 1.0588235294117647,
+          "wall_time_mean": 0.0004974302942975876,
+          "cache_hit_rate": 1.0,
+          "metrics": {
+            "room_exact_accuracy": 0.47794117647058826,
+            "entity_room_accuracy": 0.4933823529411765,
+            "all_rooms_exact": 0.4411764705882353,
+            "format_valid": 1.0,
+            "predicted_room_count": 15.264705882352942
+          }
+        },
+        {
+          "strategy": "few_shot_exemplar",
+          "strategy_display": "Few-Shot Exemplar",
+          "n": 34,
+          "coverage_pct": 0.08951137320977254,
+          "primary_score_mean": 0.45588235294117646,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 98.38577521105836,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "room_exact_accuracy": 0.4632352941176471,
+            "entity_room_accuracy": 0.4485294117647059,
+            "all_rooms_exact": 0.4411764705882353,
+            "format_valid": 0.9705882352941176,
+            "predicted_room_count": 14.764705882352942
+          }
+        }
+      ],
+      "best_strategy": "Budgeted-Cascade"
+    },
+    {
+      "run_name": "full_truthfulqa",
+      "result_file": "/mnt/Yanlai/ReasonBench/outputs/full_truthfulqa/results.jsonl",
+      "completed_records": 2532,
+      "completion_pct": 30.991432068543453,
+      "meta": {
+        "dataset_kind": "truthfulqa",
+        "model": "/home/tang/Models/Qwen3.5-4B",
+        "base_url": "https://game.agaii.org/llm/v1/chat/completions",
+        "config_path": "configs/experiments/full_truthfulqa_all_strategies.toml",
+        "strategy_count": 10,
+        "expected_examples": 817,
+        "expected_records": 8170
+      },
+      "numeric_metrics": [
+        "truth_delta",
+        "max_correct_similarity",
+        "max_incorrect_similarity",
+        "best_answer_similarity",
+        "informativeness_proxy",
+        "looks_uninformative"
+      ],
+      "per_strategy": [
+        {
+          "strategy": "direct",
+          "strategy_display": "Direct",
+          "n": 254,
+          "coverage_pct": 31.089351285189718,
+          "primary_score_mean": 0.0024415365920263054,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 41.94762956748059,
+          "cache_hit_rate": 0.06299212598425197,
+          "metrics": {
+            "truth_delta": 0.0024415365920263054,
+            "max_correct_similarity": 0.018823426389646607,
+            "max_incorrect_similarity": 0.016381889797620303,
+            "best_answer_similarity": 0.014042625688502352,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "concise_cot",
+          "strategy_display": "Concise-CoT",
+          "n": 254,
+          "coverage_pct": 31.089351285189718,
+          "primary_score_mean": 0.0017996211375511317,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 48.02348597957859,
+          "cache_hit_rate": 0.07480314960629922,
+          "metrics": {
+            "truth_delta": 0.0017996211375511317,
+            "max_correct_similarity": 0.015734184334035336,
+            "max_incorrect_similarity": 0.013934563196484204,
+            "best_answer_similarity": 0.011730498161832338,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "least_to_most",
+          "strategy_display": "Least-to-Most",
+          "n": 253,
+          "coverage_pct": 30.966952264381884,
+          "primary_score_mean": 0.001495047235628663,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 53.31258110869561,
+          "cache_hit_rate": 0.07509881422924901,
+          "metrics": {
+            "truth_delta": 0.001495047235628663,
+            "max_correct_similarity": 0.013435516357260743,
+            "max_incorrect_similarity": 0.01194046912163208,
+            "best_answer_similarity": 0.01007787186048773,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "constraint_decompose",
+          "strategy_display": "Constraint-Decompose",
+          "n": 253,
+          "coverage_pct": 30.966952264381884,
+          "primary_score_mean": 0.00127465591540652,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 56.68618186752581,
+          "cache_hit_rate": 0.07905138339920949,
+          "metrics": {
+            "truth_delta": 0.00127465591540652,
+            "max_correct_similarity": 0.011665651791902643,
+            "max_incorrect_similarity": 0.010390995876496124,
+            "best_answer_similarity": 0.008912161091674703,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "self_verify",
+          "strategy_display": "Self-Verify",
+          "n": 253,
+          "coverage_pct": 30.966952264381884,
+          "primary_score_mean": 0.002420681207734149,
+          "api_calls_mean": 2.0,
+          "wall_time_mean": 87.24481654478656,
+          "cache_hit_rate": 0.06324110671936758,
+          "metrics": {
+            "truth_delta": 0.002420681207734149,
+            "max_correct_similarity": 0.0220664799811565,
+            "max_incorrect_similarity": 0.019645798773422353,
+            "best_answer_similarity": 0.016875367782425155,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "critique_refine",
+          "strategy_display": "Critique-Refine",
+          "n": 253,
+          "coverage_pct": 30.966952264381884,
+          "primary_score_mean": 0.0018785039452442812,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 140.7009438500119,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "truth_delta": 0.0018785039452442812,
+            "max_correct_similarity": 0.015797224422451357,
+            "max_incorrect_similarity": 0.013918720477207078,
+            "best_answer_similarity": 0.012037229407509462,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "self_consistency",
+          "strategy_display": "Self-Consistency",
+          "n": 253,
+          "coverage_pct": 30.966952264381884,
+          "primary_score_mean": 0.0021946618002285697,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 48.96195325238331,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "truth_delta": 0.0021946618002285697,
+            "max_correct_similarity": 0.018032251510548908,
+            "max_incorrect_similarity": 0.01583758971032034,
+            "best_answer_similarity": 0.013687660915765832,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "selective_self_consistency",
+          "strategy_display": "Selective-SC",
+          "n": 253,
+          "coverage_pct": 30.966952264381884,
+          "primary_score_mean": 0.0023706982757701195,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 57.28771317466801,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "truth_delta": 0.0023706982757701195,
+            "max_correct_similarity": 0.018807197658900602,
+            "max_incorrect_similarity": 0.016436499383130482,
+            "best_answer_similarity": 0.014254856702233363,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "budgeted_cascade",
+          "strategy_display": "Budgeted-Cascade",
+          "n": 253,
+          "coverage_pct": 30.966952264381884,
+          "primary_score_mean": 0.0025298182471691797,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 31.34967639901593,
+          "cache_hit_rate": 0.41106719367588934,
+          "metrics": {
+            "truth_delta": 0.0025298182471691797,
+            "max_correct_similarity": 0.02387294671428532,
+            "max_incorrect_similarity": 0.02134312846711614,
+            "best_answer_similarity": 0.01787640631314954,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "few_shot_exemplar",
+          "strategy_display": "Few-Shot Exemplar",
+          "n": 253,
+          "coverage_pct": 30.966952264381884,
+          "primary_score_mean": 0.001956282922783857,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 43.945694046509935,
+          "cache_hit_rate": 0.06324110671936758,
+          "metrics": {
+            "truth_delta": 0.001956282922783857,
+            "max_correct_similarity": 0.01792614972002061,
+            "max_incorrect_similarity": 0.015969866797236755,
+            "best_answer_similarity": 0.013351981465158733,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        }
+      ],
+      "best_strategy": "Budgeted-Cascade"
+    },
+    {
+      "run_name": "full_truthfulqa_27b",
+      "result_file": "/mnt/Yanlai/ReasonBench/outputs/full_truthfulqa_27b/results.jsonl",
+      "completed_records": 752,
+      "completion_pct": 9.204406364749081,
+      "meta": {
+        "dataset_kind": "truthfulqa",
+        "model": "Qwen/Qwen3.5-27B-FP8",
+        "base_url": "https://game.agaii.org/mllm/v1/chat/completions",
+        "config_path": "configs/experiments/full_truthfulqa_all_strategies_27b.toml",
+        "strategy_count": 10,
+        "expected_examples": 817,
+        "expected_records": 8170
+      },
+      "numeric_metrics": [
+        "truth_delta",
+        "max_correct_similarity",
+        "max_incorrect_similarity",
+        "best_answer_similarity",
+        "informativeness_proxy",
+        "looks_uninformative"
+      ],
+      "per_strategy": [
+        {
+          "strategy": "direct",
+          "strategy_display": "Direct",
+          "n": 76,
+          "coverage_pct": 9.30232558139535,
+          "primary_score_mean": 0.004395821048303794,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 38.025565953763,
+          "cache_hit_rate": 0.05263157894736842,
+          "metrics": {
+            "truth_delta": 0.004395821048303794,
+            "max_correct_similarity": 0.03885911563942901,
+            "max_incorrect_similarity": 0.03446329459112522,
+            "best_answer_similarity": 0.02874892207285626,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "concise_cot",
+          "strategy_display": "Concise-CoT",
+          "n": 76,
+          "coverage_pct": 9.30232558139535,
+          "primary_score_mean": 0.006523003751554353,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 37.57235037756587,
+          "cache_hit_rate": 0.039473684210526314,
+          "metrics": {
+            "truth_delta": 0.006523003751554353,
+            "max_correct_similarity": 0.05143806700563362,
+            "max_incorrect_similarity": 0.04491506325407927,
+            "best_answer_similarity": 0.03626185100866105,
+            "informativeness_proxy": 0.9879385964912281,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "least_to_most",
+          "strategy_display": "Least-to-Most",
+          "n": 76,
+          "coverage_pct": 9.30232558139535,
+          "primary_score_mean": 0.005542665915941978,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 60.79645177717092,
+          "cache_hit_rate": 0.05263157894736842,
+          "metrics": {
+            "truth_delta": 0.005542665915941978,
+            "max_correct_similarity": 0.0332538034908033,
+            "max_incorrect_similarity": 0.02771113757486132,
+            "best_answer_similarity": 0.024704538004591194,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "constraint_decompose",
+          "strategy_display": "Constraint-Decompose",
+          "n": 74,
+          "coverage_pct": 9.057527539779683,
+          "primary_score_mean": 0.0019084684034306912,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 70.32184402564867,
+          "cache_hit_rate": 0.05405405405405406,
+          "metrics": {
+            "truth_delta": 0.0019084684034306912,
+            "max_correct_similarity": 0.023523107865680397,
+            "max_incorrect_similarity": 0.021614639462249705,
+            "best_answer_similarity": 0.018321021549876783,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "self_verify",
+          "strategy_display": "Self-Verify",
+          "n": 75,
+          "coverage_pct": 9.179926560587516,
+          "primary_score_mean": 0.009498399370183526,
+          "api_calls_mean": 2.0,
+          "wall_time_mean": 92.95720533003984,
+          "cache_hit_rate": 0.02666666666666667,
+          "metrics": {
+            "truth_delta": 0.009498399370183526,
+            "max_correct_similarity": 0.06874055119563585,
+            "max_incorrect_similarity": 0.059242151825452324,
+            "best_answer_similarity": 0.05142667792671299,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "critique_refine",
+          "strategy_display": "Critique-Refine",
+          "n": 75,
+          "coverage_pct": 9.179926560587516,
+          "primary_score_mean": 0.009085949715914655,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 133.49374133666652,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "truth_delta": 0.009085949715914655,
+            "max_correct_similarity": 0.087186553208033,
+            "max_incorrect_similarity": 0.07810060349211834,
+            "best_answer_similarity": 0.0682003416884349,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "self_consistency",
+          "strategy_display": "Self-Consistency",
+          "n": 75,
+          "coverage_pct": 9.179926560587516,
+          "primary_score_mean": 0.004327582262824102,
+          "api_calls_mean": 3.0,
+          "wall_time_mean": 39.07273263365331,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "truth_delta": 0.004327582262824102,
+            "max_correct_similarity": 0.03972571527684394,
+            "max_incorrect_similarity": 0.03539813301401983,
+            "best_answer_similarity": 0.028712417470306673,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "selective_self_consistency",
+          "strategy_display": "Selective-SC",
+          "n": 75,
+          "coverage_pct": 9.179926560587516,
+          "primary_score_mean": 0.004311211947431203,
+          "api_calls_mean": 2.84,
+          "wall_time_mean": 39.12092058786654,
+          "cache_hit_rate": 0.0,
+          "metrics": {
+            "truth_delta": 0.004311211947431203,
+            "max_correct_similarity": 0.04497731810218429,
+            "max_incorrect_similarity": 0.040666106154753086,
+            "best_answer_similarity": 0.03397727818428904,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "budgeted_cascade",
+          "strategy_display": "Budgeted-Cascade",
+          "n": 75,
+          "coverage_pct": 9.179926560587516,
+          "primary_score_mean": 0.011152277774072702,
+          "api_calls_mean": 2.84,
+          "wall_time_mean": 0.0018683534930702688,
+          "cache_hit_rate": 1.0,
+          "metrics": {
+            "truth_delta": 0.011152277774072702,
+            "max_correct_similarity": 0.06514535609802867,
+            "max_incorrect_similarity": 0.05399307832395597,
+            "best_answer_similarity": 0.049009433490053364,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        },
+        {
+          "strategy": "few_shot_exemplar",
+          "strategy_display": "Few-Shot Exemplar",
+          "n": 75,
+          "coverage_pct": 9.179926560587516,
+          "primary_score_mean": 0.004823336744012762,
+          "api_calls_mean": 1.0,
+          "wall_time_mean": 32.54403876277356,
+          "cache_hit_rate": 0.05333333333333334,
+          "metrics": {
+            "truth_delta": 0.004823336744012762,
+            "max_correct_similarity": 0.0481856880235885,
+            "max_incorrect_similarity": 0.04336235127957573,
+            "best_answer_similarity": 0.03333125676493625,
+            "informativeness_proxy": 1.0,
+            "looks_uninformative": 0.0
+          }
+        }
+      ],
+      "best_strategy": "Budgeted-Cascade"
+    }
+  ],
+  "log_summaries": [
+    {
+      "session_name": "rb_ai2_arc",
+      "attempts": 1,
+      "finished_attempts": 0,
+      "success_attempts": 0,
+      "failed_attempts": 0,
+      "last_exit_code": "--",
+      "latest_log_file": "run_20260401_181910.log"
+    },
+    {
+      "session_name": "rb_ai2_arc_27b",
+      "attempts": 2,
+      "finished_attempts": 1,
+      "success_attempts": 0,
+      "failed_attempts": 1,
+      "last_exit_code": "139",
+      "latest_log_file": "run_20260401_182217.log"
+    },
+    {
+      "session_name": "rb_livebench",
+      "attempts": 4,
+      "finished_attempts": 1,
+      "success_attempts": 1,
+      "failed_attempts": 0,
+      "last_exit_code": "0",
+      "latest_log_file": "run_20260401_175234.log"
+    },
+    {
+      "session_name": "rb_room_assignment",
+      "attempts": 4,
+      "finished_attempts": 1,
+      "success_attempts": 1,
+      "failed_attempts": 0,
+      "last_exit_code": "0",
+      "latest_log_file": "run_20260401_175234.log"
+    },
+    {
+      "session_name": "rb_room_assignment_27b",
+      "attempts": 1,
+      "finished_attempts": 0,
+      "success_attempts": 0,
+      "failed_attempts": 0,
+      "last_exit_code": "--",
+      "latest_log_file": "run_20260401_182155.log"
+    },
+    {
+      "session_name": "rb_truthfulqa",
+      "attempts": 44,
+      "finished_attempts": 40,
+      "success_attempts": 1,
+      "failed_attempts": 39,
+      "last_exit_code": "139",
+      "latest_log_file": "run_20260402_055318.log"
+    },
+    {
+      "session_name": "rb_truthfulqa_27b",
+      "attempts": 13,
+      "finished_attempts": 12,
+      "success_attempts": 0,
+      "failed_attempts": 12,
+      "last_exit_code": "139",
+      "latest_log_file": "run_20260402_094739.log"
+    }
+  ]
+}

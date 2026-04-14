@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import csv
 import json
+import math
 from collections import defaultdict
 from pathlib import Path
 from statistics import mean
@@ -23,18 +24,30 @@ def build_summary(records: list[ExperimentRecord]) -> list[dict[str, Any]]:
 
     rows: list[dict[str, Any]] = []
     for strategy_name, items in grouped.items():
+        scorable_items = [item for item in items if not bool(item.metrics.get("is_unscorable", False))]
+        primary_values = [item.primary_score for item in scorable_items]
+        unscorable_rate = mean(1.0 if item.metrics.get("is_unscorable", False) else 0.0 for item in items)
         rows.append(
             {
                 "strategy": strategy_name,
                 "examples": len(items),
-                "mean_primary_score": round(mean(item.primary_score for item in items), 4),
+                "scorable_examples": len(scorable_items),
+                "unscorable_rate": round(unscorable_rate, 4),
+                "mean_primary_score": round(mean(primary_values), 4) if primary_values else float("nan"),
                 "mean_wall_time_s": round(mean(item.wall_time_s for item in items), 4),
                 "mean_api_calls": round(mean(item.api_calls for item in items), 3),
                 "cache_hit_rate": round(mean(1.0 if item.from_cache else 0.0 for item in items), 4),
                 "format_valid_rate": round(mean(1.0 if item.metrics.get("format_valid", True) else 0.0 for item in items), 4),
             }
         )
-    rows.sort(key=lambda row: row["mean_primary_score"], reverse=True)
+
+    def _sort_key(row: dict[str, Any]) -> tuple[int, float]:
+        score = row["mean_primary_score"]
+        if isinstance(score, float) and math.isnan(score):
+            return (0, float("-inf"))
+        return (1, float(score))
+
+    rows.sort(key=_sort_key, reverse=True)
     return rows
 
 

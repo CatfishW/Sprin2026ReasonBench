@@ -1,0 +1,73 @@
+============================================================
+session_name: rb_ai2_arc__260408_173521
+attempt: 1
+started_at: 2026-04-08T18:00:47-04:00
+config_path: configs/experiments/generated/spring26_2026-04-08__17-35-21/full_ai2_arc_all_strategies.toml
+checkpoint_path: outputs/full_ai2_arc__spring26_2026-04-08__17-35-21/results.jsonl
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_2026-04-08__17-35-21/full_ai2_arc_all_strategies.toml
+============================================================
+[ReasonBench] experiment=ai2_arc_full_all_strategies__spring26_2026-04-08__17-35-21 examples=7787 strategies=10 expected_total=77870 existing_checkpoint_records=102
+[ReasonBench] pending_records=77768 max_workers=4
+[ReasonBench] progress total=103/77870 (0.13%) new=1/77768 elapsed_s=22.8
+[ReasonBench] progress total=490/77870 (0.63%) new=388/77768 elapsed_s=2192.2
+[ReasonBench] progress total=878/77870 (1.13%) new=776/77768 elapsed_s=4319.4
+[ReasonBench] progress total=1266/77870 (1.63%) new=1164/77768 elapsed_s=6500.8
+[ReasonBench] progress total=1654/77870 (2.12%) new=1552/77768 elapsed_s=8777.6
+[ReasonBench] progress total=2042/77870 (2.62%) new=1940/77768 elapsed_s=10905.4
+[ReasonBench] progress total=2430/77870 (3.12%) new=2328/77768 elapsed_s=13156.4
+[ReasonBench] progress total=2818/77870 (3.62%) new=2716/77768 elapsed_s=15547.5
+[ReasonBench] progress total=3206/77870 (4.12%) new=3104/77768 elapsed_s=17798.8
+[ReasonBench] progress total=3594/77870 (4.62%) new=3492/77768 elapsed_s=20046.3
+[ReasonBench] progress total=3982/77870 (5.11%) new=3880/77768 elapsed_s=22168.8
+[ReasonBench] progress total=4370/77870 (5.61%) new=4268/77768 elapsed_s=24337.0
+[ReasonBench] progress total=4758/77870 (6.11%) new=4656/77768 elapsed_s=26786.7
+[ReasonBench] progress total=5146/77870 (6.61%) new=5044/77768 elapsed_s=30588.3
+[ReasonBench] progress total=5534/77870 (7.11%) new=5432/77768 elapsed_s=34200.0
+[ReasonBench] progress total=5922/77870 (7.60%) new=5820/77768 elapsed_s=37834.1
+[ReasonBench] progress total=6310/77870 (8.10%) new=6208/77768 elapsed_s=41454.3
+[ReasonBench] progress total=6698/77870 (8.60%) new=6596/77768 elapsed_s=45044.1
+[ReasonBench] progress total=7086/77870 (9.10%) new=6984/77768 elapsed_s=48668.8
+[ReasonBench] progress total=7474/77870 (9.60%) new=7372/77768 elapsed_s=52373.5
+[ReasonBench] progress total=7862/77870 (10.10%) new=7760/77768 elapsed_s=56147.6
+[ReasonBench] progress total=8250/77870 (10.59%) new=8148/77768 elapsed_s=59830.1
+[ReasonBench] progress total=8638/77870 (11.09%) new=8536/77768 elapsed_s=63564.0
+[ReasonBench] progress total=9026/77870 (11.59%) new=8924/77768 elapsed_s=67226.5
+[ReasonBench] progress total=9414/77870 (12.09%) new=9312/77768 elapsed_s=77328.6
+[ReasonBench] progress total=9802/77870 (12.59%) new=9700/77768 elapsed_s=86426.8
+[ReasonBench] progress total=10190/77870 (13.09%) new=10088/77768 elapsed_s=88591.7
+[ReasonBench] progress total=10578/77870 (13.58%) new=10476/77768 elapsed_s=90746.5
+[ReasonBench] progress total=10966/77870 (14.08%) new=10864/77768 elapsed_s=92992.5
+[ReasonBench] progress total=11354/77870 (14.58%) new=11252/77768 elapsed_s=104331.1
+[ReasonBench] progress total=11742/77870 (15.08%) new=11640/77768 elapsed_s=116995.9
+[ReasonBench] progress total=12130/77870 (15.58%) new=12028/77768 elapsed_s=126960.1
+[ReasonBench] progress total=12518/77870 (16.08%) new=12416/77768 elapsed_s=135677.3
+[ReasonBench] progress total=12906/77870 (16.57%) new=12804/77768 elapsed_s=137172.7
+[ReasonBench] progress total=13294/77870 (17.07%) new=13192/77768 elapsed_s=138652.2
+[ReasonBench] progress total=13682/77870 (17.57%) new=13580/77768 elapsed_s=140120.0
+[ReasonBench] progress total=14070/77870 (18.07%) new=13968/77768 elapsed_s=141631.4
+[ReasonBench] progress total=14458/77870 (18.57%) new=14356/77768 elapsed_s=143141.3
+[ReasonBench] progress total=14846/77870 (19.07%) new=14744/77768 elapsed_s=144654.9
+[ReasonBench] progress total=15234/77870 (19.56%) new=15132/77768 elapsed_s=146150.6
+[ReasonBench] progress total=15622/77870 (20.06%) new=15520/77768 elapsed_s=147669.7
+[ReasonBench] progress total=16010/77870 (20.56%) new=15908/77768 elapsed_s=149179.0
+[ReasonBench] progress total=16398/77870 (21.06%) new=16296/77768 elapsed_s=150656.4
+[ReasonBench] progress total=16786/77870 (21.56%) new=16684/77768 elapsed_s=152172.5
+[ReasonBench] progress total=17174/77870 (22.05%) new=17072/77768 elapsed_s=153605.4
+[ReasonBench] progress total=17562/77870 (22.55%) new=17460/77768 elapsed_s=155104.5
+[ReasonBench] progress total=17950/77870 (23.05%) new=17848/77768 elapsed_s=156568.0
+[ReasonBench] progress total=18338/77870 (23.55%) new=18236/77768 elapsed_s=158093.1
+[ReasonBench] progress total=18726/77870 (24.05%) new=18624/77768 elapsed_s=159631.1
+[ReasonBench] progress total=19114/77870 (24.55%) new=19012/77768 elapsed_s=161067.8
+[ReasonBench] progress total=19502/77870 (25.04%) new=19400/77768 elapsed_s=162539.0
+[ReasonBench] progress total=19890/77870 (25.54%) new=19788/77768 elapsed_s=163990.9
+[ReasonBench] progress total=20278/77870 (26.04%) new=20176/77768 elapsed_s=165485.1
+[ReasonBench] progress total=20666/77870 (26.54%) new=20564/77768 elapsed_s=166922.4
+[ReasonBench] progress total=21054/77870 (27.04%) new=20952/77768 elapsed_s=168378.1
+[ReasonBench] progress total=21442/77870 (27.54%) new=21340/77768 elapsed_s=169869.0
+[ReasonBench] progress total=21830/77870 (28.03%) new=21728/77768 elapsed_s=171386.1
+[ReasonBench] progress total=22218/77870 (28.53%) new=22116/77768 elapsed_s=172930.3
+[ReasonBench] progress total=22606/77870 (29.03%) new=22504/77768 elapsed_s=174477.4
+[ReasonBench] progress total=22994/77870 (29.53%) new=22892/77768 elapsed_s=175981.0
+[ReasonBench] progress total=23382/77870 (30.03%) new=23280/77768 elapsed_s=177469.9
+[ReasonBench] progress total=23770/77870 (30.53%) new=23668/77768 elapsed_s=180000.4

@@ -1,0 +1,15 @@
+============================================================
+session_name: rb_truthfulqa
+attempt: 37
+started_at: 2026-04-02T05:34:44-04:00
+config_path: configs/experiments/full_truthfulqa_all_strategies.toml
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/full_truthfulqa_all_strategies.toml
+============================================================
+[ReasonBench] experiment=truthfulqa_full_all_strategies examples=817 strategies=10 expected_total=8170 existing_checkpoint_records=2437
+[ReasonBench] pending_records=5733 max_workers=4
+[ReasonBench] progress total=2438/8170 (29.84%) new=1/5733 elapsed_s=0.1
+[ReasonBench] progress total=2465/8170 (30.17%) new=28/5733 elapsed_s=506.5
+finished_at: 2026-04-02T05:45:13-04:00
+exit_code: 139
+Run failed (exit 139). Will resume from checkpoint after 20s...

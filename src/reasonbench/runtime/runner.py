@@ -87,6 +87,18 @@ class ExperimentRunner:
             metadata={"example_metadata": example.metadata, "trace": []},
         )
 
+    def _counts_toward_error_budget(self, exc: Exception) -> bool:
+        # Treat repeated gateway/proxy retry exhaustion as non-blocking so long runs can proceed.
+        exc_name = type(exc).__name__.lower()
+        message = str(exc).lower()
+        non_blocking = (
+            "retryerror" in exc_name
+            or "too many 504" in message
+            or "max retries exceeded" in message
+            or "status=504" in message
+        )
+        return not non_blocking
+
     def run(self) -> dict[str, Any]:
         started = time.perf_counter()
         warnings = self._preflight()
@@ -112,6 +124,7 @@ class ExperimentRunner:
 
         new_records: list[ExperimentRecord] = []
         error_records = 0
+        blocking_error_records = 0
         max_error_records = max(self.config.run.max_error_records, 0)
         with ThreadPoolExecutor(max_workers=self.config.run.max_workers) as executor:
             futures = {executor.submit(self._run_one, ex, strat): (ex, strat) for ex, strat in pending}
@@ -129,17 +142,22 @@ class ExperimentRunner:
                     if not self.config.run.continue_on_error:
                         raise
                     error_records += 1
+                    counts_toward_budget = self._counts_toward_error_budget(exc)
+                    if counts_toward_budget:
+                        blocking_error_records += 1
                     record = self._build_error_record(ex, strat.name, exc)
                     print(
                         f"[ReasonBench] marked_unscorable example_id={ex.example_id} "
-                        f"strategy={strat.name} error_records={error_records}"
+                        f"strategy={strat.name} error_records={error_records} "
+                        f"blocking_error_records={blocking_error_records} "
+                        f"counts_toward_budget={counts_toward_budget}"
                     )
                 new_records.append(record)
                 if self.checkpoint:
                     self.checkpoint.append(record)
                 completed_new += 1
 
-                if max_error_records and error_records >= max_error_records:
+                if max_error_records and blocking_error_records >= max_error_records:
                     raise RuntimeError(
                         f"Exceeded max_error_records={max_error_records}; aborting run after repeated generation failures."
                     )
@@ -168,6 +186,7 @@ class ExperimentRunner:
             'completed_records': len(records),
             'new_records': len(new_records),
             'error_records': error_records,
+            'blocking_error_records': blocking_error_records,
             'warnings': warnings,
             'elapsed_s': round(time.perf_counter() - started, 4),
         }

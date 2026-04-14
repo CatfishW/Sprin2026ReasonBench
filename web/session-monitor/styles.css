@@ -23,7 +23,7 @@ body {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.28;
+  opacity: 0.18;
   background-image:
     linear-gradient(0deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
@@ -31,7 +31,7 @@ body {
 }
 
 .page {
-  max-width: 960px;
+  max-width: 980px;
   margin: 0 auto;
   padding: 20px 16px 40px;
   position: relative;
@@ -54,9 +54,13 @@ body {
   pointer-events: none;
 }
 
+.session-card::after {
+  display: none;
+}
+
 .title-card {
   padding: 20px;
-  transform: rotate(-0.4deg);
+  transform: rotate(-0.25deg);
 }
 
 .kicker {
@@ -74,6 +78,7 @@ h1 {
 .subtitle {
   margin: 6px 0 16px;
   font-size: 15px;
+  line-height: 1.35;
 }
 
 .run-meta {
@@ -81,6 +86,23 @@ h1 {
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 10px;
+}
+
+.history-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.history-select {
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: #fff;
+  padding: 4px 8px;
+  min-width: 260px;
+  max-width: 100%;
 }
 
 .meta-chip {
@@ -161,10 +183,6 @@ h1 {
   padding: 14px;
 }
 
-.session-card:nth-child(2n) {
-  transform: rotate(0.35deg);
-}
-
 .session-head {
   display: flex;
   align-items: center;
@@ -183,6 +201,13 @@ h1 {
   flex-wrap: wrap;
   gap: 6px;
   margin-top: 8px;
+}
+
+.session-subhead .chip {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .chip {
@@ -242,6 +267,10 @@ h1 {
   font-size: 16px;
 }
 
+.metric--wide strong {
+  font-size: 15px;
+}
+
 .log-snippet {
   margin-top: 8px;
   border: 3px solid var(--ink);
@@ -270,6 +299,7 @@ h1 {
 .detail-block > summary {
   cursor: pointer;
   font-weight: 700;
+  list-style-position: outside;
 }
 
 .detail-block[open] {
@@ -337,6 +367,15 @@ h1 {
 }
 
 @media (max-width: 700px) {
+  .title-card {
+    transform: none;
+  }
+
+  .session-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .metrics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -344,10 +383,43 @@ h1 {
   .session-name {
     font-size: 17px;
   }
+
+  .control-btn {
+    flex: 1 1 48%;
+  }
+
+  .history-controls {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .history-select {
+    min-width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
+  .paper-noise {
+    opacity: 0.1;
+  }
+
+  .page {
+    padding: 14px 12px 28px;
+  }
+
+  .title-card {
+    padding: 16px;
+  }
+
   .metrics {
     grid-template-columns: 1fr;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .control-btn {
+    width: 100%;
   }
 }

@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260414-historyfix2" />
 </head>
 <body>
   <div class="paper-noise" aria-hidden="true"></div>
@@ -15,10 +15,17 @@
     <section class="title-card card">
       <p class="kicker">Spring 2026</p>
       <h1 id="runTitle">ReasonBench Live Sessions</h1>
-      <p class="subtitle">Full datasets (LiveBench, TruthfulQA, Room Assignment, AI2 ARC), all strategies, resumable screen runs</p>
+      <p class="subtitle">LiveBench, TruthfulQA, Room Assignment, and AI2-ARC runs with resumable screen sessions and TruthfulQA official-eval integration.</p>
       <div class="run-meta">
         <span id="runTag" class="meta-chip mono small">Run Tag: --</span>
         <span id="launchedAt" class="meta-chip mono small">Launched: --</span>
+      </div>
+      <div class="history-controls">
+        <label for="historySelect" class="mono small">Run View</label>
+        <select id="historySelect" class="history-select mono small" aria-label="Select run history view">
+          <option value="status.json">Current Live</option>
+        </select>
+        <span id="historyHint" class="mono small muted">Showing current live status.</span>
       </div>
       <div class="overall-wrap">
         <div class="overall-row">
@@ -32,11 +39,12 @@
         <button id="expandAll" class="control-btn" type="button">Expand All Details</button>
         <button id="collapseAll" class="control-btn" type="button">Collapse All Details</button>
       </div>
+      <p class="small muted">Tip: use card details only when needed to keep the dashboard focused.</p>
       <p id="generatedAt" class="mono small">Last update: --</p>
     </section>
 
     <section id="sessionGrid" class="session-grid" aria-live="polite"></section>
   </main>
-  <script src="app.js"></script>
+  <script src="app.js?v=20260414-historyfix2"></script>
 </body>
 </html>

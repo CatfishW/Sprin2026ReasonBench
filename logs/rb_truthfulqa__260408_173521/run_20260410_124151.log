@@ -1,0 +1,21 @@
+============================================================
+session_name: rb_truthfulqa__260408_173521
+attempt: 11
+started_at: 2026-04-10T12:41:51-04:00
+config_path: configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies.toml
+checkpoint_path: outputs/full_truthfulqa__spring26_2026-04-08__17-35-21/results.jsonl
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies.toml
+============================================================
+[ReasonBench] experiment=truthfulqa_full_all_strategies__spring26_2026-04-08__17-35-21 examples=817 strategies=10 expected_total=8170 existing_checkpoint_records=5002
+[ReasonBench] pending_records=3168 max_workers=4
+[ReasonBench] progress total=5003/8170 (61.24%) new=1/3168 elapsed_s=0.2
+[ReasonBench] progress total=5027/8170 (61.53%) new=25/3168 elapsed_s=374.3
+[ReasonBench] progress total=5052/8170 (61.84%) new=50/3168 elapsed_s=727.5
+[ReasonBench] progress total=5077/8170 (62.14%) new=75/3168 elapsed_s=1100.9
+finished_at: 2026-04-10T13:00:37-04:00
+exit_code: 139
+checkpoint_records_before: 5002
+checkpoint_records_after: 5079
+checkpoint_records_added: 77
+Run failed (exit 139). stale_attempts=0. Will resume from checkpoint after 20s...

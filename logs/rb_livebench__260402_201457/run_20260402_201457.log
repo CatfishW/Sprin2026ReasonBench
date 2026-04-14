@@ -1,0 +1,19 @@
+============================================================
+session_name: rb_livebench__260402_201457
+attempt: 1
+started_at: 2026-04-02T20:14:57-04:00
+config_path: configs/experiments/generated/spring26_2026-04-02__20-14-57/full_livebench_all_strategies.toml
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_2026-04-02__20-14-57/full_livebench_all_strategies.toml
+============================================================
+[ReasonBench] livebench_warning missing_ground_truth=528/1436 proxy_scoring_may_be_invalid_for_these_tasks
+[ReasonBench] livebench_warning task=LCB_generation missing_ground_truth=78
+[ReasonBench] livebench_warning task=coding_completion missing_ground_truth=50
+[ReasonBench] livebench_warning task=paraphrase missing_ground_truth=100
+[ReasonBench] livebench_warning task=simplify missing_ground_truth=100
+[ReasonBench] livebench_warning task=story_generation missing_ground_truth=100
+[ReasonBench] livebench_warning task=summarize missing_ground_truth=100
+[ReasonBench] experiment=livebench_full_all_strategies__spring26_2026-04-02__20-14-57 examples=1436 strategies=10 expected_total=14360 existing_checkpoint_records=0
+[ReasonBench] pending_records=14360 max_workers=3
+[ReasonBench] progress total=1/14360 (0.01%) new=1/14360 elapsed_s=136.5
+[ReasonBench] error example_id=eecef5ebcd4b0224ec2404b15759eae2703c32db82dc7fd711af23c0dffc888a strategy=least_to_most error=ConnectionError(MaxRetryError('HTTPSConnectionPool(host=\'game.agaii.org\', port=443): Max retries exceeded with url: /mllm/v1/chat/completions (Caused by ReadTimeoutError("HTTPSConnectionPool(host=\'game.agaii.org\', port=443): Read timed out. (read timeout=180)"))'))

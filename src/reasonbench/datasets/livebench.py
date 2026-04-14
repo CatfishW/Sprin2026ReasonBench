@@ -21,11 +21,16 @@ class LiveBenchAdapter(DatasetAdapter):
 
     def load(self) -> list[Example]:
         examples: list[Example] = []
+        task_filters = set(self.config.task_filters)
+        missing_ground_truth_by_task: dict[str, int] = {}
         for file_path in self._discover_files():
             for row in read_jsonl_records(file_path):
                 task = str(row.get('task') or '')
-                if self.config.task_filters and task not in set(self.config.task_filters):
+                if task_filters and task not in task_filters:
                     continue
+                ground_truth = row.get('ground_truth')
+                if ground_truth is None or not str(ground_truth).strip():
+                    missing_ground_truth_by_task[task] = missing_ground_truth_by_task.get(task, 0) + 1
                 turns = row.get('turns') or []
                 if isinstance(turns, str):
                     turns = [turns]
@@ -36,7 +41,7 @@ class LiveBenchAdapter(DatasetAdapter):
                         split=self.config.split,
                         turns=[str(turn).strip() for turn in turns if str(turn).strip()],
                         reference={
-                            'ground_truth': row.get('ground_truth'),
+                            'ground_truth': ground_truth,
                             'task': task,
                             'category': row.get('category') or '',
                         },
@@ -48,6 +53,14 @@ class LiveBenchAdapter(DatasetAdapter):
                         },
                     )
                 )
+        if missing_ground_truth_by_task:
+            missing_total = sum(missing_ground_truth_by_task.values())
+            print(
+                f"[ReasonBench] livebench_warning missing_ground_truth={missing_total}/{len(examples)} "
+                "proxy_scoring_may_be_invalid_for_these_tasks"
+            )
+            for task, count in sorted(missing_ground_truth_by_task.items()):
+                print(f"[ReasonBench] livebench_warning task={task or 'unknown'} missing_ground_truth={count}")
         if self.config.shuffle:
             rnd = Random(self.config.seed)
             rnd.shuffle(examples)

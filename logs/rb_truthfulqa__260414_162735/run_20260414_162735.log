@@ -1,0 +1,18 @@
+============================================================
+session_name: rb_truthfulqa__260414_162735
+attempt: 1
+started_at: 2026-04-14T16:27:35-04:00
+config_path: configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_truthfulqa_all_strategies.toml
+checkpoint_path: outputs/full_truthfulqa__spring26_room_truth_rerun_2026-04-14/results.jsonl
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /mnt/Yanlai/ReasonBench/.venv/bin/python -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_room_truth_rerun_2026-04-14/full_truthfulqa_all_strategies.toml
+============================================================
+[ReasonBench] experiment=truthfulqa_full_all_strategies__spring26_room_truth_rerun_2026-04-14 examples=817 strategies=12 expected_total=9804 existing_checkpoint_records=0
+[ReasonBench] pending_records=9804 max_workers=4
+[ReasonBench] progress total=1/9804 (0.01%) new=1/9804 elapsed_s=16.2
+[ReasonBench] progress total=49/9804 (0.50%) new=49/9804 elapsed_s=708.5
+[ReasonBench] progress total=98/9804 (1.00%) new=98/9804 elapsed_s=1423.4
+[ReasonBench] error example_id=12 strategy=constraint_decompose error=TypeError("unsupported operand type(s) for -: 'list_iterator' and 'int'")
+[ReasonBench] marked_unscorable example_id=12 strategy=constraint_decompose error_records=1
+[ReasonBench] progress total=147/9804 (1.50%) new=147/9804 elapsed_s=2158.3
+[ReasonBench] progress total=196/9804 (2.00%) new=196/9804 elapsed_s=2897.3

@@ -7,14 +7,15 @@ seed = 11
 
 [client]
 kind = "openai_compatible"
-base_url = "https://game.agaii.org/llm/v1/chat/completions"
+base_url = "https://llm.agaii.org/v1"
 model = "/home/tang/Models/Qwen3.5-4B"
 api_key_env = "OPENAI_API_KEY"
+timeout_s = 240
 default_temperature = 1.0
 default_max_tokens = 4096
-max_retries = 3
+max_retries = 6
 min_request_interval_s = 0.1
-loop_retries = 2
+loop_retries = 3
 
 [client.extra_payload]
 top_p = 0.95
@@ -74,3 +75,13 @@ enabled = true
 [strategies.few_shot_exemplar]
 enabled = true
 demo_path = "data/external_demos/general_reasoning.jsonl"
+
+[strategies.tree_of_thoughts]
+enabled = true
+branches = 3
+temperature = 0.7
+
+[strategies.coconut]
+enabled = true
+memory_turns = 3
+temperature = 0.6

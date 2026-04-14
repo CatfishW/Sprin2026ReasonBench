@@ -1,0 +1,270 @@
+       Evaluating Prompt Engineering Methods for Edge Deployment of
+                         Small Language Models*
+                        Ryan Hare, Yanlai Wu, Travis Lorsong, Vincent Mullary, Dr. Ying Tang
+
+
+   Abstract—In recent research and development, large                   Our eprimary motivation for this study stems from a
+language models have seen rapid iterations and improvements.        critical gap in current AI deployment strategies: while
+However, there are still many limitations in place when applying    structural prompt engineering greatly improves 100B+
+these models to real-world applications such as connectivity        parameter models, it remains uncertain how effectively these
+requirements, API costs, and model response times. For edge         methods scale down to resource-constrained networks and
+applications in particular, smaller open-source models are often    SLMs. Existing works have evaluated SLMs for specific
+preferred due to their ability to run on local hardware and quick   problems such as code generation [15] and cybersecurity [16],
+response times. But these models still have drawbacks in terms      but no efforts have been made to evaluate SLMs on a general-
+of response accuracy and quality. To that end, this work presents   purpose reasoning benchmark to show effective best practices
+an evaluation of advanced prompting methods and
+                                                                    for prompting in SLM applications, as well as providing a
+configurations to determine the effectiveness of these methods on
+                                                                    quantitative comparison of methods. The small size of SLMs,
+compact large language models. Specifically, evaluations focus
+on models’ deductive reasoning and domain-specific knowledge        in particular, may prove to negate the benefits of structured
+within several benchmarks.                                          prompting methods. For instance, a complex Tree of
+                                                                    Thoughts, an effective method in larger models, may be unable
+                      I. INTRODUCTION                               to scale down properly to fit the capacity of a 4B parameter
+                                                                    model. Furthermore, even if inference-time optimization such
+    The rapid proliferation of Large Language Models (LLMs)         as inference scaling improves an SLM's accuracy, it is possible
+has fundamentally transformed the landscape of natural
+                                                                    that the added response latency or computation time negates
+language processing, artificial intelligence, and autonomous
+                                                                    the benefits of applying an SLM in the first place.
+systems [1]. State-of-the-art models (for example, GPT-5.4
+and Gemini 3.1) exhibit remarkable emergent abilities in terms          To that end, the main contributions of this paper are as
+of zero-shot reasoning and complex problem-solving [2].             follows:
+However, their massive parameter counts can pose significant
+barriers to real-world deployment. These models require                 1) We present a comprehensive comparative analysis of
+substantial computational resources, extensive memory               multiple prompt engineering methodologies (CoT, ToT, Self-
+overhead, and high-bandwidth cloud infrastructure [3], or           Reflection) tested on three varied open-source SLMs (Qwen
+alternatively, long-term API costs and constant network             3.5 architectures, Trinity Large, Step 3.5 Flash).
+connectivity [4]. Consequently, these models are unsuitable             2) We introduce a custom generation framework and
+for resource-constrained environments, edge computing, and          benchmark evaluation scheme to evaluate SLM reasoning on
+privacy-sensitive local applications, which are increasingly        typical LLM benchmark tasks.
+central to cyber-physical systems. To address these
+bottlenecks, researchers and practitioners are increasingly             3) We evaluate SLM latency, accuracy, and reasoning on
+turning to compact or \"small\" Language Models (SLMs) [5].         benchmark datasets while applying a variety of methods of
+Typically ranging from 3 billion to 15 billion parameters,          both prompt engineering and LLM response optimization to
+SLMs offer a more accessible, deployable, and cost-effective        determine the impact of these methods on SLM applications.
+alternative for local AI applications [6].                                               II. METHODOLOGY
+    Despite their advantages in cost and efficiency, SLMs               To rigorously evaluate reasoning in SLMs and address our
+often suffer from a noticeable performance gap compared to          core problem statement, we evaluate both structural prompting
+their larger counterparts when deployed out-of-the-box [5]. To      methods and inference optimization methods. Structural
+bridge this gap, literature has heavily featured prompt             prompting methods are specially engineered prompts designed
+engineering [7]. Techniques such as Few-Shot prompting [8],         to tailor LLM output, encourage certain methods of thought,
+Chain-of-Thought (CoT) [9], Tree of Thoughts (ToT) [10],            or otherwise assist the LLM in answering prompts logically.
+and self-reflection [11] have emerged as critical drivers for       Inference optimization methods, meanwhile, are methods for
+enabling complex reasoning and unlocking model capabilities         improving LLM output that focus on the inference stage, often
+independent of computationally expensive fine-tuning and            aiming to avoid hallucinations through, for instance, majority
+exponential model parameter size increases. Furthermore,            voting based on multiple responses to the same prompt. The
+recent works in test- and inference-time optimization               specific methods applied with examples are detailed below.
+strategies have demonstrated augmentations to the inference
+steps that can improve a model’s reasoning trajectory [12]            A. Structural Prompting Methods
+such as inference scaling [13] and reasoning distillation [14]          Using a standardized prompting framework, we apply a
+to achieve better results with SLMs.                                variety of common and effective prompt engineering methods,
+                                                                    detailed below with examples.
+    1. Zero-Shot (Direct): Instructions strictly compel the           [Insert the same problem text from the zero-
+model to answer directly with no intermediate explanation or          shot example]
+reasoning chain. This serves as our baseline. Taking an               Simulate a panel of experts solving this
+example from one of the chosen benchmark data sets                    problem using the symbol legend:
+(discussed further below), an evaluation problem may take the
+                                                                      - Logic Expert: Analyzes hard constraints.
+form of shown below. Note that for this example, text-based
+symbols have been converted to words for human readability.           -   Scenario          Expert:       Tests       potential
+For example, in the actual data set, a person 𝑋 and animal 𝑦          assignments.
+are noted to be in the same room with ‘𝑋 @ 𝑦’. For more               - Reviewer: Checks for contradictions.
+details on the notation used, see the dataset discussed in a later
+section.                                                              Consensus Solution:
+
+ There are 3 rooms with persons Alice, Bob,                           Clearly state the final arrangement at the
+ Charlie and pets anole, bat, cat. Each room                          end using ONLY this format: Room 1: [Person],
+ contains exactly one person and one pet.                             [Pet]…
+
+     Restrictions:
+    1. Alice and anole are not in the same                           In this scenario, the SLM would then create multiple branches
+ room.                                                               of the tree with different solutions given by the different
+     2. Bob is in a room before Alice                                experts before double-checking and agreeing on a consensus
+                                                                     solution.
+     3. cat is in room 3
+                                                                         4. Critic (Self-Verify): A self-reflection framework where
+     4. cat and anole are in adjacent rooms                          the model first proposes a solution, subsequently critiques its
+     5. Charlie is not in room 1                                     own reasoning against the predefined rule set, and refines the
+                                                                     final answer. The same example will be solved using the self-
+     6. Bob and cat are not in adjacent rooms
+                                                                     verifying format below:
+ What are the tenants in the rooms?
+                                                                      [Insert the same problem text from the zero-
+Figure 1: Zero-shot prompting often includes only a problem           shot example]
+  to be solved, no extra detail, consideration, or other tips         First, solve the problem using the symbol
+                           given.                                     legend.
+    2. Chain-of-Thought (Multi-Step): Instructing the model to        Then, verify your solution               against     every
+solve the puzzle systematically. We explicitly command the            constraint in the question.
+model to list all given constraints, deduce immediate                 Final Verified Solution:
+implications, and resolve contradictions before deriving the
+final answer using a prompting structure shown below.                 Clearly state the final arrangement at the
+                                                                      end using ONLY this format: Room 1: [Person],
+ [Insert the same problem text from the zero-                         [Pet]…
+ shot example]
+ Let’s think step by step:
+                                                                         5. Continuous Reasoning (COCONUT): Emphasizing
+ 1) List all given constraints and interpret
+ them using the legend.
+                                                                     consistency across multi-turn evaluations by maintaining and
+                                                                     building upon sequential interactive memory instances. While
+ 2) Deduce immediate implications.                                   the other methods are more direct prompt engineering,
+ 3) Explore possibilities                  and     eliminate         COCONUT uses a conversation memory to emulate a back-
+ contradictions.                                                     and-forth problem-solving conversation with an assistant,
+                                                                     solving one “step” of the problem at a time before the user
+ 4) Construct the final solution.                                    prompts to continue. Thus, the model is encouraged to focus
+ Clearly state the final arrangement at the                          on small aspects of the problem instead of the entire problem.
+ end using ONLY this format: Room 1: [Person],                       In this case, the model would explicitly be told:
+ [Pet]…
+                                                                      [Insert the same problem text from the zero-
+                                                                      shot example]
+
+    3. Tree of Thoughts (ToT): Unlike Chain-of-Thought, ToT           Maintain consistent reasoning across turns
+generates a “tree” of possible thought processes before               and build on previous steps.
+backtracking and checking these processes against the                 First, evaluate rule constraints regarding
+requirements. Simulated via a persona prompt where the                Bob and Alice.
+model roleplays a panel of experts: a Logic Expert analyzing          <LLM RESPONSE>
+hard constraints, a Scenario Expert generating hypothesis
+pairs, and a Reviewer checking for contradictions. So, for the        Given prior facts, evaluate positions for
+same problem, the ToT prompt would be:                                Charlie and the cat.
+                                                                      <LLM RESPONSE>
+ <REPEAT UNTIL SOLUTION>                                                  capable of holding longer conversations while still
+                                                                          running on reasonable local architectures.
+                                                                      Smaller and larger alternatives were considered but
+  B. Inference Optimization Methods                                 ultimately excluded to maintain a more focused and controller
+    In addition to structural prompting, we evaluate the            comparison. Models below 2B parameters were not included
+efficacy of runtime inference optimization methods on SLMs:         due to their consistently weak performance on multi-step
+                                                                    reasoning tasks, significantly limiting any meaningful
+  • Base Execution: Standard single-pass generation.
+                                                                    evaluation. Conversely, larger models, such as 70B+ or
+  • Inference Scaling (𝑛-Voting): Generating 𝑛 candidate            modern systems such as ChatGPT or DeepSeek, were
+    responses (e.g., 𝑛 = 5) per prompt. A majority heuristic        excluded due to their substantially higher inference cost,
+    then extracts the final variable and selects the best           reduced accessibility, and difficulty in isolating improvements
+    outcome to filter isolated hallucinations.                      attributable to reasoning strategies rather than the scale itself.
+                                                                    In addition, these larger models had pre-existing data
+  • Reasoning Distillation: A multi-agent configuration             regarding these reasoning methods and results would not serve
+    where a complex "Teacher" path (e.g., a Teacher                 as meaningful data. Using these models, we were able to
+    executing ToT) evaluates the prompt, and its reasoning          conduct a target investigation in how model size, optimization
+    is compressed by a "Student" SLM to extract a final             strategies, and reasoning techniques interact within a practical
+    concise logic pattern.                                          range of LLMs.
+
+                 III. EXPERIMENTAL SETUP                              B. Testing Environment
+                                                                      For the SLM evaluation, all models were hosted locally on
+  A. Models for Evaluation
+                                                                    an Ubuntu operating system utilizing the SGLang
+    Our experiments focus on optimized, compact LLMs that           \cite{sglang}. Hardware deployments consisted of a single
+are positioned for efficient inference. Selecting these models
+                                                                    NVIDIA GeForce RTX 4090 for the Qwen3.5 4B model and
+allows us to test the boundaries of "small" capacities.
+Specifically, we selected several models of varied size based       a single NVIDIA RTX 6000 Ada Generation GPU for the
+on their ability to balance reasoning capability, inference         larger Qwen3.5 27B variant. To standardize the inference
+efficiency, and practical usability. Within the 4B-27B              environment, SGLang deployment is configured with a tensor
+parameter range, Qwen3.5-27B is chosen as a strong open-            parallel size of 1, a static memory fraction of 0.55, a 256k max
+weight baseline model that could demonstrate competitive            context length, and a chunked prefill size of 512.
+reasoning performance for its size while remaining                     Critically, SLMs attempting advanced CoT paths frequently
+computationally lightweight. In contrast, Qwen3.5-4B model          succumb to infinite generation loops due to their lower
+offered a more aggressive optimization focused mainly on            attention span bounds. To address this, we implemented
+low-latency inference, allowing us to evaluate how highly           sliding-window 𝑛-gram tracking. If duplicated character
+optimized, speed-focused but still large models can perform         blocks cross a 50% duplication threshold, or if stalled phrases
+on structured reasoning tasks. Together, these models served        exceed responses, our test environment terminates generation,
+as a representation of two distinct design philosophies within      logs the failure, and recursively reruns the test.
+small-scale LLMs with one prioritizing balanced reasoning
+capability and the other prioritizing inference speed and             C. Benchmark Datasets
+efficiency.                                                           To evaluate SLM reasoning, we utilized two existing
+    For the 100B–400B parameter class, Step3.5 Flash is             benchmark datasets determined from literature search. In
+selected since it offers a significant increase in model capacity   choosing these two datasets, we aimed to find complex
+and leverages MoE\cite{moe}, thus reducing memory                   problems that require a certain level of reasoning to determine
+footprint and improving throughput without sacrificing              a solution.
+performance. Through these capabilities, the model is an ideal      The first dataset utilized is the AI2_ARC dataset [19]. This
+candidate for studying how scaling affects reasoning using the      dataset features grade-school level science questions with
+same hardware. As for Trinity-Large-Preview, the model is           multiple-choice answers. This dataset is designed to test
+chosen to represent a reasoning-optimized model within the          LLMs on their advanced question-answering ability and on
+size range where it is designed to handle complex, multi-step       their inherent knowledge, while still requiring logical
+tasks with larger context windows. These capabilities allow us      reasoning to determine the best response on more esoteric
+to evaluate whether specialized reasoning-focused                   questions.
+architectures provide any measurable advantages over                Second is the Deductive Logical Reasoning – Room
+general-purpose models of similar scale. To summarize, our          Assignment dataset [20]. This set provides logical problems
+evaluations used the following LLMs:                                with symbolic relationships where some amount of persons
+  • 4B–27B Parameter Models: `Qwen3.5-4B` and                       and pets are placed within some amount of rooms. A set of
+    `Qwen3.5-27B` represent fast, highly optimized small-           logical rules limit the solution space, with a few examples
+    to-medium scale models targeted for immediate                   shown below:
+    inference.                                                             • Person X’s room is before Person Y’s room.
+  • 100B–400B Parameter Class: `Step3.5 Flash` and                         • Person X’s room is next to Person Y’s room,
+    `Trinity-Large-Preview` represent intermediate models                       independent of order.
+       • Person X is assigned to Room N.                                      vol. 36 (NeurIPS 2023). [Online]. Available:
+                                                                              https://proceedings.neurips.cc/paper_files/paper/2023/hash/271db9922b8d1
+       • Person X and Pet x are assigned to the same room.                    f4dd7aaef84ed5ac703-Abstract-Conference.html
+   The SLM response, then, is to simply give the following,                   [11] M. Renze and E. Guven, “Self-reflection in LLM agents: Effects on
+where (𝑋, 𝑌, 𝑍) represent people and (𝑥, 𝑦, 𝑧) represent pets:                problem-solving performance,” arXiv, May 2024. doi:
+                                                                              10.48550/arXiv.2405.06682.
+     • Room 1: 𝑋, 𝑥
+                                                                              [12] C. Snell, J. Lee, K. Xu, and A. Kumar, “Scaling LLM test-time
+     • Room 2: 𝑌, 𝑦                                                           compute optimally can be more effective than scaling model parameters,”
+     • Room 3: 𝑍, 𝑧                                                           arXiv, Aug. 2024. doi: 10.48550/arXiv.2408.03314.
+   The problems are infinitely scalable by adding more rooms,                 [13] Z. Hou, X. Lv, R. Lu, J. Zhang, Y. Li, Z. Yao, J. Li, J. Tang, and Y.
+                                                                              Dong, “T1: Advancing language model reasoning through reinforcement
+people, pets, and logical rules, while also guaranteeing that at              learning and inference scaling,” arXiv, Jan. 2025. doi:
+a single correct solution exists.                                             10.48550/arXiv.2501.11651.
+                                                                              [14] C.-Y. Hsieh, C.-L. Li, C.-K. Yeh, H. Nakhost, Y. Fujii, A. Ratner, R.
+                                                                              Krishna, C.-Y. Lee, and T. Pfister, “Distilling step-by-step! Outperforming
+                                                                              larger language models with less training data and smaller model sizes,”
+                         IV. CONCLUSIONS                                      arXiv, May 2023. doi: 10.48550/arXiv.2305.02301.
+   Conclusions, importance of this work.                                      [15] M. A. Al Mamun, S. Nath, G. Uddin, and N. Deb, “Evaluating the
+                                                                              environmental impact of using SLMs and prompt engineering for code
+                                                                              generation,” arXiv, Apr. 2026. doi: 10.48550/arXiv.2604.02776.
+                               APPENDIX                                       [16] G. Almeida, M. Pohlmann, A. Severo, D. Kreutz, T. Heinrich, and L.
+                                                                              Pereira, “On-premise SLMs vs. commercial LLMs: Prompt engineering and
+   Appendixes should appear before the acknowledgment.                        incident classification in SOCs and CSIRTs,” arXiv, Nov. 2025. doi:
+                                                                              10.48550/arXiv.2511.14908.
+                         ACKNOWLEDGMENT                                       [17] N. Shazeer et al., “Outrageously large neural networks: The sparsely-
+                                                                              gated mixture-of-experts layer,” in Proc. Int. Conf. Learn. Representations
+   The preferred spelling of the word “acknowledgment” in                     (ICLR), 2017. [Online]. Available: https://arxiv.org/abs/1701.06538
+America is without an “e” after the “g”. Avoid the stilted                    [18] L. Zheng, L. Yin, Z. Xie, C. Sun, J. Huang, C. H. Yu, S. Cao, C.
+expression, “One of us (R. B. G.) thanks . . .” Instead, try “R.              Kozyrakis, I. Stoica, J. E. Gonzalez, C. Barrett, and Y. Sheng, “SGLang:
+                                                                              Efficient execution of structured language model programs,” arXiv, Dec.
+B. G. thanks”. Put sponsor acknowledgments in the
+                                                                              2023. doi: 10.48550/arXiv.2312.07104.
+unnumbered footnote on the first page.                                        [19] P. Clark, I. Cowhey, O. Etzioni, T. Khot, A. Sabharwal, C. Schoenick,
+                                                                              and Ø. Tafjord, “Think you have solved question answering? Try ARC, the
+                             REFERENCES                                       AI2 reasoning challenge,” arXiv, Mar. 2018. doi:
+                                                                              10.48550/arXiv.1803.05457.
+[1] W. X. Zhao, K. Zhou, J. Li, T. Tang, X. Wang, Y. Hou, Y. Min, B.          [20] E. Munah, “Deductive logical reasoning – room assignment (dataset),”
+Zhang, J. Zhang, Z. Dong, Y. Du, C. Yang, Y. Chen, Y. Chen, Z. Chen, J.       Hugging Face Datasets, 2024. [Online]. Available:
+Jiang, R. Ren, Y. Li, X. Tang, Z. Liu, P. Liu, J.-Y. Nie, and J.-R. Wen, “A   https://huggingface.co/datasets/emunah/deductive_logical_reasoning-
+survey of large language models,” arXiv, Mar. 2023. doi:                      room_assignment
+10.48550/arXiv.2303.18223.
+[2] L. Berti, F. Giorgi, and G. Kasneci, “Emergent abilities in large
+language models: A survey,” arXiv, Feb. 2025. doi:
+10.48550/arXiv.2503.05788.
+[3] Z. Gu, H. Ye, X. Chen, Z. Zhou, H. Feng, and Y. Xiao, “StrucText-
+Eval: Evaluating large language model’s reasoning ability in structure-rich
+text,” in Proc. 63rd Annu. Meet. Assoc. Comput. Linguistics (ACL), Vienna,
+Austria, Jul. 2025. [Online]. Available: https://aclanthology.org/2025.acl-
+long.1563/
+[4] A. N. Author et al., “(Metadata needed) IEEE Xplore document
+10685415,” IEEE Xplore, 2024. [Online]. Available:
+https://ieeexplore.ieee.org/document/10685415
+[5] S. Subramanian, V. Elango, and M. Gungor, “Small language models
+(SLMs) can still pack a punch: A survey,” arXiv, Jan. 2025. doi:
+10.48550/arXiv.2501.05465.
+[6] A. N. Author et al., “(Metadata needed) IEEE Xplore document
+10590016,” IEEE Xplore, 2024. [Online]. Available:
+https://ieeexplore.ieee.org/document/10590016
+[7] B. Chen, Z. Zhang, N. Langrené, S. Zhu, et al., “Unleashing the
+potential of prompt engineering for large language models,” Patterns, vol.
+6, no. 6, p. 101260, 2025. doi: 10.1016/j.patter.2025.101260.
+[8] T. Brown et al., “Language models are few-shot learners,” in Advances
+in Neural Information Processing Systems, vol. 33 (NeurIPS 2020).
+[Online]. Available:
+https://proceedings.neurips.cc/paper_files/paper/2020/hash/1457c0d6bfcb49
+67418bfb8ac142f64a-Abstract.html
+[9] J. Wei, X. Wang, D. Schuurmans, M. Bosma, B. Ichter, F. Xia, E. Chi,
+Q. V. Le, and D. Zhou, “Chain-of-thought prompting elicits reasoning in
+large language models,” in Advances in Neural Information Processing
+Systems, vol. 35 (NeurIPS 2022). [Online]. Available:
+https://papers.nips.cc/paper_files/paper/2022/hash/9d5609613524ecf4f15af
+0f7b31abca4-Abstract-Conference.html
+[10] S. Yao, D. Yu, J. Zhao, I. Shafran, T. Griffiths, Y. Cao, and K.
+Narasimhan, “Tree of thoughts: Deliberate problem solving with large
+language models,” in Advances in Neural Information Processing Systems,
+

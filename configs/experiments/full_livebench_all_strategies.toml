@@ -10,11 +10,12 @@ kind = "openai_compatible"
 base_url = "https://game.agaii.org/mllm/v1/chat/completions"
 model = "Qwen/Qwen3.5-27B-FP8"
 api_key_env = "OPENAI_API_KEY"
+timeout_s = 240
 default_temperature = 1.0
 default_max_tokens = 4096
-max_retries = 3
+max_retries = 6
 min_request_interval_s = 0.1
-loop_retries = 2
+loop_retries = 3
 
 [client.extra_payload]
 top_p = 0.95

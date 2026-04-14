@@ -20,6 +20,11 @@ LIVEBENCH_CATEGORIES = [
     "instruction_following",
 ]
 
+AI2_ARC_SUBSETS = [
+    "ARC-Challenge",
+    "ARC-Easy",
+]
+
 
 def normalize_value(value: Any) -> Any:
     if isinstance(value, (str, int, float, bool)) or value is None:
@@ -87,18 +92,54 @@ def write_livebench() -> dict[str, int]:
     return counts
 
 
+def write_ai2_arc() -> dict[str, dict[str, int] | int]:
+    root = OUT_DIR / "ai2_arc"
+    root.mkdir(parents=True, exist_ok=True)
+    combined_path = root / "ai2_arc_full.jsonl"
+
+    counts: dict[str, dict[str, int]] = {}
+    total = 0
+    with combined_path.open("w", encoding="utf-8") as combined:
+        for subset in AI2_ARC_SUBSETS:
+            dataset = load_dataset("allenai/ai2_arc", subset)
+            subset_counts: dict[str, int] = {}
+            for split in ["train", "validation", "test"]:
+                split_rows = dataset[split]
+                out_path = root / subset / f"{split}.jsonl"
+                out_path.parent.mkdir(parents=True, exist_ok=True)
+
+                count = 0
+                with out_path.open("w", encoding="utf-8") as handle:
+                    for row in split_rows:
+                        normalized = {k: normalize_value(v) for k, v in row.items()}
+                        normalized["arc_subset"] = subset
+                        normalized["arc_split"] = split
+                        line = json.dumps(normalized, ensure_ascii=False)
+                        handle.write(line + "\n")
+                        combined.write(line + "\n")
+                        count += 1
+                        total += 1
+                subset_counts[split] = count
+            counts[subset] = subset_counts
+
+    return {"by_subset": counts, "total": total}
+
+
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     room_count = write_room_assignment()
     truthfulqa_count = write_truthfulqa()
     livebench_counts = write_livebench()
+    ai2_arc_counts = write_ai2_arc()
 
     summary = {
         "room_assignment_train": room_count,
         "truthfulqa_train": truthfulqa_count,
         "livebench": livebench_counts,
         "livebench_total": sum(livebench_counts.values()),
+        "ai2_arc": ai2_arc_counts["by_subset"],
+        "ai2_arc_total": ai2_arc_counts["total"],
     }
 
     summary_path = OUT_DIR / "dataset_manifest.json"

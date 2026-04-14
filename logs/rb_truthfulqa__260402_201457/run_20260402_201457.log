@@ -1,0 +1,13 @@
+============================================================
+session_name: rb_truthfulqa__260402_201457
+attempt: 1
+started_at: 2026-04-02T20:14:57-04:00
+config_path: configs/experiments/generated/spring26_2026-04-02__20-14-57/full_truthfulqa_all_strategies.toml
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_2026-04-02__20-14-57/full_truthfulqa_all_strategies.toml
+============================================================
+[ReasonBench] experiment=truthfulqa_full_all_strategies__spring26_2026-04-02__20-14-57 examples=817 strategies=10 expected_total=8170 existing_checkpoint_records=0
+[ReasonBench] pending_records=8170 max_workers=4
+[ReasonBench] progress total=1/8170 (0.01%) new=1/8170 elapsed_s=39.0
+[ReasonBench] progress total=40/8170 (0.49%) new=40/8170 elapsed_s=998.4
+[ReasonBench] progress total=80/8170 (0.98%) new=80/8170 elapsed_s=2336.3

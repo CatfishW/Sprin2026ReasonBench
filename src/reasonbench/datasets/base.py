@@ -28,14 +28,37 @@ def _maybe_limit(examples: list[Example], limit: int | None) -> list[Example]:
 
 
 def read_jsonl_records(path: str | Path) -> list[dict[str, Any]]:
-    rows: list[dict[str, Any]] = []
     with open(path, 'r', encoding='utf-8') as handle:
-        for line in handle:
-            line = line.strip()
-            if not line:
-                continue
-            rows.append(json.loads(line))
-    return rows
+        raw_lines = [line for line in handle if line.strip() and not line.strip().startswith(("//", "#"))]
+
+    rows: list[dict[str, Any]] = []
+    jsonl_failed = False
+    for line in raw_lines:
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError:
+            jsonl_failed = True
+            break
+        if isinstance(row, dict):
+            rows.append(row)
+
+    if rows and not jsonl_failed:
+        return rows
+
+    text = "".join(raw_lines).strip()
+    if not text:
+        return []
+
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError:
+        return []
+
+    if isinstance(data, list):
+        return [item for item in data if isinstance(item, dict)]
+    if isinstance(data, dict):
+        return [data]
+    return []
 
 
 def read_json_per_line_or_text(path: str | Path) -> list[dict[str, Any]]:
@@ -79,6 +102,9 @@ def load_hf_dataset(config: DatasetConfig) -> Iterable[dict[str, Any]]:
 
 
 def make_dataset_adapter(config: DatasetConfig) -> DatasetAdapter:
+    if config.kind == 'ai2_arc':
+        from reasonbench.datasets.ai2_arc import AI2ARCAdapter
+        return AI2ARCAdapter(config)
     if config.kind == 'room_assignment':
         from reasonbench.datasets.room_assignment import RoomAssignmentAdapter
         return RoomAssignmentAdapter(config)

@@ -9,5 +9,18 @@
     "data_analysis": 150,
     "instruction_following": 400
   },
-  "livebench_total": 1436
+  "livebench_total": 1436,
+  "ai2_arc": {
+    "ARC-Challenge": {
+      "train": 1119,
+      "validation": 299,
+      "test": 1172
+    },
+    "ARC-Easy": {
+      "train": 2251,
+      "validation": 570,
+      "test": 2376
+    }
+  },
+  "ai2_arc_total": 7787
 }

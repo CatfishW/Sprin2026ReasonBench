@@ -1,0 +1,42 @@
+============================================================
+session_name: rb_truthfulqa__260408_173521
+attempt: 6
+started_at: 2026-04-10T07:55:57-04:00
+config_path: configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies.toml
+checkpoint_path: outputs/full_truthfulqa__spring26_2026-04-08__17-35-21/results.jsonl
+cwd: /mnt/Yanlai/ReasonBench
+command: PYTHONUNBUFFERED=1 PYTHONPATH=src /usr/bin/python3 -u -m reasonbench.cli.run --config configs/experiments/generated/spring26_2026-04-08__17-35-21/full_truthfulqa_all_strategies.toml
+============================================================
+[ReasonBench] experiment=truthfulqa_full_all_strategies__spring26_2026-04-08__17-35-21 examples=817 strategies=10 expected_total=8170 existing_checkpoint_records=3955
+[ReasonBench] pending_records=4215 max_workers=4
+[ReasonBench] progress total=3956/8170 (48.42%) new=1/4215 elapsed_s=0.1
+[ReasonBench] progress total=3980/8170 (48.71%) new=25/4215 elapsed_s=440.5
+[ReasonBench] progress total=4005/8170 (49.02%) new=50/4215 elapsed_s=857.7
+[ReasonBench] progress total=4030/8170 (49.33%) new=75/4215 elapsed_s=1260.5
+[ReasonBench] progress total=4055/8170 (49.63%) new=100/4215 elapsed_s=1669.9
+[ReasonBench] progress total=4080/8170 (49.94%) new=125/4215 elapsed_s=2022.2
+[ReasonBench] progress total=4105/8170 (50.24%) new=150/4215 elapsed_s=2343.2
+[ReasonBench] progress total=4130/8170 (50.55%) new=175/4215 elapsed_s=2697.4
+[ReasonBench] progress total=4155/8170 (50.86%) new=200/4215 elapsed_s=3082.2
+[ReasonBench] progress total=4180/8170 (51.16%) new=225/4215 elapsed_s=3417.5
+[ReasonBench] progress total=4205/8170 (51.47%) new=250/4215 elapsed_s=3897.7
+[ReasonBench] progress total=4230/8170 (51.77%) new=275/4215 elapsed_s=4276.5
+[ReasonBench] progress total=4255/8170 (52.08%) new=300/4215 elapsed_s=4791.7
+[ReasonBench] progress total=4280/8170 (52.39%) new=325/4215 elapsed_s=5229.8
+[ReasonBench] progress total=4305/8170 (52.69%) new=350/4215 elapsed_s=5681.3
+[ReasonBench] progress total=4330/8170 (53.00%) new=375/4215 elapsed_s=6140.6
+[ReasonBench] progress total=4355/8170 (53.30%) new=400/4215 elapsed_s=6563.7
+[ReasonBench] progress total=4380/8170 (53.61%) new=425/4215 elapsed_s=7076.1
+[ReasonBench] progress total=4405/8170 (53.92%) new=450/4215 elapsed_s=7574.1
+[ReasonBench] progress total=4430/8170 (54.22%) new=475/4215 elapsed_s=8051.1
+[ReasonBench] progress total=4455/8170 (54.53%) new=500/4215 elapsed_s=8505.2
+[ReasonBench] progress total=4480/8170 (54.83%) new=525/4215 elapsed_s=8920.5
+[ReasonBench] progress total=4505/8170 (55.14%) new=550/4215 elapsed_s=9332.5
+[ReasonBench] progress total=4530/8170 (55.45%) new=575/4215 elapsed_s=9721.6
+[ReasonBench] progress total=4555/8170 (55.75%) new=600/4215 elapsed_s=10074.9
+finished_at: 2026-04-10T10:48:54-04:00
+exit_code: 139
+checkpoint_records_before: 3955
+checkpoint_records_after: 4573
+checkpoint_records_added: 618
+Run failed (exit 139). stale_attempts=0. Will resume from checkpoint after 20s...
