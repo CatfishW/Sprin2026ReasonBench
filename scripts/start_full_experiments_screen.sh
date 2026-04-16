@@ -91,7 +91,7 @@ for item in manifest.get("sessions", []):
 PY
 )
 
-launch_if_missing "rb_status_updater" "cd '$ROOT_DIR' && while true; do PYTHONPATH=src /usr/bin/python3 scripts/update_status_snapshot.py --output web/session-monitor/status.json >> logs/status_updater.log 2>&1; sleep 10; done"
+launch_if_missing "rb_status_updater" "cd '$ROOT_DIR' && while true; do RB_SKIP_ARCHIVED_HISTORY=1 PYTHONPATH=src /usr/bin/python3 scripts/update_status_snapshot.py --output web/session-monitor/status.json >> logs/status_updater.log 2>&1; sleep 10; done"
 
 echo ""
 echo "Active run metadata:"

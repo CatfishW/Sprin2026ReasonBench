@@ -110,7 +110,7 @@ for item in manifest.get("sessions", []):
 PY
 )
 
-launch_if_missing "rb_status_updater" "cd '$ROOT_DIR' && while true; do TRUTHFULQA_OFFICIAL_REPO='$OFFICIAL_REPO' RB_TRUTHFULQA_OFFICIAL_MIN_INTERVAL_S=120 PYTHONPATH=src '$PYTHON_BIN' scripts/update_status_snapshot.py --output web/session-monitor/status.json >> logs/status_updater.log 2>&1; sleep 10; done"
+launch_if_missing "rb_status_updater" "cd '$ROOT_DIR' && while true; do TRUTHFULQA_OFFICIAL_REPO='$OFFICIAL_REPO' RB_TRUTHFULQA_OFFICIAL_MIN_INTERVAL_S=120 RB_SKIP_ARCHIVED_HISTORY=1 PYTHONPATH=src '$PYTHON_BIN' scripts/update_status_snapshot.py --output web/session-monitor/status.json >> logs/status_updater.log 2>&1; sleep 10; done"
 
 echo ""
 echo "Active run metadata:"

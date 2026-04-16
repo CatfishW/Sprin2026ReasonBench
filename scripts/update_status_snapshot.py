@@ -1164,6 +1164,11 @@ def _build_run_history_index(repo_root: Path, active_snapshot: dict[str, Any]) -
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate session status JSON for the frontend monitor.")
     parser.add_argument("--output", required=True, help="Output JSON path")
+    parser.add_argument(
+        "--skip-archived-history",
+        action="store_true",
+        help="Skip rebuilding archived run history snapshots for faster live updates",
+    )
     args = parser.parse_args()
 
     repo_root = Path(__file__).resolve().parents[1]
@@ -1173,7 +1178,19 @@ def main() -> None:
     snapshot = build_snapshot(repo_root)
     output_path.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     _write_run_history_snapshot(repo_root, snapshot)
-    _seed_archived_history(repo_root, str(snapshot.get("run_tag") or ""))
+
+    skip_archived_history = args.skip_archived_history or os.getenv("RB_SKIP_ARCHIVED_HISTORY", "").strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
+    if not skip_archived_history:
+        try:
+            _seed_archived_history(repo_root, str(snapshot.get("run_tag") or ""))
+        except Exception as exc:  # noqa: BLE001
+            print(f"Archived history seed failed: {exc}")
+
     run_history = _build_run_history_index(repo_root, snapshot)
     run_history_path = repo_root / RUN_HISTORY_INDEX
     run_history_path.parent.mkdir(parents=True, exist_ok=True)
