@@ -119,6 +119,10 @@ h1 {
   padding: 10px;
 }
 
+#overallEta {
+  margin: 6px 0 0;
+}
+
 .controls {
   display: flex;
   gap: 8px;
@@ -244,7 +248,7 @@ h1 {
 
 .metrics {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
   margin: 10px 0;
 }

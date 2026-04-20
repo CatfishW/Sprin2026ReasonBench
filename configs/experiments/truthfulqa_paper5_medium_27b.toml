@@ -1,0 +1,62 @@
+[dataset]
+kind = "truthfulqa"
+local_path = "data/truthfulqa/truthfulqa_train_medium_subset.csv"
+split = "train"
+shuffle = false
+seed = 23
+
+[client]
+kind = "openai_compatible"
+base_url = "https://llm.agaii.org/v1"
+model = "Qwen/Qwen3.5-27B-FP8"
+api_key_env = "OPENAI_API_KEY"
+timeout_s = 600
+default_temperature = 1.0
+default_max_tokens = 4096
+max_retries = 6
+min_request_interval_s = 0.08
+loop_retries = 3
+
+[client.extra_payload]
+top_p = 0.95
+top_k = 20
+presence_penalty = 1.5
+repetition_penalty = 1.0
+
+[client.extra_payload.extra_body]
+thinking_budget = 1024
+
+[run]
+experiment_name = "truthfulqa_medium_paper5_27b"
+max_workers = 4
+strict_benchmark_mode = true
+enable_cache = true
+enable_checkpoint = true
+enable_leakage_check = true
+required_strategies = ["concise_cot", "coconut", "direct", "self_verify", "tree_of_thoughts"]
+
+[output]
+output_dir = "outputs/truthfulqa_medium_paper5_27b"
+cache_path = "outputs/truthfulqa_medium_paper5_27b/cache.sqlite"
+checkpoint_path = "outputs/truthfulqa_medium_paper5_27b/results.jsonl"
+summary_path = "outputs/truthfulqa_medium_paper5_27b/summary.csv"
+manifest_path = "outputs/truthfulqa_medium_paper5_27b/manifest.json"
+
+[strategies.direct]
+enabled = true
+
+[strategies.concise_cot]
+enabled = true
+
+[strategies.self_verify]
+enabled = true
+
+[strategies.tree_of_thoughts]
+enabled = true
+branches = 3
+temperature = 0.7
+
+[strategies.coconut]
+enabled = true
+memory_turns = 3
+temperature = 0.6

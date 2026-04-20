@@ -32,6 +32,70 @@ function formatTimestamp(raw) {
   return parsed.toLocaleString();
 }
 
+function secondsBetween(startRaw, endRaw) {
+  if (!startRaw || !endRaw) {
+    return null;
+  }
+  const start = new Date(startRaw);
+  const end = new Date(endRaw);
+  if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+    return null;
+  }
+  const seconds = (end.getTime() - start.getTime()) / 1000;
+  return Number.isFinite(seconds) && seconds > 0 ? seconds : null;
+}
+
+function estimateRemainingSeconds(completedValue, expectedValue, elapsedSeconds) {
+  const completed = Number(completedValue || 0);
+  const expected = Number(expectedValue || 0);
+  const elapsed = Number(elapsedSeconds || 0);
+  if (!Number.isFinite(completed) || !Number.isFinite(expected) || !Number.isFinite(elapsed)) {
+    return null;
+  }
+  if (expected <= 0 || completed <= 0 || completed >= expected || elapsed <= 0) {
+    return null;
+  }
+  const rate = completed / elapsed;
+  if (!Number.isFinite(rate) || rate <= 0) {
+    return null;
+  }
+  return (expected - completed) / rate;
+}
+
+function parseElapsedSecondsFromProgressLine(line) {
+  const raw = String(line || '');
+  const match = raw.match(/elapsed_s=([0-9]+(?:\.[0-9]+)?)/);
+  if (!match) {
+    return null;
+  }
+  const seconds = Number(match[1]);
+  return Number.isFinite(seconds) && seconds > 0 ? seconds : null;
+}
+
+function formatDuration(secondsValue) {
+  const seconds = Number(secondsValue);
+  if (!Number.isFinite(seconds) || seconds < 0) {
+    return '--';
+  }
+
+  const rounded = Math.max(0, Math.round(seconds));
+  if (rounded < 60) {
+    return `${rounded}s`;
+  }
+
+  const days = Math.floor(rounded / 86400);
+  const hours = Math.floor((rounded % 86400) / 3600);
+  const minutes = Math.floor((rounded % 3600) / 60);
+
+  if (days > 0) {
+    return `${days}d ${hours}h ${minutes}m`;
+  }
+  if (hours > 0) {
+    return `${hours}h ${minutes}m`;
+  }
+  return `${minutes}m`;
+}
+
 function detailOpenAttr(openState, key, fallbackOpen = false) {
   if (openState && openState.has(key)) {
     return 'open';
@@ -220,7 +284,7 @@ function leaderboardMarkup(liveSummary) {
   `;
 }
 
-function sessionCard(session, openState) {
+function sessionCard(session, openState, runElapsedSeconds) {
   const logText = (session.last_log_lines || []).join('\n') || 'No logs yet.';
   const displayName = session.display_name || session.name;
   const pct = Number(session.progress_pct || 0);
@@ -248,6 +312,16 @@ function sessionCard(session, openState) {
   const strategyCount = formatInt(session.strategy_count);
   const exampleCount = formatInt(session.example_count);
 
+  const sessionElapsedSeconds =
+    parseElapsedSecondsFromProgressLine(session.last_progress_line) || runElapsedSeconds;
+  const sessionEtaSeconds = estimateRemainingSeconds(
+    session.completed_records,
+    session.expected_records,
+    sessionElapsedSeconds,
+  );
+  const sessionEtaLabel = formatDuration(sessionEtaSeconds);
+  const sessionElapsedLabel = formatDuration(sessionElapsedSeconds);
+
   return `
     <article class="session-card card" data-session="${esc(session.name)}">
       <div class="session-head">
@@ -272,6 +346,10 @@ function sessionCard(session, openState) {
           <strong>${completedRecords} / ${expectedRecords}</strong>
         </div>
         <div class="metric">
+          <label>ETA</label>
+          <strong>${esc(sessionEtaLabel)}</strong>
+        </div>
+        <div class="metric">
           <label>Stale Retry</label>
           <strong>${formatInt(staleRetryStreak)}</strong>
         </div>
@@ -292,6 +370,8 @@ function sessionCard(session, openState) {
         <summary>Signals</summary>
         <p class="signal-line mono"><strong>Completed / Expected:</strong> ${completedRecords} / ${expectedRecords}</p>
         <p class="signal-line mono"><strong>Remaining:</strong> ${remainingRecords}</p>
+        <p class="signal-line mono"><strong>Elapsed:</strong> ${esc(sessionElapsedLabel)}</p>
+        <p class="signal-line mono"><strong>Estimated remaining:</strong> ${esc(sessionEtaLabel)}</p>
         <p class="signal-line mono"><strong>Examples:</strong> ${exampleCount}</p>
         <p class="signal-line mono"><strong>Strategies:</strong> ${strategyCount}</p>
         <p class="signal-line mono"><strong>Stale retry streak:</strong> ${formatInt(staleRetryStreak)}${stuckReason ? ` (${esc(stuckReason)})` : ''}</p>
@@ -344,6 +424,7 @@ async function refresh() {
     const overallBar = document.getElementById('overallBar');
     const overallPctText = document.getElementById('overallPct');
     const overallCounts = document.getElementById('overallCounts');
+    const overallEta = document.getElementById('overallEta');
     const generatedAt = document.getElementById('generatedAt');
     const runTitle = document.getElementById('runTitle');
     const runTag = document.getElementById('runTag');
@@ -352,16 +433,26 @@ async function refresh() {
     const hasPreviousCards = grid.children.length > 0;
     const openState = hasPreviousCards ? captureOpenDetailState() : null;
 
+    const runElapsedSeconds = secondsBetween(data.launched_at, data.generated_at);
+    const overallEtaSeconds = estimateRemainingSeconds(
+      data.overall?.completed_records || 0,
+      data.overall?.expected_records || 0,
+      runElapsedSeconds,
+    );
+
     overallBar.style.width = `${overallPct}%`;
     overallPctText.textContent = `${overallPct.toFixed(2)}%`;
     overallCounts.textContent = `${formatInt(data.overall?.completed_records || 0)} / ${formatInt(data.overall?.expected_records || 0)} records`;
+    if (overallEta) {
+      overallEta.textContent = `Estimated remaining: ${formatDuration(overallEtaSeconds)}`;
+    }
     generatedAt.textContent = `Last update: ${formatTimestamp(data.generated_at)}`;
     runTitle.textContent = data.run_title || 'ReasonBench Live Sessions';
     runTag.textContent = `Run Tag: ${data.run_tag || '--'}`;
     launchedAt.textContent = `Launched: ${formatTimestamp(data.launched_at)}`;
 
     const sessions = data.sessions || [];
-    grid.innerHTML = sessions.map((session) => sessionCard(session, openState)).join('');
+    grid.innerHTML = sessions.map((session) => sessionCard(session, openState, runElapsedSeconds)).join('');
   } catch (error) {
     const historyHint = document.getElementById('historyHint');
     if (historyHint && normalizeStatusPath(selectedStatusPath) !== 'status.json') {
