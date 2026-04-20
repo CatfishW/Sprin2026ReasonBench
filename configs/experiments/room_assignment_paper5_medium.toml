@@ -17,6 +17,9 @@ max_retries = 6
 min_request_interval_s = 0.05
 loop_retries = 3
 
+[client.extra_payload.extra_body]
+thinking_budget = 1024
+
 [client.extra_payload]
 top_p = 0.95
 top_k = 20
