@@ -1,9 +1,9 @@
 [dataset]
-kind = "room_assignment"
-local_path = "data/room_assignment/room_assignment_train_medium_subset.jsonl"
+kind = "truthfulqa"
+local_path = "data/truthfulqa/truthfulqa_train_medium_subset.csv"
 split = "train"
 shuffle = false
-seed = 19
+seed = 23
 
 [client]
 kind = "openai_compatible"
@@ -27,7 +27,7 @@ repetition_penalty = 1.0
 thinking_budget = 512
 
 [run]
-experiment_name = "room_assignment_medium_paper5_27b"
+experiment_name = "truthfulqa_medium_paper5_27b__spring26_2026-04-19__20-54-22"
 max_workers = 4
 strict_benchmark_mode = true
 enable_cache = true
@@ -36,11 +36,11 @@ enable_leakage_check = true
 required_strategies = ["concise_cot", "coconut", "direct", "self_verify", "tree_of_thoughts"]
 
 [output]
-output_dir = "outputs/room_assignment_medium_paper5_27b"
-cache_path = "outputs/room_assignment_medium_paper5_27b/cache.sqlite"
-checkpoint_path = "outputs/room_assignment_medium_paper5_27b/results.jsonl"
-summary_path = "outputs/room_assignment_medium_paper5_27b/summary.csv"
-manifest_path = "outputs/room_assignment_medium_paper5_27b/manifest.json"
+output_dir = "outputs/truthfulqa_medium_paper5_27b__spring26_2026-04-19__20-54-22"
+cache_path = "outputs/truthfulqa_medium_paper5_27b__spring26_2026-04-19__20-54-22/cache.sqlite"
+checkpoint_path = "outputs/truthfulqa_medium_paper5_27b__spring26_2026-04-19__20-54-22/results.jsonl"
+summary_path = "outputs/truthfulqa_medium_paper5_27b__spring26_2026-04-19__20-54-22/summary.csv"
+manifest_path = "outputs/truthfulqa_medium_paper5_27b__spring26_2026-04-19__20-54-22/manifest.json"
 
 [strategies.direct]
 enabled = true

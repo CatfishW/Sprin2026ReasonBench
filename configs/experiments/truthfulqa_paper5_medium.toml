@@ -18,7 +18,7 @@ min_request_interval_s = 0.05
 loop_retries = 3
 
 [client.extra_payload.extra_body]
-thinking_budget = 1024
+thinking_budget = 512
 
 [run]
 experiment_name = "truthfulqa_medium_paper5"

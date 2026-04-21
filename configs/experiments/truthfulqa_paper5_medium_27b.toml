@@ -24,7 +24,7 @@ presence_penalty = 1.5
 repetition_penalty = 1.0
 
 [client.extra_payload.extra_body]
-thinking_budget = 1024
+thinking_budget = 512
 
 [run]
 experiment_name = "truthfulqa_medium_paper5_27b"

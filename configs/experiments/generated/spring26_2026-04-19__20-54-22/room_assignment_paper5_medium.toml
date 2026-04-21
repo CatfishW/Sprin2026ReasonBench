@@ -8,13 +8,13 @@ seed = 19
 [client]
 kind = "openai_compatible"
 base_url = "https://llm.agaii.org/v1"
-model = "Qwen/Qwen3.5-27B-FP8"
+model = "/home/tang/Models/Qwen3.5-4B"
 api_key_env = "OPENAI_API_KEY"
 timeout_s = 600
 default_temperature = 1.0
 default_max_tokens = 4096
 max_retries = 6
-min_request_interval_s = 0.08
+min_request_interval_s = 0.05
 loop_retries = 3
 
 [client.extra_payload]
@@ -27,8 +27,8 @@ repetition_penalty = 1.0
 thinking_budget = 512
 
 [run]
-experiment_name = "room_assignment_medium_paper5_27b"
-max_workers = 4
+experiment_name = "room_assignment_medium_paper5__spring26_2026-04-19__20-54-22"
+max_workers = 6
 strict_benchmark_mode = true
 enable_cache = true
 enable_checkpoint = true
@@ -36,11 +36,11 @@ enable_leakage_check = true
 required_strategies = ["concise_cot", "coconut", "direct", "self_verify", "tree_of_thoughts"]
 
 [output]
-output_dir = "outputs/room_assignment_medium_paper5_27b"
-cache_path = "outputs/room_assignment_medium_paper5_27b/cache.sqlite"
-checkpoint_path = "outputs/room_assignment_medium_paper5_27b/results.jsonl"
-summary_path = "outputs/room_assignment_medium_paper5_27b/summary.csv"
-manifest_path = "outputs/room_assignment_medium_paper5_27b/manifest.json"
+output_dir = "outputs/room_assignment_medium_paper5__spring26_2026-04-19__20-54-22"
+cache_path = "outputs/room_assignment_medium_paper5__spring26_2026-04-19__20-54-22/cache.sqlite"
+checkpoint_path = "outputs/room_assignment_medium_paper5__spring26_2026-04-19__20-54-22/results.jsonl"
+summary_path = "outputs/room_assignment_medium_paper5__spring26_2026-04-19__20-54-22/summary.csv"
+manifest_path = "outputs/room_assignment_medium_paper5__spring26_2026-04-19__20-54-22/manifest.json"
 
 [strategies.direct]
 enabled = true

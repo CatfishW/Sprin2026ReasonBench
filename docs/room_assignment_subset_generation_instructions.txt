@@ -1,0 +1,72 @@
+ROOM ASSIGNMENT MEDIUM SUBSET GENERATION INSTRUCTIONS
+
+Purpose
+Generate the room-assignment medium subset from the full room-assignment training dataset for ReasonBench. Use this as the operating guide for an AI tool that needs to reproduce the subset deterministically.
+
+Source files
+- Full input: data/room_assignment/room_assignment_train_full.jsonl
+- Room subset output: data/room_assignment/room_assignment_train_medium_subset.jsonl
+- Manifest output: data/subsets/medium_subset_manifest.json
+
+Required dataset shape
+Each input line is a JSON object. Preserve the original fields in every selected row. The expected core fields are:
+- prompt
+- question
+- completion
+- label
+- id
+
+The subset generator may add these derived fields to each selected row:
+- derived_difficulty
+- derived_complexity
+- room_count
+- restriction_count
+
+What the subset should contain
+- Target size: 500 rows
+- Deterministic sampling: use seed 20260419 for room-assignment subset creation
+- Eligibility filter: keep only rows whose question text contains a parsable room count and whose room count is less than or equal to 6
+- Difficulty balance: split eligible rows into easy, medium, and hard groups using quantile breakpoints, then sample as evenly as possible across the three groups
+
+Step-by-step procedure
+1. Load the full JSONL file line by line.
+2. Ignore blank lines.
+3. Parse each line as JSON.
+4. Read the question text from the question field.
+5. Extract the room count from the question text using the phrase "There are N rooms".
+6. Drop any row that does not contain a parsable room count.
+7. Drop any row whose room count is greater than 6.
+8. For each eligible row, compute a complexity score using:
+   room_count * 2 + restriction_count + operator_diversity * 2
+   where:
+   - restriction_count is the number of numbered restriction lines in the question
+   - operator_diversity counts whether the question contains the relationship operators "<>", "!@", "!=", "@", and "="
+9. Compute the 1/3 and 2/3 quantile breakpoints over all eligible complexity scores.
+10. Assign derived_difficulty:
+   - easy if score <= first breakpoint
+   - medium if first breakpoint < score <= second breakpoint
+   - hard if score > second breakpoint
+11. Put eligible rows into easy, medium, and hard pools.
+12. Sample a 500-row subset as evenly as possible across the three pools.
+13. Use deterministic shuffling with seed 20260419 so the same input produces the same subset.
+14. For every selected row, add derived_difficulty, derived_complexity, room_count, and restriction_count.
+15. Write the selected rows to the room subset output as JSONL, preserving UTF-8 encoding and one JSON object per line.
+16. Write a manifest JSON file with the generation timestamp, subset size, input and output paths, thresholds, eligible counts, sampled counts, and sampled room-count distribution.
+
+Recommended command
+Use the repo script when possible, because it already implements the exact room-assignment logic:
+
+python scripts/build_medium_subsets.py --repo-root . --room-input data/room_assignment/room_assignment_train_full.jsonl --room-output data/room_assignment/room_assignment_train_medium_subset.jsonl --manifest-output data/subsets/medium_subset_manifest.json --size 500 --room-max-rooms 6 --room-seed 20260419
+
+Important note
+The script also writes the TruthfulQA subset. If the task is only to regenerate the room-assignment subset, treat the room-assignment branch above as the source of truth and do not change the TruthfulQA files unless that is explicitly requested.
+
+Validation checklist
+- Confirm the room subset output contains 500 rows.
+- Confirm the manifest room.input and room.output paths match the files above.
+- Confirm the manifest sampled difficulty counts are balanced or nearly balanced across easy, medium, and hard.
+- Confirm each output row still contains the original prompt, question, completion, label, and id fields.
+- Confirm the output file is JSONL, not a JSON array.
+
+Regeneration rule
+If the subset already exists and the manifest matches the current inputs and seed, do not regenerate it unnecessarily. Regenerate only when the full source dataset, seed, maximum room count, or subset size changes.

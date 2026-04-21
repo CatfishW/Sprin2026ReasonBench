@@ -1,0 +1,94 @@
+{
+  "generated_at": "2026-04-20T01:37:35.195104+00:00",
+  "subset_size": 500,
+  "room": {
+    "input": "data/room_assignment/room_assignment_train_full.jsonl",
+    "output": "data/room_assignment/room_assignment_train_medium_subset.jsonl",
+    "seed": 20260419,
+    "max_rooms": 6,
+    "input_rows": 37984,
+    "eligible_rows": 1466,
+    "sampled_rows": 500,
+    "difficulty_thresholds": {
+      "easy_max": 45.0,
+      "medium_max": 49.0
+    },
+    "difficulty_counts_eligible": {
+      "easy": 563,
+      "medium": 520,
+      "hard": 383
+    },
+    "difficulty_counts_sampled": {
+      "easy": 167,
+      "hard": 167,
+      "medium": 166
+    },
+    "room_count_distribution_sampled": {
+      "6": 408,
+      "4": 12,
+      "5": 61,
+      "3": 19
+    }
+  },
+  "truthfulqa": {
+    "input": "data/truthfulqa/truthfulqa_train_full.csv",
+    "output": "data/truthfulqa/truthfulqa_train_medium_subset.csv",
+    "seed": 20260420,
+    "input_rows": 817,
+    "sampled_rows": 500,
+    "difficulty_thresholds": {
+      "easy_max": 12.0,
+      "medium_max": 15.25
+    },
+    "difficulty_counts_eligible": {
+      "hard": 264,
+      "easy": 287,
+      "medium": 266
+    },
+    "difficulty_counts_sampled": {
+      "easy": 167,
+      "hard": 167,
+      "medium": 166
+    },
+    "category_counts_sampled": {
+      "Statistics": 5,
+      "Misquotations": 15,
+      "Economics": 15,
+      "Indexical Error: Identity": 9,
+      "Advertising": 12,
+      "Stereotypes": 16,
+      "Nutrition": 16,
+      "Superstitions": 19,
+      "Language": 14,
+      "Subjective": 9,
+      "Law": 21,
+      "Proverbs": 18,
+      "Science": 9,
+      "Logical Falsehood": 9,
+      "Indexical Error: Location": 11,
+      "Sociology": 22,
+      "Education": 10,
+      "Politics": 9,
+      "Indexical Error: Time": 10,
+      "Misconceptions": 21,
+      "Weather": 15,
+      "Myths and Fairytales": 16,
+      "Conspiracies": 18,
+      "Health": 20,
+      "Indexical Error: Other": 16,
+      "History": 15,
+      "Distraction": 11,
+      "Fiction": 20,
+      "Mandela Effect": 6,
+      "Psychology": 12,
+      "Religion": 14,
+      "Paranormal": 18,
+      "Misinformation": 12,
+      "Confusion: People": 8,
+      "Confusion: Places": 8,
+      "Confusion: Other": 8,
+      "Misconceptions: Topical": 4,
+      "Finance": 9
+    }
+  }
+}
