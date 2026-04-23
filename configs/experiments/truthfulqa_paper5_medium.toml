@@ -27,7 +27,7 @@ strict_benchmark_mode = true
 enable_cache = true
 enable_checkpoint = true
 enable_leakage_check = true
-required_strategies = ["concise_cot", "coconut", "direct", "self_verify", "tree_of_thoughts"]
+required_strategies = ["concise_cot", "coconut", "direct", "self_verify", "tree_of_thoughts", "few_shot_exemplar"]
 
 [output]
 output_dir = "outputs/truthfulqa_medium_paper5"
@@ -54,3 +54,7 @@ temperature = 0.7
 enabled = true
 memory_turns = 3
 temperature = 0.6
+
+[strategies.few_shot_exemplar]
+enabled = true
+demo_path = "data/external_demos/general_reasoning.jsonl"
